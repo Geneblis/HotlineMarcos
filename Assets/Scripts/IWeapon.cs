@@ -24,6 +24,7 @@ public class IWeapon : MonoBehaviour
     public float      fireRate       = 5f;
     public int        pelletsPerShot = 1;
     public float      spreadAngle    = 0f;
+    public float      shakeTrauma    = 1.2f;
     public GameObject projectilePrefab;
 
     [Header("Melee")]
@@ -38,6 +39,7 @@ public class IWeapon : MonoBehaviour
     Collider2D  col;
     Collider2D  playerCol;
     Vector3     originalScale;
+    Vector3     heldScale = Vector3.one;
 
     void Awake()
     {
@@ -78,7 +80,7 @@ public class IWeapon : MonoBehaviour
         transform.SetParent(holdPoint);
         transform.localPosition = Vector2.zero;
         transform.localRotation = Quaternion.identity;
-        transform.localScale    = originalScale;
+        transform.localScale    = heldScale;
     }
 
     public void OnThrow(Vector2 direction)
@@ -145,6 +147,7 @@ public class IWeapon : MonoBehaviour
 
         currentAmmo--;
         fireCooldown = 1f / fireRate;
+        CameraController.Instance?.AddTrauma(shakeTrauma);
     }
 
     void MeleeAttack(Vector2 direction)

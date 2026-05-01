@@ -153,5 +153,9 @@ MonoBehaviour:
   player: {fileID: 0}
   smoothTime: 0.5
   lookAheadDistance: 1.5
-  shiftPanDistance: 3
-  shiftSmoothTime: 0.4
+  shiftPanDistance: 5
+  shiftSmoothTime: 0
+  traumaDecay: 2.5
+  maxOffset: 0.3
+  maxAngle: 3
+  frequency: 25

@@ -107,7 +107,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.07, y: 0.28}
+  m_Size: {x: 0.1, y: 0.28}
   m_EdgeRadius: 0
 --- !u!114 &4461042855224405217
 MonoBehaviour:
@@ -123,8 +123,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::IWeapon
   weaponName: Military Rifle
   type: 0
-  maxAmmo: 30
-  currentAmmo: 30
+  maxAmmo: 999
+  currentAmmo: 999
   firePoint: {fileID: 7803518449853877097}
   throwForce: 25
   throwDrag: 3
@@ -133,6 +133,7 @@ MonoBehaviour:
   fireRate: 12
   pelletsPerShot: 1
   spreadAngle: 30
+  shakeTrauma: 1
   projectilePrefab: {fileID: 3336896619411098590, guid: 65579aceb009111469d38af1011a099f, type: 3}
   isBladed: 0
   meleeRange: 1.2
@@ -249,7 +250,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 8424818948067298862, guid: e71f3155f10d2084c8cae098de80e171, type: 3}
+  m_Sprite: {fileID: -2824152207838755960, guid: e71f3155f10d2084c8cae098de80e171, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
