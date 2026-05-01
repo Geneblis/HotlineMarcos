@@ -1,0 +1,507 @@
+fileFormatVersion: 2
+guid: 8d5e4384dfa12a645bef7f93234cfb6a
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 250956599417528208
+    second: ammo_handgun_empty_0
+  - first:
+      213: 2441899657297146799
+    second: ammo_handgun_empty_1
+  - first:
+      213: -8142048943918584244
+    second: ammo_handgun_empty_2
+  - first:
+      213: -3482728646711418827
+    second: ammo_handgun_empty_3
+  - first:
+      213: 3359753743283770140
+    second: ammo_handgun_empty_4
+  - first:
+      213: 2682449300303457567
+    second: ammo_handgun_empty_5
+  - first:
+      213: -7461182219303652097
+    second: ammo_handgun_empty_6
+  - first:
+      213: -3462792150309339907
+    second: ammo_handgun_empty_7
+  - first:
+      213: -2392447343851450795
+    second: ammo_handgun_empty_8
+  - first:
+      213: 3307386973578026075
+    second: ammo_handgun_empty_9
+  - first:
+      213: -6130971184611731944
+    second: ammo_handgun_empty_10
+  - first:
+      213: -7966027714138403194
+    second: ammo_handgun_empty_11
+  - first:
+      213: -6951731696469260162
+    second: ammo_handgun_empty_12
+  - first:
+      213: 1419215543615342256
+    second: ammo_handgun_empty_13
+  - first:
+      213: 3261978748187529078
+    second: ammo_handgun_empty_14
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: ammo_handgun_empty_0
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 1
+        width: 18
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 09f525292b39b7300800000000000000
+      internalID: 250956599417528208
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ammo_handgun_empty_1
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 31
+        width: 18
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa33852fcce53e120800000000000000
+      internalID: 2441899657297146799
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ammo_handgun_empty_2
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 1
+        width: 18
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c4e63e9bf91a10f80800000000000000
+      internalID: -8142048943918584244
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ammo_handgun_empty_3
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 31
+        width: 18
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 53060b38fbcdaafc0800000000000000
+      internalID: -3482728646711418827
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ammo_handgun_empty_4
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 1
+        width: 18
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c13d7319a3e30ae20800000000000000
+      internalID: 3359753743283770140
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ammo_handgun_empty_5
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 31
+        width: 18
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f1d25982d69f93520800000000000000
+      internalID: 2682449300303457567
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ammo_handgun_empty_6
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 1
+        width: 18
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff4f1f57d4e847890800000000000000
+      internalID: -7461182219303652097
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ammo_handgun_empty_7
+      rect:
+        serializedVersion: 2
+        x: 77
+        y: 31
+        width: 18
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dfcfccdc2e0b1ffc0800000000000000
+      internalID: -3462792150309339907
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ammo_handgun_empty_8
+      rect:
+        serializedVersion: 2
+        x: 77
+        y: 1
+        width: 18
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 55e48e501d15cced0800000000000000
+      internalID: -2392447343851450795
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ammo_handgun_empty_9
+      rect:
+        serializedVersion: 2
+        x: 95
+        y: 31
+        width: 18
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b5c5fdedde236ed20800000000000000
+      internalID: 3307386973578026075
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ammo_handgun_empty_10
+      rect:
+        serializedVersion: 2
+        x: 95
+        y: 1
+        width: 18
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 816df0dd03a6aeaa0800000000000000
+      internalID: -6130971184611731944
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ammo_handgun_empty_11
+      rect:
+        serializedVersion: 2
+        x: 113
+        y: 31
+        width: 18
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 68e0dd3fffbf27190800000000000000
+      internalID: -7966027714138403194
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ammo_handgun_empty_12
+      rect:
+        serializedVersion: 2
+        x: 113
+        y: 1
+        width: 18
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e78402a9adc768f90800000000000000
+      internalID: -6951731696469260162
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ammo_handgun_empty_13
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 31
+        width: 18
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0b6c7e0840112b310800000000000000
+      internalID: 1419215543615342256
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ammo_handgun_empty_14
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 1
+        width: 18
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 67f47968360e44d20800000000000000
+      internalID: 3261978748187529078
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      ammo_handgun_empty_0: 250956599417528208
+      ammo_handgun_empty_1: 2441899657297146799
+      ammo_handgun_empty_10: -6130971184611731944
+      ammo_handgun_empty_11: -7966027714138403194
+      ammo_handgun_empty_12: -6951731696469260162
+      ammo_handgun_empty_13: 1419215543615342256
+      ammo_handgun_empty_14: 3261978748187529078
+      ammo_handgun_empty_2: -8142048943918584244
+      ammo_handgun_empty_3: -3482728646711418827
+      ammo_handgun_empty_4: 3359753743283770140
+      ammo_handgun_empty_5: 2682449300303457567
+      ammo_handgun_empty_6: -7461182219303652097
+      ammo_handgun_empty_7: -3462792150309339907
+      ammo_handgun_empty_8: -2392447343851450795
+      ammo_handgun_empty_9: 3307386973578026075
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
