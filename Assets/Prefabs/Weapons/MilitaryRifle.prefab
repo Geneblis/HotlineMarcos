@@ -49,8 +49,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
+  m_LinearDamping: 1
+  m_AngularDamping: 1
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -79,7 +79,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 72
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -123,8 +123,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::IWeapon
   weaponName: Military Rifle
   type: 0
-  maxAmmo: 999
-  currentAmmo: 999
+  maxAmmo: 30
+  currentAmmo: 30
   firePoint: {fileID: 7803518449853877097}
   throwForce: 25
   throwDrag: 3

@@ -11,6 +11,10 @@ public class CameraController : MonoBehaviour
     public float smoothTime        = 0.25f;
     public float lookAheadDistance = 1.5f;
 
+    [Header("Mouse Pan")]
+    public float mousePanDistance = 1.5f;
+    public float mousePanSmooth   = 0.4f;
+
     [Header("Shift Pan")]
     public float shiftPanDistance = 3f;
     public float shiftSmoothTime  = 0.4f;
@@ -25,7 +29,9 @@ public class CameraController : MonoBehaviour
     Camera      cam;
     Vector3     followVelocity;
     Vector3     shiftVelocity;
+    Vector3     mousePanVelocity;
     Vector3     shiftOffset;
+    Vector3     mousePanOffset;
     Vector3     smoothedPosition;
     float       trauma;
     float       seed;
@@ -44,9 +50,9 @@ public class CameraController : MonoBehaviour
             return;
         }
 
-        playerRb         = player.GetComponent<Rigidbody2D>();
-        cam              = Camera.main;
-        smoothedPosition = new Vector3(player.position.x, player.position.y, transform.position.z);
+        playerRb           = player.GetComponent<Rigidbody2D>();
+        cam                = Camera.main;
+        smoothedPosition   = new Vector3(player.position.x, player.position.y, transform.position.z);
         transform.position = smoothedPosition;
     }
 
@@ -58,23 +64,39 @@ public class CameraController : MonoBehaviour
         Vector2 targetPos  = (Vector2)player.position + moveDir * lookAheadDistance;
         Vector3 baseTarget = new Vector3(targetPos.x, targetPos.y, smoothedPosition.z);
 
+        Vector3 mouse      = Input.mousePosition;
+        mouse.z            = Mathf.Abs(cam.transform.position.z);
+        Vector3 mouseWorld = cam.ScreenToWorldPoint(mouse);
+        Vector2 toMouse    = (Vector2)mouseWorld - (Vector2)player.position;
+
+        // Mouse pan: sempre ativo, clampado em mousePanDistance
+        Vector2 clampedMouse = Vector2.ClampMagnitude(toMouse, mousePanDistance);
+        // Normaliza pelo pan máximo para que o offset seja proporcional à distância
+        Vector2 mousePanDir  = toMouse.magnitude > 0.01f
+            ? clampedMouse / mousePanDistance * mousePanDistance
+            : Vector2.zero;
+
+        mousePanOffset = Vector3.SmoothDamp(
+            mousePanOffset,
+            new Vector3(clampedMouse.x, clampedMouse.y, 0f),
+            ref mousePanVelocity,
+            mousePanSmooth);
+
+        // Shift pan: offset adicional ao segurar Shift
         Vector3 desiredShift = Vector3.zero;
         if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
         {
-            Vector3 mouse      = Input.mousePosition;
-            mouse.z            = Mathf.Abs(cam.transform.position.z);
-            Vector3 mouseWorld = cam.ScreenToWorldPoint(mouse);
-            Vector2 toMouse    = (Vector2)mouseWorld - (Vector2)player.position;
-
-            if (toMouse.magnitude > shiftPanDistance)
-                toMouse = toMouse.normalized * shiftPanDistance;
-
-            desiredShift = new Vector3(toMouse.x, toMouse.y, 0f);
+            Vector2 shiftDir = Vector2.ClampMagnitude(toMouse, shiftPanDistance);
+            desiredShift     = new Vector3(shiftDir.x, shiftDir.y, 0f);
         }
 
         shiftOffset = Vector3.SmoothDamp(shiftOffset, desiredShift, ref shiftVelocity, shiftSmoothTime);
 
-        smoothedPosition = Vector3.SmoothDamp(smoothedPosition, baseTarget + shiftOffset, ref followVelocity, smoothTime);
+        smoothedPosition = Vector3.SmoothDamp(
+            smoothedPosition,
+            baseTarget + mousePanOffset + shiftOffset,
+            ref followVelocity,
+            smoothTime);
 
         ApplyShake();
     }

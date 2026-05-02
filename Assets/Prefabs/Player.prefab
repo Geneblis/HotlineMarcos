@@ -159,7 +159,7 @@ GameObject:
   - component: {fileID: 1775475372023935783}
   - component: {fileID: 692347245647687334}
   - component: {fileID: 1601062389330948805}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -195,7 +195,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7abffde7c6f1f2948b056757c5f0b044, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  moveSpeed: 5
+  moveSpeed: 6
   bodyRotationSpeed: 720
   legsRotationSpeed: 540
   body: {fileID: 2948186996977974827}
