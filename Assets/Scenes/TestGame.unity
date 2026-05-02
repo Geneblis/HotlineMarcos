@@ -613,6 +613,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Shotgun
       objectReference: {fileID: 0}
+    - target: {fileID: 4461042855224405217, guid: 7ec4a3272080a154d86a4fa9cda432be, type: 3}
+      propertyPath: shellCasingPrefab
+      value: 
+      objectReference: {fileID: 5537049821064018152, guid: b2e7acf631eabd4409f90204b3506f8c, type: 3}
     - target: {fileID: 8232831572532864265, guid: 7ec4a3272080a154d86a4fa9cda432be, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.403

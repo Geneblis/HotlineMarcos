@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Collider2D))]
@@ -13,6 +14,7 @@ public class IWeapon : MonoBehaviour
     [Header("Origin Point")]
     [Tooltip("Transform that indicates where bullets/attacks originate from")]
     public Transform firePoint;
+    public Transform shellPoint;
 
     [Header("Throw")]
     public float throwForce            = 10f;
@@ -24,13 +26,18 @@ public class IWeapon : MonoBehaviour
     public float      fireRate       = 5f;
     public int        pelletsPerShot = 1;
     public float      spreadAngle    = 0f;
-    public float      shakeTrauma    = 1.2f;
+    public float      shakeTrauma    = 0.3f;
     public GameObject projectilePrefab;
+    public GameObject shellCasingPrefab;
 
     [Header("Melee")]
     public bool  isBladed    = false;
     public float meleeRange  = 1.2f;
     public float meleeDamage = 50f;
+
+    [Header("Sounds")]
+    public List<WeaponSoundEntry> weaponSounds = new List<WeaponSoundEntry>();
+    public AudioClip emptyShotSound;
 
     bool        isHeld;
     bool        isThrown;
@@ -137,7 +144,9 @@ public class IWeapon : MonoBehaviour
         }
 
         Vector2 origin = firePoint != null ? (Vector2)firePoint.position : (Vector2)transform.position;
-
+        
+        SpawnShell(direction);
+        
         for (int i = 0; i < pelletsPerShot; i++)
         {
             Vector2    dir = ApplySpread(direction, spreadAngle);
@@ -148,6 +157,28 @@ public class IWeapon : MonoBehaviour
         currentAmmo--;
         fireCooldown = 1f / fireRate;
         CameraController.Instance?.AddTrauma(shakeTrauma);
+    }
+
+    void SpawnShell(Vector2 direction)
+    {
+        if (shellCasingPrefab == null) return;
+
+        Vector2 origin = shellPoint != null ? (Vector2)shellPoint.position : (Vector2)transform.position;
+        
+        // Pequeno offset aleatório na origem para mais realismo
+        Vector2 randomOffset = Random.insideUnitCircle * 0.1f;
+        origin += randomOffset;
+        
+        // Rotação inicial aleatória (0-360 graus)
+        float randomRotation = Random.Range(0f, 360f);
+        
+        // Instanciar com rotação aleatória
+        GameObject shell = Instantiate(shellCasingPrefab, origin, Quaternion.Euler(0, 0, randomRotation));
+        
+        // Adicionar aleatóriedade à direção (até 30% de variação)
+        Vector2 randomizedDirection = (direction + Random.insideUnitCircle * 0.3f).normalized;
+        
+        shell.GetComponent<ShellCasing>()?.Eject(randomizedDirection);
     }
 
     void MeleeAttack(Vector2 direction)
@@ -182,7 +213,25 @@ public class IWeapon : MonoBehaviour
         if (active && playerCol != null)
             Physics2D.IgnoreCollision(col, playerCol, false);
     }
+
+    void PlaySound(WeaponSoundType soundType)
+    {
+        var entry = weaponSounds.Find(s => s.type == soundType);
+        if (entry != null && entry.clip != null)
+        {
+            AudioSource.PlayClipAtPoint(entry.clip, transform.position);
+        }
+    }
 }
 
 public enum WeaponType { Firearm, Melee }
 public enum FireType   { SemiAuto, Automatic }
+
+[System.Serializable]
+public class WeaponSoundEntry
+{
+    public WeaponSoundType type;
+    public AudioClip clip;
+}
+
+public enum WeaponSoundType { FirearmShot, MeleeAttack }
