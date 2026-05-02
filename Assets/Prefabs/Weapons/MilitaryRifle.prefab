@@ -172,6 +172,12 @@ MonoBehaviour:
   isBladed: 0
   meleeRange: 1.2
   meleeDamage: 50
+  weaponSounds:
+  - type: 0
+    clip: {fileID: 8300000, guid: f23681646f855e44b90512e83b70199c, type: 3}
+  - type: 0
+    clip: {fileID: 8300000, guid: e491077cb28839f4682989722bb5b6aa, type: 3}
+  emptyShotSound: {fileID: 8300000, guid: c9cfc5ee63025dd45b8e613d74ae36a6, type: 3}
 --- !u!1 &4388088450692290962
 GameObject:
   m_ObjectHideFlags: 0

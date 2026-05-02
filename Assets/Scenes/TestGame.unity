@@ -224,6 +224,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1472106279496477889, guid: 4c97179ae8608c24d809942d4e4fd9c9, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1775475372023935783, guid: 4c97179ae8608c24d809942d4e4fd9c9, type: 3}
+      propertyPath: pickupSounds.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1775475372023935783, guid: 4c97179ae8608c24d809942d4e4fd9c9, type: 3}
+      propertyPath: 'pickupSounds.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 7384c996304d5944abc3b522d7ae63c5, type: 3}
+    - target: {fileID: 1775475372023935783, guid: 4c97179ae8608c24d809942d4e4fd9c9, type: 3}
+      propertyPath: 'pickupSounds.Array.data[1]'
+      value: 
+      objectReference: {fileID: 8300000, guid: d88fe0f35289a7a4f99aff8348c8e8ca, type: 3}
+    - target: {fileID: 1775475372023935783, guid: 4c97179ae8608c24d809942d4e4fd9c9, type: 3}
+      propertyPath: 'pickupSounds.Array.data[2]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 17223c18500e0024da26989d64c0cccc, type: 3}
     - target: {fileID: 2665493093572972153, guid: 4c97179ae8608c24d809942d4e4fd9c9, type: 3}
       propertyPath: m_Layer
       value: 6
@@ -355,7 +375,7 @@ GameObject:
   - component: {fileID: 799700944}
   - component: {fileID: 799700943}
   - component: {fileID: 799700945}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -490,6 +510,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 72845240782121253, guid: 1628a41bdfa7f1d478d6d47537e4b97c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4320844117219035517, guid: 1628a41bdfa7f1d478d6d47537e4b97c, type: 3}
       propertyPath: m_Name
       value: MilitaryRifle
@@ -556,6 +580,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cacete
       objectReference: {fileID: 0}
+    - target: {fileID: 4461042855224405217, guid: d981dbedeea652746ade69c09ad84d2a, type: 3}
+      propertyPath: weaponSounds.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4461042855224405217, guid: d981dbedeea652746ade69c09ad84d2a, type: 3}
+      propertyPath: weaponSounds.Array.data[0].type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4461042855224405217, guid: d981dbedeea652746ade69c09ad84d2a, type: 3}
+      propertyPath: weaponSounds.Array.data[1].type
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8232831572532864265, guid: d981dbedeea652746ade69c09ad84d2a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.3698316
@@ -609,14 +645,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 72845240782121253, guid: 7ec4a3272080a154d86a4fa9cda432be, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4320844117219035517, guid: 7ec4a3272080a154d86a4fa9cda432be, type: 3}
       propertyPath: m_Name
       value: Shotgun
       objectReference: {fileID: 0}
-    - target: {fileID: 4461042855224405217, guid: 7ec4a3272080a154d86a4fa9cda432be, type: 3}
-      propertyPath: shellCasingPrefab
-      value: 
-      objectReference: {fileID: 5537049821064018152, guid: b2e7acf631eabd4409f90204b3506f8c, type: 3}
     - target: {fileID: 8232831572532864265, guid: 7ec4a3272080a154d86a4fa9cda432be, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.403
@@ -717,6 +753,10 @@ PrefabInstance:
     - target: {fileID: 6278622201889030317, guid: 87b79f6338ab452439316b86d9f376bd, type: 3}
       propertyPath: m_Name
       value: Camera
+      objectReference: {fileID: 0}
+    - target: {fileID: 8637737706266132064, guid: 87b79f6338ab452439316b86d9f376bd, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

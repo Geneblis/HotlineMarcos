@@ -157,6 +157,10 @@ MonoBehaviour:
   type: 0
   maxAmmo: 6
   currentAmmo: 6
+  weaponSounds:
+  - type: 0
+    clip: {fileID: 8300000, guid: c0957cc23e7c3ef478b9f201a4094592, type: 3}
+  emptyShotSound: {fileID: 8300000, guid: c9cfc5ee63025dd45b8e613d74ae36a6, type: 3}
   firePoint: {fileID: 7803518449853877097}
   shellPoint: {fileID: 5268619855563342042}
   throwForce: 30
@@ -229,7 +233,7 @@ Transform:
   m_GameObject: {fileID: 4422050163749233970}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

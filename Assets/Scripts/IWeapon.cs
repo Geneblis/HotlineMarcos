@@ -11,6 +11,10 @@ public class IWeapon : MonoBehaviour
     public int        maxAmmo;
     public int        currentAmmo;
 
+    [Header("Sounds")]
+    public List<WeaponSoundEntry> weaponSounds = new List<WeaponSoundEntry>();
+    public AudioClip emptyShotSound;
+
     [Header("Origin Point")]
     [Tooltip("Transform that indicates where bullets/attacks originate from")]
     public Transform firePoint;
@@ -34,10 +38,6 @@ public class IWeapon : MonoBehaviour
     public bool  isBladed    = false;
     public float meleeRange  = 1.2f;
     public float meleeDamage = 50f;
-
-    [Header("Sounds")]
-    public List<WeaponSoundEntry> weaponSounds = new List<WeaponSoundEntry>();
-    public AudioClip emptyShotSound;
 
     bool        isHeld;
     bool        isThrown;
@@ -113,8 +113,13 @@ public class IWeapon : MonoBehaviour
     {
         if (!isHeld)                    return false;
         if (type != WeaponType.Firearm) return false;
-        if (currentAmmo <= 0)           return false;
         if (fireCooldown > 0)           return false;
+
+        if (currentAmmo <= 0)
+        {
+            PlayWeaponSound(WeaponSoundType.EmptyShot);
+            return false;
+        }
 
         Shoot(direction);
         return true;
@@ -157,6 +162,9 @@ public class IWeapon : MonoBehaviour
         currentAmmo--;
         fireCooldown = 1f / fireRate;
         CameraController.Instance?.AddTrauma(shakeTrauma);
+        
+        // Toca som de disparo
+        PlayWeaponSound(WeaponSoundType.FirearmShot);
     }
 
     void SpawnShell(Vector2 direction)
@@ -165,17 +173,12 @@ public class IWeapon : MonoBehaviour
 
         Vector2 origin = shellPoint != null ? (Vector2)shellPoint.position : (Vector2)transform.position;
         
-        // Pequeno offset aleatório na origem para mais realismo
         Vector2 randomOffset = Random.insideUnitCircle * 0.1f;
         origin += randomOffset;
-        
-        // Rotação inicial aleatória (0-360 graus)
         float randomRotation = Random.Range(0f, 360f);
         
-        // Instanciar com rotação aleatória
-        GameObject shell = Instantiate(shellCasingPrefab, origin, Quaternion.Euler(0, 0, randomRotation));
-        
-        // Adicionar aleatóriedade à direção (até 30% de variação)
+        Vector3 origin3D = new Vector3(origin.x, origin.y, 2f);
+        GameObject shell = Instantiate(shellCasingPrefab, origin3D, Quaternion.Euler(0, 0, randomRotation));
         Vector2 randomizedDirection = (direction + Random.insideUnitCircle * 0.3f).normalized;
         
         shell.GetComponent<ShellCasing>()?.Eject(randomizedDirection);
@@ -194,6 +197,9 @@ public class IWeapon : MonoBehaviour
         }
 
         fireCooldown = 1f / fireRate;
+        
+        // Toca som de melee attack
+        PlayWeaponSound(WeaponSoundType.MeleeAttack);
     }
 
     Vector2 ApplySpread(Vector2 dir, float degrees)
@@ -222,6 +228,38 @@ public class IWeapon : MonoBehaviour
             AudioSource.PlayClipAtPoint(entry.clip, transform.position);
         }
     }
+
+    void PlayWeaponSound(WeaponSoundType soundType)
+    {
+        AudioClip clipToPlay = null;
+
+        // Centraliza toda a lógica de som
+        switch (soundType)
+        {
+            case WeaponSoundType.FirearmShot:
+                var firearmEntry = weaponSounds.Find(s => s.type == WeaponSoundType.FirearmShot);
+                clipToPlay = firearmEntry?.clip;
+                break;
+
+            case WeaponSoundType.MeleeAttack:
+                var meleeEntry = weaponSounds.Find(s => s.type == WeaponSoundType.MeleeAttack);
+                clipToPlay = meleeEntry?.clip;
+                break;
+
+            case WeaponSoundType.EmptyShot:
+                clipToPlay = emptyShotSound;
+                break;
+        }
+
+        if (clipToPlay != null)
+        {
+            AudioSource.PlayClipAtPoint(clipToPlay, transform.position);
+        }
+        else
+        {
+            Debug.LogWarning($"Weapon '{weaponName}': Sound not assigned for {soundType}");
+        }
+    }
 }
 
 public enum WeaponType { Firearm, Melee }
@@ -234,4 +272,4 @@ public class WeaponSoundEntry
     public AudioClip clip;
 }
 
-public enum WeaponSoundType { FirearmShot, MeleeAttack }
+public enum WeaponSoundType { FirearmShot, MeleeAttack, EmptyShot }

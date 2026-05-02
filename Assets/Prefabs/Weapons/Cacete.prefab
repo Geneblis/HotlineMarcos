@@ -125,7 +125,10 @@ MonoBehaviour:
   type: 1
   maxAmmo: 0
   currentAmmo: 0
+  weaponSounds: []
+  emptyShotSound: {fileID: 0}
   firePoint: {fileID: 7803518449853877097}
+  shellPoint: {fileID: 0}
   throwForce: 30
   throwDrag: 3
   stopVelocityThreshold: 0.01
@@ -135,6 +138,7 @@ MonoBehaviour:
   spreadAngle: 30
   shakeTrauma: 2
   projectilePrefab: {fileID: 3336896619411098590, guid: 65579aceb009111469d38af1011a099f, type: 3}
+  shellCasingPrefab: {fileID: 0}
   isBladed: 0
   meleeRange: 1
   meleeDamage: 1
@@ -195,7 +199,7 @@ Transform:
   m_GameObject: {fileID: 4422050163749233970}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

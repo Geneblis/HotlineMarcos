@@ -30,6 +30,16 @@ public class Projectile : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        Debug.Log($"Projectile colidiu com: {other.name} | Layer: {other.gameObject.layer} ({LayerMask.LayerToName(other.gameObject.layer)})");
+
+        // Verifica se bateu no layer "Map"
+        if (other.gameObject.layer == LayerMask.NameToLayer("Map"))
+        {
+            Debug.Log("Deletando projétil - bateu no Map!");
+            Destroy(gameObject);
+            return;
+        }
+
         // Só reage a inimigos e ao player — ignora tudo o mais (paredes, props, etc.)
         // Remova o check de "Player" se não quiser que balas do player acertem ele mesmo
         bool isValidTarget = other.CompareTag("Enemy") || other.CompareTag("Player");

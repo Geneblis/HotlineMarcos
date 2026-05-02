@@ -10,14 +10,20 @@ public class PlayerWeaponController : MonoBehaviour
     public float pickupRadius = 1f;
     public LayerMask weaponLayer;
 
+    [Header("Audio")]
+    [Tooltip("Som para tocar ao pegar uma arma")]
+    public AudioClip pickupSound;
+
     IWeapon      equippedWeapon;
     Camera      cam;
     Collider2D  playerCollider;
+    AudioSource audioSource;
 
     void Awake()
     {
         cam = Camera.main ?? FindFirstObjectByType<Camera>();
         playerCollider = GetComponent<Collider2D>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -64,6 +70,15 @@ public class PlayerWeaponController : MonoBehaviour
     {
         equippedWeapon = weapon;
         equippedWeapon.OnPickup(holdPoint, playerCollider);
+        PlayPickupSound();
+    }
+
+    void PlayPickupSound()
+    {
+        if (pickupSound == null || audioSource == null)
+            return;
+
+        audioSource.PlayOneShot(pickupSound);
     }
 
     void ThrowWeapon(Vector2 direction)
@@ -91,12 +106,7 @@ public class PlayerWeaponController : MonoBehaviour
                 : buttonPressed);
 
         if (wantsToShoot)
-        {
-            bool fired = equippedWeapon.TryShoot(mouseDir);
-
-            if (!fired && equippedWeapon.IsEmpty())
-                Debug.Log("Out of ammo!");
-        }
+            equippedWeapon.TryShoot(mouseDir);
     }
 
     Vector2 GetMouseDirection()
