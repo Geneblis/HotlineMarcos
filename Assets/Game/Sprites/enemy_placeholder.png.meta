@@ -29521,6 +29521,50 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: enemy_placeholder_1177
+      rect:
+        serializedVersion: 2
+        x: 962
+        y: 1212
+        width: 25
+        height: 23
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 885e325fa32f25d44a2b4ea8ead030d9
+      internalID: 1878652952
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_placeholder_1178
+      rect:
+        serializedVersion: 2
+        x: 977
+        y: 1233
+        width: 2
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 127b3b09072323848bd808796dd0e025
+      internalID: 229456091
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -29736,6 +29780,8 @@ TextureImporter:
       enemy_placeholder_1174: 5573585454070901331
       enemy_placeholder_1175: 3247786969070818664
       enemy_placeholder_1176: 3310688245739445201
+      enemy_placeholder_1177: 1878652952
+      enemy_placeholder_1178: 229456091
       enemy_placeholder_118: 6260215281063348852
       enemy_placeholder_119: 8235650528500571073
       enemy_placeholder_12: -1728127993498721947
