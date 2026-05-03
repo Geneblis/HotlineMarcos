@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerAnimationController : MonoBehaviour
 {
     [Header("References")]
+    public Animator lowerAnimator;
 
     Rigidbody2D rb;
 
