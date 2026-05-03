@@ -2,20 +2,38 @@ using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
 {
+    // --- MÁQUINA DE ESTADOS (MODULARIDADE) ---
+    public enum AIState { Patrol, Chase, Combat }
+    
+    [Header("Estado Atual (Apenas Leitura)")]
+    public AIState currentState = AIState.Patrol;
+
     [Header("Configurações Base")]
     [SerializeField] private float health = 1f;
-    [SerializeField] private float moveSpeed = 6f;
+    [SerializeField] private float patrolSpeed = 2f;
+    [SerializeField] private float chaseSpeed = 5f;
+    
+    [Header("Módulo de Visão (FOV)")]
+    [SerializeField] private float detectionRadius = 12f;
+    [SerializeField] [Range(0, 360)] private float viewAngle = 90f;
+    [SerializeField] private LayerMask obstacleLayer; 
+    
+    [Header("Módulo de Combate")]
+    [SerializeField] private float attackRadius = 8f; 
     [SerializeField] private float aiReactionTime = 0.5f; 
     private float nextAiAttackTime;
-    
-    [Header("Detecção e Combate")]
-    [SerializeField] private float detectionRadius = 10f;
-    [SerializeField] private float attackRadius = 2f;
-    
+    private bool isAggro = false; // Define se ele já percebeu o player
+
+    [Header("Módulo de Patrulha")]
+    [SerializeField] private Transform[] patrolPoints;
+    [SerializeField] private float patrolWaitTime = 1f;
+    private int currentPatrolIndex;
+    private float waitTimer;
+
     [Header("Referências")]
     [SerializeField] private Transform playerTransform;
-    [SerializeField] private IWeapon heldWeapon; // Agora puxa direto o seu script IWeapon!
-    [SerializeField] private Transform holdPoint; // Um ponto vazio dentro do inimigo onde a arma deve ficar
+    [SerializeField] private IWeapon heldWeapon; 
+    [SerializeField] private Transform holdPoint;
 
     private bool isDead = false;
 
@@ -29,15 +47,10 @@ public class EnemyAI : MonoBehaviour
             if (player != null) playerTransform = player.transform;
         }
 
-        // SE O INIMIGO COMEÇAR COM UMA ARMA, ELE "PEGA" ELA
         if (heldWeapon != null)
         {
-            // O inimigo precisa ter um Collider2D para passar aqui e não atirar no próprio pé
             Collider2D enemyCollider = GetComponent<Collider2D>(); 
-            
-            // Se não tiver holdPoint, a arma fica no centro do inimigo mesmo
             Transform pointToHold = holdPoint != null ? holdPoint : transform; 
-            
             heldWeapon.OnPickup(pointToHold, enemyCollider);
         }
     }
@@ -46,90 +59,171 @@ public class EnemyAI : MonoBehaviour
     {
         if (isDead || playerTransform == null) return;
 
-        float distanceToPlayer = Vector2.Distance(transform.position, playerTransform.position);
+        // O cérebro do inimigo é dividido em módulos. 
+        // 1. Primeiro ele atualiza a visão para entender o mundo.
+        UpdateVisionModule();
 
-        // 1. AJUSTE DE RANGE DINÂMICO
-        float currentAttackRange = attackRadius; 
-        
-        // Se a arma for Melee, o range de ataque do inimigo vira o range da arma!
-        if (heldWeapon != null && heldWeapon.type == WeaponType.Melee)
+        // 2. Depois ele age com base no estado atual dele.
+        switch (currentState)
         {
-            currentAttackRange = heldWeapon.meleeRange;
+            case AIState.Patrol:
+                PatrolBehavior();
+                break;
+            case AIState.Chase:
+                ChaseBehavior();
+                break;
+            case AIState.Combat:
+                CombatBehavior();
+                break;
         }
+    }
 
-        if (distanceToPlayer <= currentAttackRange)
+    // ==========================================
+    // MÓDULO 1: VISÃO E DECISÃO
+    // ==========================================
+    private void UpdateVisionModule()
+    {
+        float distanceToPlayer = Vector2.Distance(transform.position, playerTransform.position);
+        
+        // Dispara o "laser" para ver se tem parede no meio
+        bool hasLineOfSight = CheckLineOfSight(distanceToPlayer);
+
+        // Define o raio de ataque correto (Arma de Fogo vs Corpo a Corpo)
+        float currentAttackRange = (heldWeapon != null && heldWeapon.type == WeaponType.Melee) ? heldWeapon.meleeRange : attackRadius;
+
+        // Se tem visão limpa (sem paredes) E o player tá perto
+        if (hasLineOfSight && distanceToPlayer <= detectionRadius)
         {
-            Attack();
-            LookAtPlayer();
-
-            // Se for corpo a corpo, é importante que ele continue andando na sua 
-            // direção enquanto bate, pra não errar o golpe se você der um passinho pra trás.
-            if (heldWeapon != null && heldWeapon.type == WeaponType.Melee)
+            // O player tá dentro do cone frontal de visão? Ou o inimigo já tava puto (aggro)?
+            if (isAggro || IsPlayerInCone())
             {
-                transform.position = Vector2.MoveTowards(transform.position, playerTransform.position, moveSpeed * Time.deltaTime);
+                isAggro = true; // Viu o player, não tem mais volta!
+
+                if (distanceToPlayer <= currentAttackRange)
+                {
+                    currentState = AIState.Combat; // Tá na distância de bater/atirar
+                }
+                else
+                {
+                    currentState = AIState.Chase; // Tá longe, vai correr atrás
+                }
             }
         }
-        else if (distanceToPlayer <= detectionRadius)
+        else
         {
-            Chase();
+            // Se o player se escondeu atrás da parede ou saiu da distância
+            if (isAggro)
+            {
+                // Se ele tava caçando/lutando, ele continua indo na direção do player pra procurar
+                currentState = AIState.Chase; 
+            }
+            else
+            {
+                currentState = AIState.Patrol;
+            }
         }
     }
 
-    private void Chase()
+    private bool CheckLineOfSight(float distance)
     {
-        transform.position = Vector2.MoveTowards(transform.position, playerTransform.position, moveSpeed * Time.deltaTime);
-        LookAtPlayer();
+        // Cria uma direção do inimigo para o player
+        Vector2 dirToPlayer = (playerTransform.position - transform.position).normalized;
+        
+        // Atira um raio. Se bater na layer "Parede", a variável 'hit.collider' não será nula.
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, dirToPlayer, distance, obstacleLayer);
+        
+        // Se for null, o caminho está limpo! (Retorna true)
+        return hit.collider == null; 
     }
 
-    private void LookAtPlayer()
+    private bool IsPlayerInCone()
     {
-        Vector2 direction = playerTransform.position - transform.position;
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90f)); 
+        Vector2 dirToPlayer = (playerTransform.position - transform.position).normalized;
+        float angleToPlayer = Vector2.Angle(transform.up, dirToPlayer); // Usa transform.up pro Top-Down
+        return angleToPlayer < viewAngle / 2f;
     }
 
-    private void Attack()
+    // ==========================================
+    // MÓDULO 2: COMPORTAMENTOS (ESTADOS)
+    // ==========================================
+    private void PatrolBehavior()
     {
-        // 2. CONTROLE DE MULTIPLOS HITS
-        // Se a arma sumiu ou se o inimigo ainda tá se "recuperando" do último ataque, ele não faz nada
+        if (patrolPoints == null || patrolPoints.Length == 0) return;
+
+        Transform targetPoint = patrolPoints[currentPatrolIndex];
+        
+        transform.position = Vector2.MoveTowards(transform.position, targetPoint.position, patrolSpeed * Time.deltaTime);
+        LookAtTarget(targetPoint.position);
+
+        if (Vector2.Distance(transform.position, targetPoint.position) < 0.2f)
+        {
+            waitTimer -= Time.deltaTime; 
+            if (waitTimer <= 0)
+            {
+                currentPatrolIndex = (currentPatrolIndex + 1) % patrolPoints.Length;
+                waitTimer = patrolWaitTime; 
+            }
+        }
+    }
+
+    private void ChaseBehavior()
+    {
+        // Corre na direção do player
+        transform.position = Vector2.MoveTowards(transform.position, playerTransform.position, chaseSpeed * Time.deltaTime);
+        LookAtTarget(playerTransform.position);
+    }
+
+    private void CombatBehavior()
+    {
+        // No combate ele para (ou se move bem devagar se for melee) e tenta atacar
+        LookAtTarget(playerTransform.position);
+
+        if (heldWeapon != null && heldWeapon.type == WeaponType.Melee)
+        {
+            // Se for corpo a corpo, continua indo pra cima enquanto bate
+            transform.position = Vector2.MoveTowards(transform.position, playerTransform.position, chaseSpeed * Time.deltaTime);
+        }
+
+        ExecuteAttack();
+    }
+
+    // ==========================================
+    // MÓDULO 3: AÇÕES (ATACAR, MORRER, OLHAR)
+    // ==========================================
+    private void ExecuteAttack()
+    {
         if (heldWeapon == null || Time.time < nextAiAttackTime) return;
 
         Vector2 aimDirection = (playerTransform.position - heldWeapon.transform.position).normalized;
         bool didAttack = false;
 
-        if (heldWeapon.type == WeaponType.Firearm)
-        {
-            didAttack = heldWeapon.TryShoot(aimDirection);
-        }
-        else if (heldWeapon.type == WeaponType.Melee)
-        {
-            didAttack = heldWeapon.TryMeleeAttack(aimDirection);
-        }
+        if (heldWeapon.type == WeaponType.Firearm) didAttack = heldWeapon.TryShoot(aimDirection);
+        else if (heldWeapon.type == WeaponType.Melee) didAttack = heldWeapon.TryMeleeAttack(aimDirection);
 
-        // Se o ataque funcionou de fato, ele reseta o cronômetro pra bater/atirar de novo
-        if (didAttack)
-        {
-            nextAiAttackTime = Time.time + aiReactionTime;
-        }
+        if (didAttack) nextAiAttackTime = Time.time + aiReactionTime;
+    }
+
+    private void LookAtTarget(Vector2 targetPos)
+    {
+        Vector2 direction = targetPos - (Vector2)transform.position;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90f)); 
     }
 
     public void TakeDamage(float damage)
     {
         if (isDead) return;
-
+        
+        isAggro = true; // Se tomou tiro pelas costas, já sabe que tá sendo atacado
+        
         health -= damage;
-        if (health <= 0)
-        {
-            Die();
-        }
+        if (health <= 0) Die();
     }
 
     private void Die()
     {
         isDead = true;
-        
         DropWeapon();
-
         GetComponent<Collider2D>().enabled = false; 
         this.enabled = false; 
     }
@@ -138,13 +232,8 @@ public class EnemyAI : MonoBehaviour
     {
         if (heldWeapon != null)
         {
-            // Em vez de fazermos a lógica do zero, usamos o seu método OnThrow!
-            // Vamos jogar a arma numa direção um pouco aleatória pra dar um efeito legal de morte
             Vector2 randomDropDirection = Random.insideUnitCircle.normalized;
-            
-            // Força reduzida para não voar longe demais (Multipliquei por 0.2f, ajuste se precisar)
             heldWeapon.OnThrow(randomDropDirection * 0.2f); 
-
             heldWeapon = null;
         }
     }
