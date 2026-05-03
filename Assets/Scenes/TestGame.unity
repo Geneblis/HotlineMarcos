@@ -580,18 +580,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cacete
       objectReference: {fileID: 0}
-    - target: {fileID: 4461042855224405217, guid: d981dbedeea652746ade69c09ad84d2a, type: 3}
-      propertyPath: weaponSounds.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4461042855224405217, guid: d981dbedeea652746ade69c09ad84d2a, type: 3}
-      propertyPath: weaponSounds.Array.data[0].type
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4461042855224405217, guid: d981dbedeea652746ade69c09ad84d2a, type: 3}
-      propertyPath: weaponSounds.Array.data[1].type
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8232831572532864265, guid: d981dbedeea652746ade69c09ad84d2a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.3698316

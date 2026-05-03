@@ -125,22 +125,26 @@ MonoBehaviour:
   type: 1
   maxAmmo: 0
   currentAmmo: 0
-  weaponSounds: []
+  weaponSounds:
+  - type: 1
+    clip: {fileID: 8300000, guid: 630cc3c70fe1836439bb9fb4f03c46d3, type: 3}
+  - type: 1
+    clip: {fileID: 8300000, guid: 1d3838b5e1ca1ce4ba8e260fcc16203b, type: 3}
   emptyShotSound: {fileID: 0}
   firePoint: {fileID: 7803518449853877097}
   shellPoint: {fileID: 0}
   throwForce: 30
   throwDrag: 3
   stopVelocityThreshold: 0.01
-  fireType: 0
-  fireRate: 8
-  pelletsPerShot: 4
+  fireType: 1
+  fireRate: 30
+  pelletsPerShot: 0
   spreadAngle: 30
   shakeTrauma: 2
   projectilePrefab: {fileID: 3336896619411098590, guid: 65579aceb009111469d38af1011a099f, type: 3}
   shellCasingPrefab: {fileID: 0}
   isBladed: 0
-  meleeRange: 1
+  meleeRange: 0.6
   meleeDamage: 1
 --- !u!1 &4388088450692290962
 GameObject:

@@ -524,6 +524,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2813884898274966998}
+  - component: {fileID: 6288684537963061811}
   m_Layer: 0
   m_Name: HUD
   m_TagString: Untagged
@@ -547,3 +548,24 @@ Transform:
   - {fileID: 2951443014688041352}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6288684537963061811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5429957764065348084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28a0d48c72bbee24395d79c6650cf4c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  pointsText: {fileID: 8177567619129809720}
+  pointsSuffix: ' PTS'
+  ammoText: {fileID: 6757664659801998515}
+  ammoSeparator: ' / '
+  ammoEmpty: ' '
+  timerText: {fileID: 1225226023259096290}
+  countDown: 1
+  timerDuration: 60
+  timerRunning: 0

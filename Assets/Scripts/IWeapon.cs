@@ -21,7 +21,7 @@ public class IWeapon : MonoBehaviour
     public Transform shellPoint;
 
     [Header("Throw")]
-    public float throwForce            = 10f;
+    public float throwForce            = 25f;
     public float throwDrag             = 3f;
     public float stopVelocityThreshold = 0.05f;
 
@@ -111,13 +111,17 @@ public class IWeapon : MonoBehaviour
 
     public bool TryShoot(Vector2 direction)
     {
-        if (!isHeld)                    return false;
-        if (type != WeaponType.Firearm) return false;
-        if (fireCooldown > 0)           return false;
+        if (!isHeld)                          return false;
+        if (!IsOfType(WeaponType.Firearm))    return false;
+        if (fireCooldown > 0)                 return false;
 
-        if (currentAmmo <= 0)
-        {
-            PlayWeaponSound(WeaponSoundType.EmptyShot);
+        if (currentAmmo <= 0) {
+            //avoids automatic weapons from spamming the empty sound.
+            if (fireCooldown <= 0 && fireType == FireType.Automatic) {
+                PlayWeaponSound(WeaponSoundType.EmptyShot);
+                fireCooldown = 0.5f;
+            }
+            else PlayWeaponSound(WeaponSoundType.EmptyShot);
             return false;
         }
 
@@ -127,18 +131,16 @@ public class IWeapon : MonoBehaviour
 
     public bool TryMeleeAttack(Vector2 direction)
     {
-        if (!isHeld)                  return false;
-        if (type != WeaponType.Melee) return false;
-        if (fireCooldown > 0)         return false;
-
+        if (!isHeld)                       return false;
+        if (!IsOfType(WeaponType.Melee))   return false;
+        if (fireCooldown > 0)              return false;
         MeleeAttack(direction);
         return true;
     }
 
-    public bool IsEmpty()   => currentAmmo <= 0;
-    public bool IsHeld()    => isHeld;
-    public bool IsFirearm() => type == WeaponType.Firearm;
-    public bool IsMelee()   => type == WeaponType.Melee;
+    public bool IsEmpty()              => currentAmmo <= 0;
+    public bool IsHeld()               => isHeld;
+    public bool IsOfType(WeaponType weaponType) => type == weaponType;
 
     void Shoot(Vector2 direction)
     {
@@ -218,15 +220,6 @@ public class IWeapon : MonoBehaviour
 
         if (active && playerCol != null)
             Physics2D.IgnoreCollision(col, playerCol, false);
-    }
-
-    void PlaySound(WeaponSoundType soundType)
-    {
-        var entry = weaponSounds.Find(s => s.type == soundType);
-        if (entry != null && entry.clip != null)
-        {
-            AudioSource.PlayClipAtPoint(entry.clip, transform.position);
-        }
     }
 
     void PlayWeaponSound(WeaponSoundType soundType)

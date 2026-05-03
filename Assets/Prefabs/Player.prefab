@@ -196,7 +196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7abffde7c6f1f2948b056757c5f0b044, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  moveSpeed: 6
+  moveSpeed: 7
   bodyRotationSpeed: 720
   legsRotationSpeed: 540
   body: {fileID: 2948186996977974827}
@@ -232,6 +232,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   pickupSound: {fileID: 8300000, guid: 11cb80f6067cdd7438cc5e8fce9c96e2, type: 3}
+  throwSound: {fileID: 8300000, guid: 2467ecad32adaed4aa1e8208619031d4, type: 3}
 --- !u!58 &692347245647687334
 CircleCollider2D:
   m_ObjectHideFlags: 0
