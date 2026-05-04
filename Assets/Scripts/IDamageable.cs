@@ -1,6 +1,6 @@
 // IDamageable.cs
 // Interface central de dano. Todo objeto que pode ser danificado implementa isso.
-public enum DamageType { Bullet, Melee, Thrown }
+public enum DamageType { Bullet, Melee, Thrown, Finisher }
 
 public interface IDamageable
 {
