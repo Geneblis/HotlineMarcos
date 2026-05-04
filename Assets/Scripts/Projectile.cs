@@ -25,32 +25,31 @@ public class Projectile : MonoBehaviour
             Physics2D.IgnoreCollision(col, weaponCol, true);
 
         rb.linearVelocity = direction.normalized * speed;
+
+        // Rotaciona o sprite do projétil na direção do disparo
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0f, 0f, angle);
+
         Destroy(gameObject, lifetime);
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log($"Projectile colidiu com: {other.name} | Layer: {other.gameObject.layer} ({LayerMask.LayerToName(other.gameObject.layer)})");
+        // Ignora outros projéteis
+        if (other.GetComponent<Projectile>() != null) return;
 
-        // Ignora colisão com outros projéteis
-        if (other.GetComponent<Projectile>() != null)
-            return;
-
-        // Verifica se bateu no layer "Map"
+        // Destrói ao bater no mapa
         if (other.gameObject.layer == LayerMask.NameToLayer("Map"))
         {
-            Debug.Log("Deletando projétil - bateu no Map!");
             Destroy(gameObject);
             return;
         }
 
-        // Só reage a inimigos e ao player — ignora tudo o mais (paredes, props, etc.)
-        // Remova o check de "Player" se não quiser que balas do player acertem ele mesmo
+        // Só processa dano em alvos válidos
         bool isValidTarget = other.CompareTag("Enemy") || other.CompareTag("Player");
         if (!isValidTarget) return;
 
-        // other.GetComponent<IDamageable>()?.TakeDamage(damage);
-        Debug.Log($"Projectile hit: {other.name}");
+        other.GetComponent<IDamageable>()?.TakeDamage(damage, DamageType.Bullet);
 
         Destroy(gameObject);
     }
