@@ -42,8 +42,8 @@ GameObject:
   - component: {fileID: 4094838798064262767}
   - component: {fileID: 3735200801983036181}
   - component: {fileID: 4636218013155078459}
-  - component: {fileID: 2053508562670189793}
   - component: {fileID: 2035201636582391374}
+  - component: {fileID: 8644230998328679775}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -61,7 +61,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.72655, y: -0.12723, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 4, y: 4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 546821265921705657}
@@ -153,8 +153,41 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!61 &2053508562670189793
-BoxCollider2D:
+--- !u!114 &2035201636582391374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8622417055965342909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4170ac83ce6a80d44ac103edbed6692f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyAI
+  currentState: 0
+  health: 1
+  patrolSpeed: 2
+  chaseSpeed: 5
+  detectionRadius: 10
+  viewAngle: 300
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  attackRadius: 6
+  aiReactionTime: 0.5
+  patrolPoints: []
+  patrolWaitTime: 1
+  searchDuration: 4
+  searchRotationSpeed: 90
+  weaponPrefab: {fileID: 0}
+  holdPoint: {fileID: 0}
+  stunDuration: 2
+  stunKnockbackForce: 1.5
+  stunnedZRotation: 90
+  playerTransform: {fileID: 0}
+--- !u!70 &8644230998328679775
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -187,34 +220,6 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.24, y: 0.23}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
---- !u!114 &2035201636582391374
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8622417055965342909}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4170ac83ce6a80d44ac103edbed6692f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyAI
-  health: 1
-  moveSpeed: 6
-  detectionRadius: 10
-  attackRadius: 6
-  playerTransform: {fileID: 0}
-  heldWeapon: {fileID: 0}
-  holdPoint: {fileID: 0}
+  m_Offset: {x: 0, y: -0.03}
+  m_Size: {x: 0.23, y: 0.2}
+  m_Direction: 1
