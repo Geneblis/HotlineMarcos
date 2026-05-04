@@ -167,9 +167,33 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3000998957181087179, guid: db111a0fe0981ba458f869f199cb5422, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -647
+      objectReference: {fileID: 0}
+    - target: {fileID: 3000998957181087179, guid: db111a0fe0981ba458f869f199cb5422, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -364
+      objectReference: {fileID: 0}
     - target: {fileID: 5429957764065348084, guid: db111a0fe0981ba458f869f199cb5422, type: 3}
       propertyPath: m_Name
       value: HUD
+      objectReference: {fileID: 0}
+    - target: {fileID: 7246941900372213399, guid: db111a0fe0981ba458f869f199cb5422, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.000015259
+      objectReference: {fileID: 0}
+    - target: {fileID: 7246941900372213399, guid: db111a0fe0981ba458f869f199cb5422, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 357
+      objectReference: {fileID: 0}
+    - target: {fileID: 8571663259550867149, guid: db111a0fe0981ba458f869f199cb5422, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 770
+      objectReference: {fileID: 0}
+    - target: {fileID: 8571663259550867149, guid: db111a0fe0981ba458f869f199cb5422, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 332
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1111,6 +1135,10 @@ PrefabInstance:
     - target: {fileID: 4320844117219035517, guid: 7ec4a3272080a154d86a4fa9cda432be, type: 3}
       propertyPath: m_Name
       value: Shotgun
+      objectReference: {fileID: 0}
+    - target: {fileID: 4461042855224405217, guid: 7ec4a3272080a154d86a4fa9cda432be, type: 3}
+      propertyPath: throwForce
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 8232831572532864265, guid: 7ec4a3272080a154d86a4fa9cda432be, type: 3}
       propertyPath: m_LocalPosition.x
