@@ -108,6 +108,26 @@ public class IWeapon : MonoBehaviour
         if (playerCol != null)
             Physics2D.IgnoreCollision(col, playerCol, true);
     }
+    private void OnCollisionEnter2D(Collision2D collision)
+{
+    // Só processa o impacto se a arma estiver em voo (isThrown)
+    if (isThrown)
+    {
+        // Tenta encontrar o componente de IA no objeto atingido
+        EnemyAI enemy = collision.gameObject.GetComponent<EnemyAI>();
+
+        if (enemy != null)
+        {
+            // ENVIA A MENSAGEM: Dano 0 (ou quanto quiser), mas do tipo Thrown
+            enemy.TakeDamage(0f, DamageType.Thrown);
+
+            // FAZ A ARMA CAIR: Após atingir o inimigo, ela perde a força de voo
+            isThrown = false;
+            rb.linearDamping = 5f; // Aumenta o arrasto para ela parar rápido
+            rb.angularVelocity *= 0.2f; // Diminui o giro
+        }
+    }
+}
 
     public bool TryShoot(Vector2 direction)
     {
