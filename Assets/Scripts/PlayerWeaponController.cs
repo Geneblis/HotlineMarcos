@@ -36,43 +36,43 @@ public class PlayerWeaponController : MonoBehaviour
         audioSource    = GetComponent<AudioSource>();
     }
 
-    void Update()
+   void Update()
+{
+    Vector2 mouseDir = GetMouseDirection();
+
+    // Botão Direito: Pegar ou Jogar
+    if (Input.GetMouseButtonDown(1))
     {
-
-        Vector2 mouseDir = GetMouseDirection();
-
-        // Verifica finalização primeiro
-        if (Input.GetKeyDown(finisherKey))
+        if (equippedWeapon == null)
         {
-            TryExecuteFinisher();
+            TryPickup();
+            // IMPORTANTE: Se pegamos a arma, saímos do Update aqui 
+            // para não correr o risco de jogá-la no mesmo clique.
+            if (equippedWeapon != null) return; 
         }
-
-        if (Input.GetMouseButtonDown(1))
+        else
         {
-            if (equippedWeapon == null)
-                TryPickup();
-            else
-                ThrowWeapon(mouseDir);
+            ThrowWeapon(mouseDir);
+            return; // Sai do update após jogar
         }
-
-        // Lógica de Ataque/Soco
-        if (equippedWeapon != null)
-        {
-            HandleShooting(mouseDir);
-        }
-        else if (Input.GetMouseButtonDown(0)) // Botão esquerdo sem arma
-        {
-            PerformPunch(mouseDir);
-        }
-        if (Input.GetMouseButtonDown(1))
-        {
-            if (equippedWeapon == null) TryPickup();
-            else ThrowWeapon(mouseDir);
-        }
-
-        if (equippedWeapon != null) HandleShooting(mouseDir);
-        else if (Input.GetMouseButtonDown(0)) PerformPunch(mouseDir);
     }
+
+    // Botão de Finalização (Space)
+    if (Input.GetKeyDown(finisherKey))
+    {
+        TryExecuteFinisher();
+    }
+
+    // Lógica de Ataque (Botão Esquerdo)
+    if (equippedWeapon != null)
+    {
+        HandleShooting(mouseDir);
+    }
+    else if (Input.GetMouseButtonDown(0))
+    {
+        PerformPunch(mouseDir);
+    }
+}
 
     //_________________________________________
     // Parte do soco do personagem
