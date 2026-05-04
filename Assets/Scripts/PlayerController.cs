@@ -10,13 +10,13 @@ public class PlayerController : MonoBehaviour, IDamageable
     public float bodyRotationSpeed = 720f;
     public float legsRotationSpeed = 540f;
 
-    [Header("Vida")]
-    [SerializeField] private float maxHealth     = 100f;
+    [Header("Health")]
+    [SerializeField] private float maxHealth     = 1f;
     [SerializeField] private float currentHealth;
 
     [Header("References")]
-    public Transform body; // gira em direção ao mouse
-    public Transform legs; // gira em direção ao WASD
+    public Transform body;
+    public Transform legs;
 
     Rigidbody2D rb;
     Camera      cam;
@@ -26,14 +26,13 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     void Awake()
     {
-        rb            = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
         currentHealth = maxHealth;
+        cam = FindFirstObjectByType<Camera>();
 
-        cam = Camera.main ?? FindFirstObjectByType<Camera>();
-
-        if (cam  == null) Debug.LogError("PlayerController: nenhuma câmera encontrada!", this);
-        if (body == null) Debug.LogError("PlayerController: campo 'Body' não atribuído!", this);
-        if (legs == null) Debug.LogError("PlayerController: campo 'Legs' não atribuído!", this);
+        if (cam  == null) Debug.LogError("PlayerController: no camera found!", this);
+        if (body == null) Debug.LogError("PlayerController: 'Body' not assigned!", this);
+        if (legs == null) Debug.LogError("PlayerController: 'Legs' not assigned!", this);
     }
 
     void Update()
@@ -55,13 +54,9 @@ public class PlayerController : MonoBehaviour, IDamageable
         rb.linearVelocity = moveInput * moveSpeed;
     }
 
-    // ──────────────────────────────────────────────
-    // IDamageable
-    // ──────────────────────────────────────────────
     public void TakeDamage(float damage, DamageType damageType)
     {
         if (isDead) return;
-
         currentHealth -= damage;
         if (currentHealth <= 0f) Die();
     }
@@ -70,8 +65,8 @@ public class PlayerController : MonoBehaviour, IDamageable
     {
         isDead            = true;
         rb.linearVelocity = Vector2.zero;
-        // TODO: tocar animação de morte, tela de game over, etc.
         gameObject.SetActive(false);
+        GameManager.Instance?.OnPlayerDied();
     }
 
     void RotateTowardsMouse()

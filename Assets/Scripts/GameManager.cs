@@ -1,5 +1,8 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro;
+
+public enum GameState { Playing, Paused, Dead }
 
 public class GameManager : MonoBehaviour
 {
@@ -7,21 +10,15 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
+        if (Instance != null && Instance != this) { Destroy(gameObject); return; }
         Instance = this;
     }
 
-    [Header("HUD — Pontuação")]
+    [Header("HUD — Points")]
     [SerializeField] TMP_Text pointsText;
     [SerializeField] string   pointsSuffix = "";
 
-    int currentPoints = 0;
-
-    [Header("HUD — Munição")]
+    [Header("HUD — Ammo")]
     [SerializeField] TMP_Text ammoText;
     [SerializeField] string   ammoSeparator = " / ";
     [SerializeField] string   ammoEmpty     = "---";
@@ -30,12 +27,25 @@ public class GameManager : MonoBehaviour
     [SerializeField] TMP_Text timerText;
     [SerializeField] bool     countDown     = false;
     [SerializeField] float    timerDuration = 60f;
-    [SerializeField] bool     timerRunning  = true;
 
-    float elapsedTime = 0f;
+    [Header("Screens")]
+    [SerializeField] GameObject gameOverScreen;
+    [SerializeField] GameObject pauseMenuRoot;
+
+    [Header("Main Menu Scene")]
+    [SerializeField] string mainMenuScene = "MainMenu";
+
+    GameState state         = GameState.Playing;
+    int       currentPoints = 0;
+    float     elapsedTime   = 0f;
 
     void Start()
     {
+        Time.timeScale = 1f;
+
+        if (gameOverScreen != null) gameOverScreen.SetActive(false);
+        if (pauseMenuRoot  != null) pauseMenuRoot.SetActive(false);
+
         RefreshPointsUI();
         RefreshAmmoUI(ammoEmpty);
         RefreshTimerUI(countDown ? timerDuration : 0f);
@@ -43,25 +53,65 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (!timerRunning) return;
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if      (state == GameState.Playing) Pause();
+            else if (state == GameState.Paused)  Resume();
+        }
+
+        if (state == GameState.Dead && Input.GetKeyDown(KeyCode.R))
+            RestartLevel();
+
+        if (state != GameState.Playing) return;
 
         elapsedTime += Time.deltaTime;
-
-        float display = countDown
-            ? Mathf.Max(0f, timerDuration - elapsedTime)
-            : elapsedTime;
-
+        float display = countDown ? Mathf.Max(0f, timerDuration - elapsedTime) : elapsedTime;
         RefreshTimerUI(display);
 
         if (countDown && display <= 0f)
         {
-            timerRunning = false;
+            state = GameState.Dead;
             OnTimerEnd();
         }
     }
 
+    public GameState CurrentState => state;
+
+    public void Pause()
+    {
+        state          = GameState.Paused;
+        Time.timeScale = 0f;
+        if (pauseMenuRoot != null) pauseMenuRoot.SetActive(true);
+    }
+
+    public void Resume()
+    {
+        state          = GameState.Playing;
+        Time.timeScale = 1f;
+        if (pauseMenuRoot != null) pauseMenuRoot.SetActive(false);
+    }
+
+    public void OnPlayerDied()
+    {
+        state = GameState.Dead;
+        if (gameOverScreen != null) gameOverScreen.SetActive(true);
+    }
+
+    public void RestartLevel()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void GoToMainMenu()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(mainMenuScene);
+    }
+
     public void AddPoints(int amount)
     {
+        if (state != GameState.Playing) return;
         currentPoints += amount;
         RefreshPointsUI();
     }
@@ -72,19 +122,10 @@ public class GameManager : MonoBehaviour
         RefreshPointsUI();
     }
 
-    public void UpdateAmmo(int current, int max)
-    {
-        RefreshAmmoUI($"{current}{ammoSeparator}{max}");
-    }
+    public void UpdateAmmo(int current, int max) => RefreshAmmoUI($"{current}{ammoSeparator}{max}");
+    public void ClearAmmo()                       => RefreshAmmoUI(ammoEmpty);
 
-    public void ClearAmmo()
-    {
-        RefreshAmmoUI(ammoEmpty);
-    }
-
-    public void PauseTimer()  => timerRunning = false;
-    public void ResumeTimer() => timerRunning = true;
-    public void ResetTimer()  { elapsedTime = 0f; timerRunning = true; }
+    public void ResetTimer() { elapsedTime = 0f; }
 
     void RefreshPointsUI()
     {
@@ -108,6 +149,6 @@ public class GameManager : MonoBehaviour
 
     void OnTimerEnd()
     {
-        Debug.Log("GameManager: Timer encerrado.");
+        Debug.Log("GameManager: Timer ended.");
     }
 }
