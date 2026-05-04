@@ -32,6 +32,10 @@ public class Projectile : MonoBehaviour
     {
         Debug.Log($"Projectile colidiu com: {other.name} | Layer: {other.gameObject.layer} ({LayerMask.LayerToName(other.gameObject.layer)})");
 
+        // Ignora colisão com outros projéteis
+        if (other.GetComponent<Projectile>() != null)
+            return;
+
         // Verifica se bateu no layer "Map"
         if (other.gameObject.layer == LayerMask.NameToLayer("Map"))
         {
