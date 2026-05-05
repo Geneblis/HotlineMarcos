@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     public float legsRotationSpeed = 540f;
 
     [Header("Health")]
-    [SerializeField] private float maxHealth     = 1f;
+    [SerializeField] private float maxHealth = 1f;
     [SerializeField] private float currentHealth;
 
     [Header("References")]
@@ -19,10 +19,10 @@ public class PlayerController : MonoBehaviour, IDamageable
     public Transform legs;
 
     Rigidbody2D rb;
-    Camera      cam;
-    Vector2     moveInput;
-    float       lastMoveAngle;
-    bool        isDead;
+    Camera cam;
+    Vector2 moveInput;
+    float lastMoveAngle;
+    bool isDead;
 
     void Awake()
     {
@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         currentHealth = maxHealth;
         cam = FindFirstObjectByType<Camera>();
 
-        if (cam  == null) Debug.LogError("PlayerController: no camera found!", this);
+        if (cam == null) Debug.LogError("PlayerController: no camera found!", this);
         if (body == null) Debug.LogError("PlayerController: 'Body' not assigned!", this);
         if (legs == null) Debug.LogError("PlayerController: 'Legs' not assigned!", this);
     }
@@ -63,7 +63,7 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     private void Die()
     {
-        isDead            = true;
+        isDead = true;
         rb.linearVelocity = Vector2.zero;
         gameObject.SetActive(false);
         GameManager.Instance?.OnPlayerDied();
@@ -73,8 +73,8 @@ public class PlayerController : MonoBehaviour, IDamageable
     {
         if (cam == null || body == null) return;
         Vector3 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 dir      = mousePos - body.position;
-        float   angle    = Vector2ToAngle(dir);
+        Vector2 dir = mousePos - body.position;
+        float angle = Vector2ToAngle(dir);
         body.rotation = Quaternion.RotateTowards(body.rotation, Quaternion.Euler(0, 0, angle), bodyRotationSpeed * Time.deltaTime);
     }
 

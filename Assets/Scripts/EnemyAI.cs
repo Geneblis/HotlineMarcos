@@ -100,19 +100,19 @@ public class EnemyAI : MonoBehaviour, IDamageable
     }
 
     void Update()
-{
-    if (isDead || playerTransform == null) return;
-
-    // BLOQUEIO TOTAL: Se estiver atordoado, ele executa apenas a lógica de stun
-    if (currentState == AIState.Stunned)
     {
-        StunnedBehavior();
-        return; // O 'return' impede que o UpdateVisionModule() seja chamado abaixo
-    }
+        if (isDead || playerTransform == null) return;
 
-    UpdateVisionModule();
-    ExecuteCurrentState();
-}
+        // BLOQUEIO TOTAL: Se estiver atordoado, ele executa apenas a lógica de stun
+        if (currentState == AIState.Stunned)
+        {
+            StunnedBehavior();
+            return; // O 'return' impede que o UpdateVisionModule() seja chamado abaixo
+        }
+
+        UpdateVisionModule();
+        ExecuteCurrentState();
+    }
 
     // ══════════════════════════════════════════════
     // INICIALIZAÇÃO
@@ -178,15 +178,15 @@ public class EnemyAI : MonoBehaviour, IDamageable
 
     private bool CheckLineOfSight(float distance)
     {
-        Vector2      dir = ((Vector2)playerTransform.position - (Vector2)transform.position).normalized;
+        Vector2 dir = ((Vector2)playerTransform.position - (Vector2)transform.position).normalized;
         RaycastHit2D hit = Physics2D.Raycast(transform.position, dir, distance, obstacleLayer);
         return hit.collider == null;
     }
 
     private bool IsPlayerInCone()
     {
-        Vector2 dir   = ((Vector2)playerTransform.position - (Vector2)transform.position).normalized;
-        float   angle = Vector2.Angle(transform.up, dir);
+        Vector2 dir = ((Vector2)playerTransform.position - (Vector2)transform.position).normalized;
+        float angle = Vector2.Angle(transform.up, dir);
         return angle < viewAngle / 2f;
     }
 
@@ -214,43 +214,43 @@ public class EnemyAI : MonoBehaviour, IDamageable
     }
 
     private void ChangeState(AIState newState)
-{
-    if (currentState == newState) return;
-
-    // TRAVA: Se estiver em Stun, ignora mudanças de estado automáticas da visão
-    if (currentState == AIState.Stunned)
     {
-        // Só permite sair do Stun se o novo estado for PickupWeapon ou Patrol (pós-recuperação)
-        if (newState != AIState.PickupWeapon && newState != AIState.Patrol && newState != AIState.Hold)
-        {
-            return;
-        }
-    }
+        if (currentState == newState) return;
 
-    // Ao entrar em estado passivo, verifica se há arma esperando ser pega
-    if (readyToPickupWeapon)
-    {
-        if (droppedWeapon == null || droppedWeapon.IsHeld())
+        // TRAVA: Se estiver em Stun, ignora mudanças de estado automáticas da visão
+        if (currentState == AIState.Stunned)
         {
-            readyToPickupWeapon = false;
-            droppedWeapon = null;
-        }
-        else
-        {
-            bool isPassiveState = newState == AIState.Patrol
-                               || newState == AIState.Hold
-                               || newState == AIState.Search;
-            if (isPassiveState)
+            // Só permite sair do Stun se o novo estado for PickupWeapon ou Patrol (pós-recuperação)
+            if (newState != AIState.PickupWeapon && newState != AIState.Patrol && newState != AIState.Hold)
             {
-                currentState = AIState.PickupWeapon;
                 return;
             }
         }
-    }
 
-    currentState = newState;
-    if (newState == AIState.Search) searchTimer = searchDuration;
-}
+        // Ao entrar em estado passivo, verifica se há arma esperando ser pega
+        if (readyToPickupWeapon)
+        {
+            if (droppedWeapon == null || droppedWeapon.IsHeld())
+            {
+                readyToPickupWeapon = false;
+                droppedWeapon = null;
+            }
+            else
+            {
+                bool isPassiveState = newState == AIState.Patrol
+                                   || newState == AIState.Hold
+                                   || newState == AIState.Search;
+                if (isPassiveState)
+                {
+                    currentState = AIState.PickupWeapon;
+                    return;
+                }
+            }
+        }
+
+        currentState = newState;
+        if (newState == AIState.Search) searchTimer = searchDuration;
+    }
 
     // ══════════════════════════════════════════════
     // MÓDULO 3 — COMPORTAMENTOS DE ESTADO
@@ -350,36 +350,36 @@ public class EnemyAI : MonoBehaviour, IDamageable
     }
 
     private void StunnedBehavior()
-{
-    // Força o Rigidbody a parar gradualmente para não deslizar infinitamente
-    rb.linearVelocity = Vector2.Lerp(rb.linearVelocity, Vector2.zero, Time.deltaTime * 3f);
-
-    stunTimer -= Time.deltaTime;
-    if (stunTimer <= 0f)
     {
-        RecoverFromStun();
+        // Força o Rigidbody a parar gradualmente para não deslizar infinitamente
+        rb.linearVelocity = Vector2.Lerp(rb.linearVelocity, Vector2.zero, Time.deltaTime * 3f);
+
+        stunTimer -= Time.deltaTime;
+        if (stunTimer <= 0f)
+        {
+            RecoverFromStun();
+        }
     }
-}
 
     private void RecoverFromStun()
-{
-    // Reseta a rotação para o inimigo ficar "em pé" novamente
-    transform.rotation = Quaternion.identity;
+    {
+        // Reseta a rotação para o inimigo ficar "em pé" novamente
+        transform.rotation = Quaternion.identity;
 
-    if (droppedWeapon != null && !droppedWeapon.IsHeld())
-    {
-        readyToPickupWeapon = true;
-        // Forçamos a troca de estado ignorando a trava anterior
-        currentState = AIState.PickupWeapon; 
+        if (droppedWeapon != null && !droppedWeapon.IsHeld())
+        {
+            readyToPickupWeapon = true;
+            // Forçamos a troca de estado ignorando a trava anterior
+            currentState = AIState.PickupWeapon;
+        }
+        else
+        {
+            droppedWeapon = null;
+            readyToPickupWeapon = false;
+            bool singlePoint = patrolPoints != null && patrolPoints.Length == 1;
+            currentState = isAggro ? AIState.Chase : (singlePoint ? AIState.Hold : AIState.Patrol);
+        }
     }
-    else
-    {
-        droppedWeapon = null;
-        readyToPickupWeapon = false;
-        bool singlePoint = patrolPoints != null && patrolPoints.Length == 1;
-        currentState = isAggro ? AIState.Chase : (singlePoint ? AIState.Hold : AIState.Patrol);
-    }
-}
 
     // ══════════════════════════════════════════════
     // MÓDULO 4 — ATAQUE
@@ -404,62 +404,61 @@ public class EnemyAI : MonoBehaviour, IDamageable
     // MÓDULO 5 — SISTEMA DE DANO (IDamageable)
     // ══════════════════════════════════════════════
     public void TakeDamage(float damage, DamageType damageType)
-{
-    if (isDead) return;
-
-    isAggro = true;
-
-    switch (damageType)
     {
-        case DamageType.Bullet:
-        case DamageType.Melee:
-            health -= damage;
-            if (health <= 0) Die();
-            break;
+        if (isDead) return;
 
-        case DamageType.Thrown:
-            OnHitByThrownWeapon();
-            break;
+        isAggro = true;
 
-        // NOVO CASO: Finalização no chão
-        case DamageType.Finisher:
-            ExecuteFinisherLogic();
-            break;
+        switch (damageType)
+        {
+            case DamageType.Bullet:
+            case DamageType.Melee:
+                health -= damage;
+                if (health <= 0) Die();
+                break;
+
+            case DamageType.Thrown:
+                OnHitByThrownWeapon();
+                break;
+
+            // NOVO CASO: Finalização no chão
+            case DamageType.Finisher:
+                ExecuteFinisherLogic();
+                break;
+        }
     }
-}
 
-//finalizaçao
-private void ExecuteFinisherLogic()
-{
-    // Aqui você pode adicionar efeitos especiais antes de morrer
-    Debug.Log($"{name} foi executado brutalmente!");
-    
-    // Se tiver um sistema de partículas de sangue:
-    // Instantiate(bloodSplashPrefab, transform.position, Quaternion.identity);
+    //finalizaçao
+    private void ExecuteFinisherLogic()
+    {
+        // Aqui você pode adicionar efeitos especiais antes de morrer
+        Debug.Log($"{name} foi executado brutalmente!");
 
-    Die(); // Chama o método de morte que você já tem
-    
-}
+        // Se tiver um sistema de partículas de sangue:
+        // Instantiate(bloodSplashPrefab, transform.position, Quaternion.identity);
+
+        Die(); // Chama o método de morte que você já tem
+    }
 
     private void OnHitByThrownWeapon()
-{
-    droppedWeapon = heldWeapon;
-    DropWeapon();
+    {
+        droppedWeapon = heldWeapon;
+        DropWeapon();
 
-    // Entra no estado de Stun primeiro
-    currentState = AIState.Stunned;
-    stunTimer = stunDuration;
+        // Entra no estado de Stun primeiro
+        currentState = AIState.Stunned;
+        stunTimer = stunDuration;
 
-    // Zera inércia anterior para o knockback ser consistente
-    rb.linearVelocity = Vector2.zero;
-    rb.angularVelocity = 0f;
+        // Zera inércia anterior para o knockback ser consistente
+        rb.linearVelocity = Vector2.zero;
+        rb.angularVelocity = 0f;
 
-    Vector2 knockbackDir = (transform.position - playerTransform.position).normalized;
-    rb.AddForce(knockbackDir * stunKnockbackForce, ForceMode2D.Impulse);
-    
-    // Gira o boneco para o lado (visual de queda)
-    transform.rotation = Quaternion.Euler(0, 0, stunnedZRotation);
-}
+        Vector2 knockbackDir = (transform.position - playerTransform.position).normalized;
+        rb.AddForce(knockbackDir * stunKnockbackForce, ForceMode2D.Impulse);
+
+        // Gira o boneco para o lado (visual de queda)
+        transform.rotation = Quaternion.Euler(0, 0, stunnedZRotation);
+    }
 
     private void Die()
     {
@@ -482,11 +481,12 @@ private void ExecuteFinisherLogic()
     // UTILITÁRIOS
     // ══════════════════════════════════════════════
     private void MoveTowards(Vector2 target, float speed)
-{
-    // Em vez de mudar a posição, definimos a velocidade (Velocity)
-    Vector2 direction = (target - (Vector2)transform.position).normalized;
-    rb.linearVelocity = direction * speed; 
-}
+    {
+        // Em vez de mudar a posição, definimos a velocidade (Velocity)
+        Vector2 direction = (target - (Vector2)transform.position).normalized;
+        rb.linearVelocity = direction * speed;
+    }
+
     private void LookAtTarget(Vector2 targetPos)
     {
         Vector2 dir   = targetPos - (Vector2)transform.position;
