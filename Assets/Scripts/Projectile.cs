@@ -18,7 +18,6 @@ public class Projectile : MonoBehaviour
         col = GetComponent<Collider2D>();
     }
 
-    // weaponCol = collider da arma que disparou; projétil ignora ela
     public void Launch(Vector2 direction, Collider2D weaponCol = null)
     {
         if (weaponCol != null)
@@ -26,7 +25,6 @@ public class Projectile : MonoBehaviour
 
         rb.linearVelocity = direction.normalized * speed;
 
-        // Rotaciona o sprite do projétil na direção do disparo
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0f, 0f, angle);
 
@@ -35,22 +33,19 @@ public class Projectile : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        // Ignora outros projéteis
         if (other.GetComponent<Projectile>() != null) return;
 
-        // Destrói ao bater no mapa
         if (other.gameObject.layer == LayerMask.NameToLayer("Map"))
         {
+            other.GetComponent<DoorController>()?.OnHitByBullet(rb.linearVelocity.normalized);
             Destroy(gameObject);
             return;
         }
 
-        // Só processa dano em alvos válidos
         bool isValidTarget = other.CompareTag("Enemy") || other.CompareTag("Player");
         if (!isValidTarget) return;
 
         other.GetComponent<IDamageable>()?.TakeDamage(damage, DamageType.Bullet);
-
         Destroy(gameObject);
     }
 }

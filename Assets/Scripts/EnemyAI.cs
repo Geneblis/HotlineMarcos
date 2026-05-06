@@ -61,9 +61,9 @@ public class EnemyAI : MonoBehaviour, IDamageable
     [Header("Módulo de Arma")]
     [SerializeField] private GameObject weaponPrefab;
     [SerializeField] private Transform  holdPoint;
-    [SerializeField] private float      stunDuration = 2f; // tempo no chão após levar arma arremessada
-    [SerializeField] private float      stunKnockbackForce   = 1.5f; // ← reduzido; ajuste no Inspector
-    [SerializeField] private float      stunnedZRotation     = 90f;
+    [SerializeField] private float      stunDuration       = 2f;
+    [SerializeField] private float      stunKnockbackForce = 1.5f;
+    [SerializeField] private float      stunnedZRotation   = 90f;
 
     private IWeapon heldWeapon;
     private IWeapon droppedWeapon;
@@ -85,9 +85,9 @@ public class EnemyAI : MonoBehaviour, IDamageable
     // ══════════════════════════════════════════════
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-        gameObject.tag = "Enemy";
+        rb             = GetComponent<Rigidbody2D>();
         enemyCollider  = GetComponent<Collider2D>();
+        gameObject.tag = "Enemy";
 
         if (playerTransform == null)
         {
@@ -103,11 +103,10 @@ public class EnemyAI : MonoBehaviour, IDamageable
     {
         if (isDead || playerTransform == null) return;
 
-        // BLOQUEIO TOTAL: Se estiver atordoado, ele executa apenas a lógica de stun
         if (currentState == AIState.Stunned)
         {
             StunnedBehavior();
-            return; // O 'return' impede que o UpdateVisionModule() seja chamado abaixo
+            return;
         }
 
         UpdateVisionModule();
@@ -164,7 +163,6 @@ public class EnemyAI : MonoBehaviour, IDamageable
         {
             if (currentState == AIState.Combat || currentState == AIState.Chase)
                 ChangeState(AIState.Search);
-            // Search e PickupWeapon se gerenciam sozinhos
         }
         else
         {
@@ -185,8 +183,8 @@ public class EnemyAI : MonoBehaviour, IDamageable
 
     private bool IsPlayerInCone()
     {
-        Vector2 dir = ((Vector2)playerTransform.position - (Vector2)transform.position).normalized;
-        float angle = Vector2.Angle(transform.up, dir);
+        Vector2 dir   = ((Vector2)playerTransform.position - (Vector2)transform.position).normalized;
+        float   angle = Vector2.Angle(transform.up, dir);
         return angle < viewAngle / 2f;
     }
 
@@ -217,23 +215,18 @@ public class EnemyAI : MonoBehaviour, IDamageable
     {
         if (currentState == newState) return;
 
-        // TRAVA: Se estiver em Stun, ignora mudanças de estado automáticas da visão
         if (currentState == AIState.Stunned)
         {
-            // Só permite sair do Stun se o novo estado for PickupWeapon ou Patrol (pós-recuperação)
             if (newState != AIState.PickupWeapon && newState != AIState.Patrol && newState != AIState.Hold)
-            {
                 return;
-            }
         }
 
-        // Ao entrar em estado passivo, verifica se há arma esperando ser pega
         if (readyToPickupWeapon)
         {
             if (droppedWeapon == null || droppedWeapon.IsHeld())
             {
                 readyToPickupWeapon = false;
-                droppedWeapon = null;
+                droppedWeapon       = null;
             }
             else
             {
@@ -351,33 +344,27 @@ public class EnemyAI : MonoBehaviour, IDamageable
 
     private void StunnedBehavior()
     {
-        // Força o Rigidbody a parar gradualmente para não deslizar infinitamente
         rb.linearVelocity = Vector2.Lerp(rb.linearVelocity, Vector2.zero, Time.deltaTime * 3f);
 
         stunTimer -= Time.deltaTime;
-        if (stunTimer <= 0f)
-        {
-            RecoverFromStun();
-        }
+        if (stunTimer <= 0f) RecoverFromStun();
     }
 
     private void RecoverFromStun()
     {
-        // Reseta a rotação para o inimigo ficar "em pé" novamente
         transform.rotation = Quaternion.identity;
 
         if (droppedWeapon != null && !droppedWeapon.IsHeld())
         {
             readyToPickupWeapon = true;
-            // Forçamos a troca de estado ignorando a trava anterior
-            currentState = AIState.PickupWeapon;
+            currentState        = AIState.PickupWeapon;
         }
         else
         {
-            droppedWeapon = null;
+            droppedWeapon       = null;
             readyToPickupWeapon = false;
-            bool singlePoint = patrolPoints != null && patrolPoints.Length == 1;
-            currentState = isAggro ? AIState.Chase : (singlePoint ? AIState.Hold : AIState.Patrol);
+            bool singlePoint    = patrolPoints != null && patrolPoints.Length == 1;
+            currentState        = isAggro ? AIState.Chase : (singlePoint ? AIState.Hold : AIState.Patrol);
         }
     }
 
@@ -388,8 +375,8 @@ public class EnemyAI : MonoBehaviour, IDamageable
     {
         if (heldWeapon == null || Time.time < nextAiAttackTime) return;
 
-        Vector2 aimDir   = ((Vector2)playerTransform.position - (Vector2)heldWeapon.transform.position).normalized;
-        bool    attacked = false;
+        Vector2 aimDir = ((Vector2)playerTransform.position - (Vector2)heldWeapon.transform.position).normalized;
+        bool attacked  = false;
 
         switch (heldWeapon.type)
         {
@@ -421,23 +408,28 @@ public class EnemyAI : MonoBehaviour, IDamageable
                 OnHitByThrownWeapon();
                 break;
 
-            // NOVO CASO: Finalização no chão
             case DamageType.Finisher:
                 ExecuteFinisherLogic();
                 break;
         }
     }
 
-    //finalizaçao
-    private void ExecuteFinisherLogic()
+    public void TakeKnockdown(Vector2 knockbackDir)
     {
-        // Aqui você pode adicionar efeitos especiais antes de morrer
-        Debug.Log($"{name} foi executado brutalmente!");
+        if (isDead || currentState == AIState.Stunned) return;
 
-        // Se tiver um sistema de partículas de sangue:
-        // Instantiate(bloodSplashPrefab, transform.position, Quaternion.identity);
+        isAggro       = true;
+        droppedWeapon = heldWeapon;
+        DropWeapon();
 
-        Die(); // Chama o método de morte que você já tem
+        currentState = AIState.Stunned;
+        stunTimer    = stunDuration;
+
+        rb.linearVelocity  = Vector2.zero;
+        rb.angularVelocity = 0f;
+        rb.AddForce(knockbackDir * stunKnockbackForce, ForceMode2D.Impulse);
+
+        transform.rotation = Quaternion.Euler(0f, 0f, stunnedZRotation);
     }
 
     private void OnHitByThrownWeapon()
@@ -445,19 +437,22 @@ public class EnemyAI : MonoBehaviour, IDamageable
         droppedWeapon = heldWeapon;
         DropWeapon();
 
-        // Entra no estado de Stun primeiro
         currentState = AIState.Stunned;
-        stunTimer = stunDuration;
+        stunTimer    = stunDuration;
 
-        // Zera inércia anterior para o knockback ser consistente
-        rb.linearVelocity = Vector2.zero;
+        rb.linearVelocity  = Vector2.zero;
         rb.angularVelocity = 0f;
 
         Vector2 knockbackDir = (transform.position - playerTransform.position).normalized;
         rb.AddForce(knockbackDir * stunKnockbackForce, ForceMode2D.Impulse);
 
-        // Gira o boneco para o lado (visual de queda)
-        transform.rotation = Quaternion.Euler(0, 0, stunnedZRotation);
+        transform.rotation = Quaternion.Euler(0f, 0f, stunnedZRotation);
+    }
+
+    private void ExecuteFinisherLogic()
+    {
+        Debug.Log($"{name} foi executado!");
+        Die();
     }
 
     private void Die()
@@ -482,7 +477,6 @@ public class EnemyAI : MonoBehaviour, IDamageable
     // ══════════════════════════════════════════════
     private void MoveTowards(Vector2 target, float speed)
     {
-        // Em vez de mudar a posição, definimos a velocidade (Velocity)
         Vector2 direction = (target - (Vector2)transform.position).normalized;
         rb.linearVelocity = direction * speed;
     }
