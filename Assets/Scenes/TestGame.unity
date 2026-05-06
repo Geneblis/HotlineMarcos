@@ -965,7 +965,6 @@ GameObject:
   - component: {fileID: 1621196441}
   - component: {fileID: 1621196440}
   - component: {fileID: 1621196445}
-  - component: {fileID: 1621196447}
   m_Layer: 7
   m_Name: Door
   m_TagString: Untagged
@@ -1090,7 +1089,8 @@ Transform:
   m_LocalPosition: {x: 5.67, y: -5.28, z: -0.05}
   m_LocalScale: {x: 0.22237425, y: 0.2830695, z: 1.1591}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1798055932}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 1.399, y: 1.286, z: -1.14}
 --- !u!50 &1621196445
@@ -1104,8 +1104,8 @@ Rigidbody2D:
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 0.0001
+  m_UseAutoMass: 1
+  m_Mass: 0.4674419
   m_LinearDamping: 20
   m_AngularDamping: 6
   m_GravityScale: 0
@@ -1136,32 +1136,37 @@ MonoBehaviour:
   bulletPushForce: 20
   knockCheckRadius: 0.84
   knockCheckDistance: 0.49
---- !u!233 &1621196447
-HingeJoint2D:
+--- !u!1 &1798055931
+GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1621196439}
-  m_Enabled: 1
-  serializedVersion: 4
-  m_EnableCollision: 0
-  m_ConnectedRigidBody: {fileID: 0}
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_BreakAction: 3
-  m_AutoConfigureConnectedAnchor: 0
-  m_Anchor: {x: 0.17407979, y: -2.7950702}
-  m_ConnectedAnchor: {x: 5.6927447, y: -6.0718193}
-  m_UseConnectedAnchor: 1
-  m_UseMotor: 1
-  m_Motor:
-    m_MotorSpeed: 0
-    m_MaximumMotorForce: 10000
-  m_UseLimits: 0
-  m_AngleLimits:
-    m_LowerAngle: 0
-    m_UpperAngle: 180
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1798055932}
+  m_Layer: 7
+  m_Name: DoorPivot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1798055932
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1798055931}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0, y: -2.92, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1621196443}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1808175655
 PrefabInstance:
   m_ObjectHideFlags: 0

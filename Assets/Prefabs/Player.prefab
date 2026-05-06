@@ -199,6 +199,8 @@ MonoBehaviour:
   moveSpeed: 7
   bodyRotationSpeed: 720
   legsRotationSpeed: 540
+  maxHealth: 100
+  currentHealth: 0
   body: {fileID: 2948186996977974827}
   legs: {fileID: 3430366620852029864}
 --- !u!114 &7842536105318099804
@@ -233,6 +235,11 @@ MonoBehaviour:
     m_Bits: 8
   pickupSound: {fileID: 8300000, guid: 11cb80f6067cdd7438cc5e8fce9c96e2, type: 3}
   throwSound: {fileID: 8300000, guid: 2467ecad32adaed4aa1e8208619031d4, type: 3}
+  punchRange: 1.2
+  punchDamage: 0.2
+  punchCooldown: 0.4
+  finisherKey: 32
+  finisherRadius: 1.5
 --- !u!58 &692347245647687334
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -281,7 +288,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 20
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 0
