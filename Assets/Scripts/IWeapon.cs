@@ -87,7 +87,8 @@ public class IWeapon : MonoBehaviour
         transform.SetParent(holdPoint);
         transform.localPosition = Vector2.zero;
         transform.localRotation = Quaternion.identity;
-        transform.localScale    = heldScale;
+        // Mantém a escala que a arma tinha quando foi pega do chão
+        // transform.localScale = heldScale;
     }
 
     public void OnThrow(Vector2 direction)

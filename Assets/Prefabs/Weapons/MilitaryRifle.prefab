@@ -60,7 +60,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 1}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5320372471469396656}
@@ -159,9 +159,11 @@ MonoBehaviour:
   currentAmmo: 30
   weaponSounds:
   - type: 0
-    clip: {fileID: 8300000, guid: f23681646f855e44b90512e83b70199c, type: 3}
+    clip: {fileID: 8300000, guid: 8ae6ee03fb958ce429e6c39155111034, type: 3}
   - type: 0
-    clip: {fileID: 8300000, guid: e491077cb28839f4682989722bb5b6aa, type: 3}
+    clip: {fileID: 8300000, guid: 76ce33218bd72774499cfaee181b6065, type: 3}
+  - type: 0
+    clip: {fileID: 8300000, guid: ba5f47e1b1adff749aa95aa57b7510f2, type: 3}
   emptyShotSound: {fileID: 8300000, guid: c9cfc5ee63025dd45b8e613d74ae36a6, type: 3}
   firePoint: {fileID: 7803518449853877097}
   shellPoint: {fileID: 5320372471469396656}
@@ -234,13 +236,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4422050163749233970}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8232831572532864265}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3093831830703018208
 SpriteRenderer:
   serializedVersion: 2
@@ -290,12 +292,12 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -2824152207838755960, guid: e71f3155f10d2084c8cae098de80e171, type: 3}
+  m_Sprite: {fileID: -5730235514207748552, guid: dc52c265a21ee6346afa78ee7002f080, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.28, y: 0.1}
+  m_Size: {x: 0.2, y: 0.52}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
