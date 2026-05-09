@@ -122,7 +122,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::IWeapon
   weaponName: Bat
-  type: 1
+  type: 2
   maxAmmo: 0
   currentAmmo: 0
   weaponSounds:

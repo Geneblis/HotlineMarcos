@@ -154,7 +154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::IWeapon
   weaponName: Shotgun
-  type: 0
+  type: 1
   maxAmmo: 6
   currentAmmo: 6
   weaponSounds:

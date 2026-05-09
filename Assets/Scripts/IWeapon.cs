@@ -184,6 +184,9 @@ public class IWeapon : MonoBehaviour
 
         currentAmmo--;
         fireCooldown = 1f / fireRate;
+
+        //checar pra caso for uma arma do jogador, adicionar trauma na câmera
+        
         CameraController.Instance?.AddTrauma(shakeTrauma);
         
         // Toca som de disparo

@@ -100,6 +100,15 @@ MonoBehaviour:
   stunDuration: 2
   stunKnockbackForce: 1.5
   stunnedZRotation: 90
+  animator: {fileID: 1907500601032950959}
+  idleAnimation: YakuzaIdle
+  walkAnimation: YakuzaWalk
+  oneHandIdleAnimation: YakuzaIdle1Hand
+  oneHandWalkAnimation: YakuzaWalk1Hand
+  twoHandIdleAnimation: YakuzaIdle2Hand
+  twoHandWalkAnimation: YakuzaWalk2Hand
+  onGroundAnimation: YakuzaOnGround
+  movingVelocityThreshold: 0.1
   playerTransform: {fileID: 0}
 --- !u!95 &1907500601032950959
 Animator:

@@ -4,61 +4,42 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
 public class EnemyAI : MonoBehaviour, IDamageable
 {
-    // ─────────────────────────────────────────────
-    // MÁQUINA DE ESTADOS
-    // ─────────────────────────────────────────────
     public enum AIState { Patrol, Hold, Chase, Search, Combat, PickupWeapon, Stunned }
 
-    [Header("Estado Atual (Apenas Leitura)")]
+    private enum WeaponHoldCategory { None, OneHand, TwoHand }
+
+    [Header("Current State (Read Only)")]
     public AIState currentState = AIState.Patrol;
 
-    // ─────────────────────────────────────────────
-    // CONFIGURAÇÕES BASE
-    // ─────────────────────────────────────────────
-    [Header("Configurações Base")]
+    [Header("Base Settings")]
     [SerializeField] private float health      = 1f;
     [SerializeField] private float patrolSpeed = 2f;
     [SerializeField] private float chaseSpeed  = 5f;
     private Rigidbody2D rb;
 
-    // ─────────────────────────────────────────────
-    // MÓDULO DE VISÃO (FOV)
-    // ─────────────────────────────────────────────
-    [Header("Módulo de Visão (FOV)")]
+    [Header("Vision Module (FOV)")]
     [SerializeField] private float               detectionRadius = 12f;
     [SerializeField][Range(0, 360)] private float viewAngle      = 90f;
     [SerializeField] private LayerMask           obstacleLayer;
 
-    // ─────────────────────────────────────────────
-    // MÓDULO DE COMBATE
-    // ─────────────────────────────────────────────
-    [Header("Módulo de Combate")]
+    [Header("Combat Module")]
     [SerializeField] private float attackRadius   = 8f;
     [SerializeField] private float aiReactionTime = 0.5f;
     private float nextAiAttackTime;
 
-    // ─────────────────────────────────────────────
-    // MÓDULO DE PATRULHA
-    // ─────────────────────────────────────────────
-    [Header("Módulo de Patrulha")]
+    [Header("Patrol Module")]
     [SerializeField] private Transform[] patrolPoints;
     [SerializeField] private float       patrolWaitTime = 1f;
     private int   currentPatrolIndex;
     private float waitTimer;
 
-    // ─────────────────────────────────────────────
-    // MÓDULO DE BUSCA (SEARCH)
-    // ─────────────────────────────────────────────
-    [Header("Módulo de Busca")]
+    [Header("Search Module")]
     [SerializeField] private float searchDuration      = 4f;
     [SerializeField] private float searchRotationSpeed = 90f;
     private Vector2 lastKnownPlayerPosition;
     private float   searchTimer;
 
-    // ─────────────────────────────────────────────
-    // MÓDULO DE ARMA
-    // ─────────────────────────────────────────────
-    [Header("Módulo de Arma")]
+    [Header("Weapon Module")]
     [SerializeField] private GameObject weaponPrefab;
     [SerializeField] private Transform  holdPoint;
     [SerializeField] private float      stunDuration       = 2f;
@@ -70,19 +51,26 @@ public class EnemyAI : MonoBehaviour, IDamageable
     private bool    readyToPickupWeapon;
     private float   stunTimer;
 
-    // ─────────────────────────────────────────────
-    // REFERÊNCIAS E ESTADO INTERNO
-    // ─────────────────────────────────────────────
-    [Header("Referências")]
+    [Header("Animation Module")]
+    [SerializeField] private Animator animator;
+    [SerializeField] private string   idleAnimation         = "Idle";
+    [SerializeField] private string   walkAnimation         = "Walk";
+    [SerializeField] private string   oneHandIdleAnimation  = "OneHand_Idle";
+    [SerializeField] private string   oneHandWalkAnimation  = "OneHand_Walk";
+    [SerializeField] private string   twoHandIdleAnimation  = "TwoHand_Idle";
+    [SerializeField] private string   twoHandWalkAnimation  = "TwoHand_Walk";
+    [SerializeField] private string   onGroundAnimation     = "OnGround";
+    [SerializeField] private float    movingVelocityThreshold = 0.1f;
+
+    private string currentAnimation;
+
+    [Header("References")]
     [SerializeField] private Transform playerTransform;
 
     private bool       isDead;
     private bool       isAggro;
     private Collider2D enemyCollider;
 
-    // ══════════════════════════════════════════════
-    // UNITY LIFECYCLE
-    // ══════════════════════════════════════════════
     void Start()
     {
         rb             = GetComponent<Rigidbody2D>();
@@ -106,16 +94,15 @@ public class EnemyAI : MonoBehaviour, IDamageable
         if (currentState == AIState.Stunned)
         {
             StunnedBehavior();
+            UpdateAnimations();
             return;
         }
 
         UpdateVisionModule();
         ExecuteCurrentState();
+        UpdateAnimations();
     }
 
-    // ══════════════════════════════════════════════
-    // INICIALIZAÇÃO
-    // ══════════════════════════════════════════════
     private void SpawnWeapon()
     {
         if (weaponPrefab == null) return;
@@ -130,7 +117,7 @@ public class EnemyAI : MonoBehaviour, IDamageable
         }
         else
         {
-            Debug.LogWarning($"[EnemyAI] {name}: prefab '{weaponPrefab.name}' não tem IWeapon!");
+            Debug.LogWarning($"[EnemyAI] {name}: prefab '{weaponPrefab.name}' has no IWeapon component!");
             Destroy(go);
         }
     }
@@ -141,9 +128,6 @@ public class EnemyAI : MonoBehaviour, IDamageable
         currentState = singlePoint ? AIState.Hold : AIState.Patrol;
     }
 
-    // ══════════════════════════════════════════════
-    // MÓDULO 1 — VISÃO E TOMADA DE DECISÃO
-    // ══════════════════════════════════════════════
     private void UpdateVisionModule()
     {
         float distToPlayer  = Vector2.Distance(transform.position, playerTransform.position);
@@ -195,9 +179,6 @@ public class EnemyAI : MonoBehaviour, IDamageable
         return attackRadius;
     }
 
-    // ══════════════════════════════════════════════
-    // MÓDULO 2 — MÁQUINA DE ESTADOS
-    // ══════════════════════════════════════════════
     private void ExecuteCurrentState()
     {
         switch (currentState)
@@ -245,9 +226,6 @@ public class EnemyAI : MonoBehaviour, IDamageable
         if (newState == AIState.Search) searchTimer = searchDuration;
     }
 
-    // ══════════════════════════════════════════════
-    // MÓDULO 3 — COMPORTAMENTOS DE ESTADO
-    // ══════════════════════════════════════════════
     private void PatrolBehavior()
     {
         if (patrolPoints == null || patrolPoints.Length == 0) return;
@@ -368,9 +346,6 @@ public class EnemyAI : MonoBehaviour, IDamageable
         }
     }
 
-    // ══════════════════════════════════════════════
-    // MÓDULO 4 — ATAQUE
-    // ══════════════════════════════════════════════
     private void ExecuteAttack()
     {
         if (heldWeapon == null || Time.time < nextAiAttackTime) return;
@@ -389,9 +364,6 @@ public class EnemyAI : MonoBehaviour, IDamageable
         if (attacked) nextAiAttackTime = Time.time + aiReactionTime;
     }
 
-    // ══════════════════════════════════════════════
-    // MÓDULO 5 — SISTEMA DE DANO (IDamageable)
-    // ══════════════════════════════════════════════
     public void TakeDamage(float damage, DamageType damageType)
     {
         if (isDead) return;
@@ -453,7 +425,7 @@ public class EnemyAI : MonoBehaviour, IDamageable
 
     private void ExecuteFinisherLogic()
     {
-        Debug.Log($"{name} foi executado!");
+        Debug.Log($"{name} was executed!");
         Die();
     }
 
@@ -474,9 +446,47 @@ public class EnemyAI : MonoBehaviour, IDamageable
         heldWeapon = null;
     }
 
-    // ══════════════════════════════════════════════
-    // UTILITÁRIOS
-    // ══════════════════════════════════════════════
+    private void UpdateAnimations()
+    {
+        if (animator == null) return;
+
+        if (currentState == AIState.Stunned)
+        {
+            PlayAnimation(onGroundAnimation);
+            return;
+        }
+
+        bool isMoving = rb.linearVelocity.sqrMagnitude > movingVelocityThreshold * movingVelocityThreshold;
+        WeaponHoldCategory weaponCategory = GetHeldWeaponCategory();
+
+        string targetAnimation = weaponCategory switch
+        {
+            WeaponHoldCategory.None    => isMoving ? walkAnimation        : idleAnimation,
+            WeaponHoldCategory.OneHand => isMoving ? oneHandWalkAnimation : oneHandIdleAnimation,
+            WeaponHoldCategory.TwoHand => isMoving ? twoHandWalkAnimation : twoHandIdleAnimation,
+            _                          => idleAnimation
+        };
+
+        PlayAnimation(targetAnimation);
+    }
+
+    private WeaponHoldCategory GetHeldWeaponCategory()
+    {
+        if (heldWeapon == null) return WeaponHoldCategory.None;
+
+        if (heldWeapon.type == WeaponType.OneHandFirearm || heldWeapon.type == WeaponType.OneHandMelee)
+            return WeaponHoldCategory.OneHand;
+
+        return WeaponHoldCategory.TwoHand;
+    }
+
+    private void PlayAnimation(string animationName)
+    {
+        if (string.IsNullOrEmpty(animationName) || animationName == currentAnimation) return;
+        currentAnimation = animationName;
+        animator.Play(animationName);
+    }
+
     private void MoveTowards(Vector2 target, float speed)
     {
         Vector2 direction = (target - (Vector2)transform.position).normalized;

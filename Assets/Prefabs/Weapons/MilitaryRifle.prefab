@@ -154,7 +154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::IWeapon
   weaponName: Military Rifle
-  type: 0
+  type: 1
   maxAmmo: 30
   currentAmmo: 30
   weaponSounds:
