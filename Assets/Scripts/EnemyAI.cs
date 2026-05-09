@@ -190,7 +190,7 @@ public class EnemyAI : MonoBehaviour, IDamageable
 
     private float GetAttackRange()
     {
-        if (heldWeapon != null && heldWeapon.type == WeaponType.Melee)
+        if (heldWeapon != null && (heldWeapon.type == WeaponType.OneHandMelee || heldWeapon.type == WeaponType.TwoHandMelee))
             return heldWeapon.meleeRange;
         return attackRadius;
     }
@@ -309,7 +309,7 @@ public class EnemyAI : MonoBehaviour, IDamageable
     {
         LookAtTarget(playerTransform.position);
 
-        if (heldWeapon != null && heldWeapon.type == WeaponType.Melee)
+        if (heldWeapon != null && (heldWeapon.type == WeaponType.OneHandMelee || heldWeapon.type == WeaponType.TwoHandMelee))
             MoveTowards(playerTransform.position, chaseSpeed);
 
         ExecuteAttack();
@@ -380,8 +380,10 @@ public class EnemyAI : MonoBehaviour, IDamageable
 
         switch (heldWeapon.type)
         {
-            case WeaponType.Firearm: attacked = heldWeapon.TryShoot(aimDir);       break;
-            case WeaponType.Melee:   attacked = heldWeapon.TryMeleeAttack(aimDir); break;
+            case WeaponType.OneHandFirearm: attacked = heldWeapon.TryShoot(aimDir);       break;
+            case WeaponType.TwoHandFirearm: attacked = heldWeapon.TryShoot(aimDir);       break;
+            case WeaponType.TwoHandMelee:   attacked = heldWeapon.TryMeleeAttack(aimDir); break;
+            case WeaponType.OneHandMelee:   attacked = heldWeapon.TryMeleeAttack(aimDir); break;
         }
 
         if (attacked) nextAiAttackTime = Time.time + aiReactionTime;

@@ -181,14 +181,14 @@ void ExecuteFinisher(EnemyAI enemy)
         bool buttonDown    = Input.GetMouseButton(0);
         bool buttonPressed = Input.GetMouseButtonDown(0);
 
-        if (equippedWeapon.IsOfType(WeaponType.Melee))
+        if (equippedWeapon.IsOfType(WeaponType.OneHandMelee) || equippedWeapon.IsOfType(WeaponType.TwoHandMelee))
         {
             if (buttonPressed) equippedWeapon.TryMeleeAttack(mouseDir);
             return;
         }
 
         bool wantsToShoot = false;
-        if (equippedWeapon.IsOfType(WeaponType.Firearm))
+        if (equippedWeapon.IsOfType(WeaponType.OneHandFirearm) || equippedWeapon.IsOfType(WeaponType.TwoHandFirearm))
         {
             wantsToShoot = equippedWeapon.fireType == FireType.Automatic
                 ? buttonDown //if
@@ -207,7 +207,7 @@ void ExecuteFinisher(EnemyAI enemy)
     {
         if (GameManager.Instance == null || equippedWeapon == null) return;
 
-        if (equippedWeapon.IsOfType(WeaponType.Melee))
+        if (equippedWeapon.IsOfType(WeaponType.OneHandMelee) || equippedWeapon.IsOfType(WeaponType.TwoHandMelee))
         {
             GameManager.Instance.ClearAmmo();
             return;

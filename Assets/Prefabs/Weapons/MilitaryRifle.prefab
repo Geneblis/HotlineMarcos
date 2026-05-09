@@ -171,9 +171,9 @@ MonoBehaviour:
   throwDrag: 3
   stopVelocityThreshold: 0.01
   fireType: 1
-  fireRate: 12
+  fireRate: 16
   pelletsPerShot: 1
-  spreadAngle: 20
+  spreadAngle: 12
   shakeTrauma: 1
   projectilePrefab: {fileID: 3336896619411098590, guid: 65579aceb009111469d38af1011a099f, type: 3}
   shellCasingPrefab: {fileID: 5537049821064018152, guid: 1eb030adcaac9c3458cdc99eff148c99, type: 3}

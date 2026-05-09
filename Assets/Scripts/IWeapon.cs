@@ -133,7 +133,7 @@ public class IWeapon : MonoBehaviour
     public bool TryShoot(Vector2 direction)
     {
         if (!isHeld)                          return false;
-        if (!IsOfType(WeaponType.Firearm))    return false;
+        if (!IsOfType(WeaponType.TwoHandFirearm) && !IsOfType(WeaponType.OneHandFirearm))    return false;
         if (fireCooldown > 0)                 return false;
 
         if (currentAmmo <= 0) {
@@ -153,7 +153,7 @@ public class IWeapon : MonoBehaviour
     public bool TryMeleeAttack(Vector2 direction)
     {
         if (!isHeld)                       return false;
-        if (!IsOfType(WeaponType.Melee))   return false;
+        if (!IsOfType(WeaponType.OneHandMelee) && !IsOfType(WeaponType.TwoHandMelee))   return false;
         if (fireCooldown > 0)              return false;
         MeleeAttack(direction);
         return true;
@@ -276,7 +276,7 @@ public class IWeapon : MonoBehaviour
     }
 }
 
-public enum WeaponType { Firearm, Melee }
+public enum WeaponType { OneHandFirearm, TwoHandFirearm, OneHandMelee, TwoHandMelee }
 public enum FireType   { SemiAuto, Automatic }
 
 [System.Serializable]
