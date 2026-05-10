@@ -51,15 +51,25 @@ public class EnemyAI : MonoBehaviour, IDamageable
     private bool    readyToPickupWeapon;
     private float   stunTimer;
 
+    // ─────────────────────────────────────────────────────────────────
+    [Header("Weapon Search Module")]
+    [Tooltip("Maximum distance at which the enemy can detect and decide to pick up a weapon on the ground.")]
+    [SerializeField] private float weaponSearchRadius   = 20f;
+    [Tooltip("Interval (in seconds) at which the enemy will scan for nearby weapons when unarmed.")]
+    [SerializeField] private float weaponSearchInterval = 2f;
+
+    private float weaponSearchTimer; // conta regressiva até a próxima varredura
+    // ─────────────────────────────────────────────────────────────────
+
     [Header("Animation Module")]
     [SerializeField] private Animator animator;
-    [SerializeField] private string   idleAnimation         = "Idle";
-    [SerializeField] private string   walkAnimation         = "Walk";
-    [SerializeField] private string   oneHandIdleAnimation  = "OneHand_Idle";
-    [SerializeField] private string   oneHandWalkAnimation  = "OneHand_Walk";
-    [SerializeField] private string   twoHandIdleAnimation  = "TwoHand_Idle";
-    [SerializeField] private string   twoHandWalkAnimation  = "TwoHand_Walk";
-    [SerializeField] private string   onGroundAnimation     = "OnGround";
+    [SerializeField] private string   idleAnimation           = "Idle";
+    [SerializeField] private string   walkAnimation           = "Walk";
+    [SerializeField] private string   oneHandIdleAnimation    = "OneHand_Idle";
+    [SerializeField] private string   oneHandWalkAnimation    = "OneHand_Walk";
+    [SerializeField] private string   twoHandIdleAnimation    = "TwoHand_Idle";
+    [SerializeField] private string   twoHandWalkAnimation    = "TwoHand_Walk";
+    [SerializeField] private string   onGroundAnimation       = "OnGround";
     [SerializeField] private float    movingVelocityThreshold = 0.1f;
 
     private string currentAnimation;
@@ -99,8 +109,46 @@ public class EnemyAI : MonoBehaviour, IDamageable
         }
 
         UpdateVisionModule();
+        UpdateWeaponSearchModule(); // ← novo: busca armas no cenário quando desarmado
         ExecuteCurrentState();
         UpdateAnimations();
+    }
+    private void UpdateWeaponSearchModule()
+    {
+        // Só age quando desarmado e em estado compatível
+        if (heldWeapon != null)                  return;
+        if (currentState == AIState.PickupWeapon) return;
+        if (currentState == AIState.Stunned)      return;
+
+        weaponSearchTimer -= Time.deltaTime;
+        if (weaponSearchTimer > 0f) return;
+
+        weaponSearchTimer = weaponSearchInterval; // reinicia o intervalo
+
+        IWeapon nearest = FindNearestAvailableWeapon();
+        if (nearest == null) return;
+
+        droppedWeapon       = nearest;
+        readyToPickupWeapon = true;
+        currentState        = AIState.PickupWeapon; // força direto, sem passar pelo ChangeState
+    }
+    private IWeapon FindNearestAvailableWeapon()
+    {
+        MonoBehaviour[] allBehaviours = Object.FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None);
+        IWeapon nearest = null;
+        float nearestDist = weaponSearchRadius;
+        foreach (MonoBehaviour behaviour in allBehaviours)
+        {
+            if (behaviour is not IWeapon weapon){continue;}
+            if (weapon.IsHeld()){continue;}
+            float dist = Vector3.Distance(transform.position, weapon.transform.position);
+            if (dist < nearestDist){
+                nearestDist = dist;
+                nearest = weapon;
+            }
+        }
+
+        return nearest;
     }
 
     private void SpawnWeapon()
@@ -211,10 +259,16 @@ public class EnemyAI : MonoBehaviour, IDamageable
             }
             else
             {
+                // Sem arma em mãos: prioriza pegar a arma em qualquer estado passivo
+                // OU quando o inimigo está desarmado mesmo em estados agressivos
                 bool isPassiveState = newState == AIState.Patrol
                                    || newState == AIState.Hold
                                    || newState == AIState.Search;
-                if (isPassiveState)
+
+                bool isUnarmedAndAggressive = heldWeapon == null
+                                           && (newState == AIState.Chase || newState == AIState.Combat);
+
+                if (isPassiveState || isUnarmedAndAggressive)
                 {
                     currentState = AIState.PickupWeapon;
                     return;
@@ -507,6 +561,10 @@ public class EnemyAI : MonoBehaviour, IDamageable
 
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRadius);
+
+        // Raio de busca de armas (verde)
+        Gizmos.color = new Color(0f, 1f, 0f, 0.25f);
+        Gizmos.DrawWireSphere(transform.position, weaponSearchRadius);
 
         Gizmos.color = new Color(0f, 1f, 1f, 0.5f);
         Vector3 leftRay  = Quaternion.Euler(0, 0,  viewAngle / 2f) * transform.up;

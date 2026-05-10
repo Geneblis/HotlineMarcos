@@ -95,11 +95,13 @@ MonoBehaviour:
   patrolWaitTime: 1
   searchDuration: 4
   searchRotationSpeed: 90
-  weaponPrefab: {fileID: 0}
+  weaponPrefab: {fileID: 4320844117219035517, guid: 93b0555c4f9933e4a8d5b54fe184ae90, type: 3}
   holdPoint: {fileID: 0}
   stunDuration: 2
   stunKnockbackForce: 1.5
   stunnedZRotation: 90
+  weaponSearchRadius: 20
+  weaponSearchInterval: 2
   animator: {fileID: 1907500601032950959}
   idleAnimation: YakuzaIdle
   walkAnimation: YakuzaWalk

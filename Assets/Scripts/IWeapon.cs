@@ -46,7 +46,6 @@ public class IWeapon : MonoBehaviour
     Collider2D  col;
     Collider2D  playerCol;
     Vector3     originalScale;
-    Vector3     heldScale = Vector3.one;
 
     void Awake()
     {
@@ -78,6 +77,9 @@ public class IWeapon : MonoBehaviour
 
     public void OnPickup(Transform holdPoint, Collider2D pickerCollider)
     {
+        if (playerCol != null && playerCol != pickerCollider)
+            Physics2D.IgnoreCollision(col, playerCol, false);
+
         isHeld    = true;
         isThrown  = false;
         playerCol = pickerCollider;
@@ -87,8 +89,6 @@ public class IWeapon : MonoBehaviour
         transform.SetParent(holdPoint);
         transform.localPosition = Vector2.zero;
         transform.localRotation = Quaternion.identity;
-        // Mantém a escala que a arma tinha quando foi pega do chão
-        // transform.localScale = heldScale;
     }
 
     public void OnThrow(Vector2 direction)
@@ -109,26 +109,23 @@ public class IWeapon : MonoBehaviour
         if (playerCol != null)
             Physics2D.IgnoreCollision(col, playerCol, true);
     }
+
     private void OnCollisionEnter2D(Collision2D collision)
-{
-    // Só processa o impacto se a arma estiver em voo (isThrown)
-    if (isThrown)
     {
-        // Tenta encontrar o componente de IA no objeto atingido
-        EnemyAI enemy = collision.gameObject.GetComponent<EnemyAI>();
-
-        if (enemy != null)
+        if (isThrown)
         {
-            // ENVIA A MENSAGEM: Dano 0 (ou quanto quiser), mas do tipo Thrown
-            enemy.TakeDamage(0f, DamageType.Thrown);
+            EnemyAI enemy = collision.gameObject.GetComponent<EnemyAI>();
 
-            // FAZ A ARMA CAIR: Após atingir o inimigo, ela perde a força de voo
-            isThrown = false;
-            rb.linearDamping = 5f; // Aumenta o arrasto para ela parar rápido
-            rb.angularVelocity *= 0.2f; // Diminui o giro
+            if (enemy != null)
+            {
+                enemy.TakeDamage(0f, DamageType.Thrown);
+
+                isThrown = false;
+                rb.linearDamping = 5f;
+                rb.angularVelocity *= 0.2f;
+            }
         }
     }
-}
 
     public bool TryShoot(Vector2 direction)
     {
@@ -137,7 +134,6 @@ public class IWeapon : MonoBehaviour
         if (fireCooldown > 0)                 return false;
 
         if (currentAmmo <= 0) {
-            //avoids automatic weapons from spamming the empty sound.
             if (fireCooldown <= 0 && fireType == FireType.Automatic) {
                 PlayWeaponSound(WeaponSoundType.EmptyShot);
                 fireCooldown = 0.5f;
@@ -159,9 +155,9 @@ public class IWeapon : MonoBehaviour
         return true;
     }
 
-    public bool IsEmpty()              => currentAmmo <= 0;
-    public bool IsHeld()               => isHeld;
-    public bool IsOfType(WeaponType weaponType) => type == weaponType;
+    public bool IsEmpty()                           => currentAmmo <= 0;
+    public bool IsHeld()                            => isHeld;
+    public bool IsOfType(WeaponType weaponType)     => type == weaponType;
 
     void Shoot(Vector2 direction)
     {
@@ -185,11 +181,9 @@ public class IWeapon : MonoBehaviour
         currentAmmo--;
         fireCooldown = 1f / fireRate;
 
-        //checar pra caso for uma arma do jogador, adicionar trauma na câmera
+        if (transform.parent != null && transform.parent.gameObject.layer == LayerMask.NameToLayer("Playable"))
+            CameraController.Instance?.AddTrauma(shakeTrauma);
         
-        CameraController.Instance?.AddTrauma(shakeTrauma);
-        
-        // Toca som de disparo
         PlayWeaponSound(WeaponSoundType.FirearmShot);
     }
 
@@ -218,13 +212,11 @@ public class IWeapon : MonoBehaviour
 
         if (hit != null && !hit.CompareTag("Player"))
         {
-            // hit.GetComponent<IDamageable>()?.TakeDamage(isBladed ? 9999 : (int)meleeDamage);
             Debug.Log($"Melee hit: {hit.name} | Bladed: {isBladed}");
         }
 
         fireCooldown = 1f / fireRate;
         
-        // Toca som de melee attack
         PlayWeaponSound(WeaponSoundType.MeleeAttack);
     }
 
@@ -250,7 +242,6 @@ public class IWeapon : MonoBehaviour
     {
         AudioClip clipToPlay = null;
 
-        // Centraliza toda a lógica de som
         switch (soundType)
         {
             case WeaponSoundType.FirearmShot:
