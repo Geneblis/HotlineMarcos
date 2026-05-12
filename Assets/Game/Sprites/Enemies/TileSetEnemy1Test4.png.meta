@@ -1,0 +1,1131 @@
+fileFormatVersion: 2
+guid: e7c2b4ea171a3e14586c2b85137dcd58
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 2794150142139234151
+    second: TileSetEnemy1Test4_0
+  - first:
+      213: 2806129961792500802
+    second: TileSetEnemy1Test4_1
+  - first:
+      213: -308858398872535182
+    second: TileSetEnemy1Test4_2
+  - first:
+      213: 6324546910457120965
+    second: TileSetEnemy1Test4_3
+  - first:
+      213: -1826636650594491543
+    second: TileSetEnemy1Test4_4
+  - first:
+      213: -5771510550654141007
+    second: TileSetEnemy1Test4_5
+  - first:
+      213: -8538846782547489141
+    second: TileSetEnemy1Test4_6
+  - first:
+      213: -105713025708315371
+    second: TileSetEnemy1Test4_7
+  - first:
+      213: -4164770088843012409
+    second: TileSetEnemy1Test4_8
+  - first:
+      213: 3425494102028082969
+    second: TileSetEnemy1Test4_9
+  - first:
+      213: 8667011571706879072
+    second: TileSetEnemy1Test4_10
+  - first:
+      213: -5521686693639880157
+    second: TileSetEnemy1Test4_11
+  - first:
+      213: -4479353903758850154
+    second: TileSetEnemy1Test4_12
+  - first:
+      213: -4472971608818952492
+    second: TileSetEnemy1Test4_13
+  - first:
+      213: -1253661385800979129
+    second: TileSetEnemy1Test4_14
+  - first:
+      213: -1922244791822664411
+    second: TileSetEnemy1Test4_15
+  - first:
+      213: 7013994431987868385
+    second: TileSetEnemy1Test4_16
+  - first:
+      213: 7565618028638417704
+    second: TileSetEnemy1Test4_17
+  - first:
+      213: 470928774299904335
+    second: TileSetEnemy1Test4_18
+  - first:
+      213: 3040857392601972185
+    second: TileSetEnemy1Test4_19
+  - first:
+      213: 3374059683700408564
+    second: TileSetEnemy1Test4_20
+  - first:
+      213: 1591431835040551991
+    second: TileSetEnemy1Test4_21
+  - first:
+      213: -2092833134721512402
+    second: TileSetEnemy1Test4_22
+  - first:
+      213: 5251991626872199541
+    second: TileSetEnemy1Test4_23
+  - first:
+      213: -2943537786063386768
+    second: TileSetEnemy1Test4_24
+  - first:
+      213: -1328698010243672377
+    second: TileSetEnemy1Test4_25
+  - first:
+      213: 857305181829994470
+    second: TileSetEnemy1Test4_26
+  - first:
+      213: 8933396514270529500
+    second: TileSetEnemy1Test4_27
+  - first:
+      213: -2687483982359029562
+    second: TileSetEnemy1Test4_28
+  - first:
+      213: 3509751751791497833
+    second: TileSetEnemy1Test4_29
+  - first:
+      213: 6650437910704310643
+    second: TileSetEnemy1Test4_30
+  - first:
+      213: -6466271761424949427
+    second: TileSetEnemy1Test4_31
+  - first:
+      213: -5538849362860059886
+    second: TileSetEnemy1Test4_32
+  - first:
+      213: -1993799510198132796
+    second: TileSetEnemy1Test4_33
+  - first:
+      213: -5714990521358933004
+    second: TileSetEnemy1Test4_34
+  - first:
+      213: 8918281705405605164
+    second: TileSetEnemy1Test4_35
+  - first:
+      213: -3535082970241685146
+    second: TileSetEnemy1Test4_36
+  - first:
+      213: -1398394868090806376
+    second: TileSetEnemy1Test4_37
+  - first:
+      213: 4263012458257922343
+    second: TileSetEnemy1Test4_38
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: TileSetEnemy1Test4_0
+      rect:
+        serializedVersion: 2
+        x: 2471
+        y: 223
+        width: 194
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 767f05f00c0d6c620800000000000000
+      internalID: 2794150142139234151
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TileSetEnemy1Test4_1
+      rect:
+        serializedVersion: 2
+        x: 2943
+        y: 223
+        width: 194
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 244f83e255061f620800000000000000
+      internalID: 2806129961792500802
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TileSetEnemy1Test4_2
+      rect:
+        serializedVersion: 2
+        x: 3455
+        y: 223
+        width: 194
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 27f7e413ce6b6bbf0800000000000000
+      internalID: -308858398872535182
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TileSetEnemy1Test4_3
+      rect:
+        serializedVersion: 2
+        x: 3967
+        y: 191
+        width: 194
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c8471bf7ed45c750800000000000000
+      internalID: 6324546910457120965
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TileSetEnemy1Test4_4
+      rect:
+        serializedVersion: 2
+        x: 4479
+        y: 183
+        width: 194
+        height: 146
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9632b9be4ab76a6e0800000000000000
+      internalID: -1826636650594491543
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TileSetEnemy1Test4_5
+      rect:
+        serializedVersion: 2
+        x: 4991
+        y: 167
+        width: 194
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1bd37d2abb977efa0800000000000000
+      internalID: -5771510550654141007
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TileSetEnemy1Test4_6
+      rect:
+        serializedVersion: 2
+        x: 5503
+        y: 191
+        width: 194
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b8e05ce871cef7980800000000000000
+      internalID: -8538846782547489141
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TileSetEnemy1Test4_7
+      rect:
+        serializedVersion: 2
+        x: 6015
+        y: 223
+        width: 194
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 51d268e209e688ef0800000000000000
+      internalID: -105713025708315371
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TileSetEnemy1Test4_8
+      rect:
+        serializedVersion: 2
+        x: 6527
+        y: 191
+        width: 194
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7c6175b8ba3c336c0800000000000000
+      internalID: -4164770088843012409
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TileSetEnemy1Test4_9
+      rect:
+        serializedVersion: 2
+        x: 7039
+        y: 175
+        width: 194
+        height: 154
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 91f549b9cbcc98f20800000000000000
+      internalID: 3425494102028082969
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TileSetEnemy1Test4_10
+      rect:
+        serializedVersion: 2
+        x: 7551
+        y: 167
+        width: 194
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 06cd9cbca19674870800000000000000
+      internalID: 8667011571706879072
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TileSetEnemy1Test4_11
+      rect:
+        serializedVersion: 2
+        x: 8063
+        y: 191
+        width: 194
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 322089015370f53b0800000000000000
+      internalID: -5521686693639880157
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TileSetEnemy1Test4_12
+      rect:
+        serializedVersion: 2
+        x: 8599
+        y: 231
+        width: 146
+        height: 138
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 697c13f6b5326d1c0800000000000000
+      internalID: -4479353903758850154
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TileSetEnemy1Test4_13
+      rect:
+        serializedVersion: 2
+        x: 9111
+        y: 231
+        width: 146
+        height: 138
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4d650f54500dce1c0800000000000000
+      internalID: -4472971608818952492
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TileSetEnemy1Test4_14
+      rect:
+        serializedVersion: 2
+        x: 9623
+        y: 231
+        width: 146
+        height: 138
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 74d65be9c991a9ee0800000000000000
+      internalID: -1253661385800979129
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TileSetEnemy1Test4_15
+      rect:
+        serializedVersion: 2
+        x: 10135
+        y: 199
+        width: 146
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 52db01cdb80d255e0800000000000000
+      internalID: -1922244791822664411
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TileSetEnemy1Test4_16
+      rect:
+        serializedVersion: 2
+        x: 10647
+        y: 183
+        width: 146
+        height: 186
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1e2643f26c6b65160800000000000000
+      internalID: 7013994431987868385
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TileSetEnemy1Test4_17
+      rect:
+        serializedVersion: 2
+        x: 11159
+        y: 175
+        width: 146
+        height: 194
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 823b84f33897ef860800000000000000
+      internalID: 7565618028638417704
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TileSetEnemy1Test4_18
+      rect:
+        serializedVersion: 2
+        x: 11671
+        y: 199
+        width: 146
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f49e7a2a933198600800000000000000
+      internalID: 470928774299904335
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TileSetEnemy1Test4_19
+      rect:
+        serializedVersion: 2
+        x: 12183
+        y: 231
+        width: 146
+        height: 138
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9dd39aaffab433a20800000000000000
+      internalID: 3040857392601972185
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TileSetEnemy1Test4_20
+      rect:
+        serializedVersion: 2
+        x: 12695
+        y: 231
+        width: 146
+        height: 138
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4f00ee1e76113de20800000000000000
+      internalID: 3374059683700408564
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TileSetEnemy1Test4_21
+      rect:
+        serializedVersion: 2
+        x: 13207
+        y: 199
+        width: 146
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 73417db72d6e51610800000000000000
+      internalID: 1591431835040551991
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TileSetEnemy1Test4_22
+      rect:
+        serializedVersion: 2
+        x: 13719
+        y: 175
+        width: 146
+        height: 194
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e2cc1ce2a53c4f2e0800000000000000
+      internalID: -2092833134721512402
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TileSetEnemy1Test4_23
+      rect:
+        serializedVersion: 2
+        x: 14231
+        y: 199
+        width: 146
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5791b03fe82d2e840800000000000000
+      internalID: 5251991626872199541
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TileSetEnemy1Test4_24
+      rect:
+        serializedVersion: 2
+        x: 14743
+        y: 223
+        width: 146
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 07780c6aaf37627d0800000000000000
+      internalID: -2943537786063386768
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TileSetEnemy1Test4_25
+      rect:
+        serializedVersion: 2
+        x: 15255
+        y: 223
+        width: 146
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7c658ad03348f8de0800000000000000
+      internalID: -1328698010243672377
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TileSetEnemy1Test4_26
+      rect:
+        serializedVersion: 2
+        x: 15767
+        y: 223
+        width: 146
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6e7141b4582c5eb00800000000000000
+      internalID: 857305181829994470
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TileSetEnemy1Test4_27
+      rect:
+        serializedVersion: 2
+        x: 16279
+        y: 199
+        width: 146
+        height: 146
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd7cece6cccc9fb70800000000000000
+      internalID: 8933396514270529500
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TileSetEnemy1Test4_28
+      rect:
+        serializedVersion: 2
+        x: 16791
+        y: 183
+        width: 146
+        height: 162
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6c810f39e8324bad0800000000000000
+      internalID: -2687483982359029562
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TileSetEnemy1Test4_29
+      rect:
+        serializedVersion: 2
+        x: 17303
+        y: 175
+        width: 146
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 962565f6f9425b030800000000000000
+      internalID: 3509751751791497833
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TileSetEnemy1Test4_30
+      rect:
+        serializedVersion: 2
+        x: 17815
+        y: 199
+        width: 146
+        height: 146
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 37942545b0a1b4c50800000000000000
+      internalID: 6650437910704310643
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TileSetEnemy1Test4_31
+      rect:
+        serializedVersion: 2
+        x: 18327
+        y: 223
+        width: 146
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d4f502fb7103346a0800000000000000
+      internalID: -6466271761424949427
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TileSetEnemy1Test4_32
+      rect:
+        serializedVersion: 2
+        x: 18839
+        y: 199
+        width: 146
+        height: 146
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 213d35eb9dd0223b0800000000000000
+      internalID: -5538849362860059886
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TileSetEnemy1Test4_33
+      rect:
+        serializedVersion: 2
+        x: 19351
+        y: 183
+        width: 146
+        height: 162
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4cfda49b8e99454e0800000000000000
+      internalID: -1993799510198132796
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TileSetEnemy1Test4_34
+      rect:
+        serializedVersion: 2
+        x: 19863
+        y: 175
+        width: 146
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4f32daf666640b0b0800000000000000
+      internalID: -5714990521358933004
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TileSetEnemy1Test4_35
+      rect:
+        serializedVersion: 2
+        x: 20375
+        y: 199
+        width: 146
+        height: 146
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c25e091c5f914cb70800000000000000
+      internalID: 8918281705405605164
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TileSetEnemy1Test4_36
+      rect:
+        serializedVersion: 2
+        x: 20863
+        y: 79
+        width: 194
+        height: 330
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 669263ba4ccd0fec0800000000000000
+      internalID: -3535082970241685146
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TileSetEnemy1Test4_37
+      rect:
+        serializedVersion: 2
+        x: 21375
+        y: 79
+        width: 194
+        height: 330
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 89fd7b7c647e79ce0800000000000000
+      internalID: -1398394868090806376
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TileSetEnemy1Test4_38
+      rect:
+        serializedVersion: 2
+        x: 21831
+        y: 79
+        width: 194
+        height: 338
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 729378f8e33492b30800000000000000
+      internalID: 4263012458257922343
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      TileSetEnemy1Test4_0: 2794150142139234151
+      TileSetEnemy1Test4_1: 2806129961792500802
+      TileSetEnemy1Test4_10: 8667011571706879072
+      TileSetEnemy1Test4_11: -5521686693639880157
+      TileSetEnemy1Test4_12: -4479353903758850154
+      TileSetEnemy1Test4_13: -4472971608818952492
+      TileSetEnemy1Test4_14: -1253661385800979129
+      TileSetEnemy1Test4_15: -1922244791822664411
+      TileSetEnemy1Test4_16: 7013994431987868385
+      TileSetEnemy1Test4_17: 7565618028638417704
+      TileSetEnemy1Test4_18: 470928774299904335
+      TileSetEnemy1Test4_19: 3040857392601972185
+      TileSetEnemy1Test4_2: -308858398872535182
+      TileSetEnemy1Test4_20: 3374059683700408564
+      TileSetEnemy1Test4_21: 1591431835040551991
+      TileSetEnemy1Test4_22: -2092833134721512402
+      TileSetEnemy1Test4_23: 5251991626872199541
+      TileSetEnemy1Test4_24: -2943537786063386768
+      TileSetEnemy1Test4_25: -1328698010243672377
+      TileSetEnemy1Test4_26: 857305181829994470
+      TileSetEnemy1Test4_27: 8933396514270529500
+      TileSetEnemy1Test4_28: -2687483982359029562
+      TileSetEnemy1Test4_29: 3509751751791497833
+      TileSetEnemy1Test4_3: 6324546910457120965
+      TileSetEnemy1Test4_30: 6650437910704310643
+      TileSetEnemy1Test4_31: -6466271761424949427
+      TileSetEnemy1Test4_32: -5538849362860059886
+      TileSetEnemy1Test4_33: -1993799510198132796
+      TileSetEnemy1Test4_34: -5714990521358933004
+      TileSetEnemy1Test4_35: 8918281705405605164
+      TileSetEnemy1Test4_36: -3535082970241685146
+      TileSetEnemy1Test4_37: -1398394868090806376
+      TileSetEnemy1Test4_38: 4263012458257922343
+      TileSetEnemy1Test4_4: -1826636650594491543
+      TileSetEnemy1Test4_5: -5771510550654141007
+      TileSetEnemy1Test4_6: -8538846782547489141
+      TileSetEnemy1Test4_7: -105713025708315371
+      TileSetEnemy1Test4_8: -4164770088843012409
+      TileSetEnemy1Test4_9: 3425494102028082969
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
