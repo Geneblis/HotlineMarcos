@@ -1,32 +1,29 @@
 using UnityEngine;
 
-
-//NOTE:
-// O projetil precisa de funcionalidade para IGNORAR (passar direto por) um inimigo que esteja derrubado.
-// Isso é necessário para que o jogador possa atirar por baixo de um inimigo caído, sem que a bala seja bloqueada por ele.
-
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Collider2D))]
 public class Projectile : MonoBehaviour
 {
     [Header("Settings")]
-    public float speed    = 20f;
+    public float speed = 20f;
     public float lifetime = 3f;
-    public int   damage   = 100;
+    public int damage = 100;
 
     Rigidbody2D rb;
-    Collider2D  col;
+    Collider2D col;
 
     void Awake()
     {
-        rb  = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
         col = GetComponent<Collider2D>();
     }
 
     public void Launch(Vector2 direction, Collider2D weaponCol = null)
     {
         if (weaponCol != null)
+        {
             Physics2D.IgnoreCollision(col, weaponCol, true);
+        }
 
         rb.linearVelocity = direction.normalized * speed;
 
@@ -38,7 +35,17 @@ public class Projectile : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.GetComponent<Projectile>() != null) return;
+        if (other.GetComponent<Projectile>() != null)
+        {
+            return;
+        }
+
+        EnemyAI enemy = other.GetComponentInParent<EnemyAI>();
+        if (enemy != null && enemy.currentState == EnemyAI.AIState.Stunned)
+        {
+            IgnoreEnemyColliders(enemy);
+            return;
+        }
 
         if (other.gameObject.layer == LayerMask.NameToLayer("Map"))
         {
@@ -48,9 +55,27 @@ public class Projectile : MonoBehaviour
         }
 
         bool isValidTarget = other.CompareTag("Enemy") || other.CompareTag("Player");
-        if (!isValidTarget) return;
+        if (!isValidTarget)
+        {
+            return;
+        }
 
         other.GetComponent<IDamageable>()?.TakeDamage(damage, DamageType.Bullet);
         Destroy(gameObject);
+    }
+
+    private void IgnoreEnemyColliders(EnemyAI enemy)
+    {
+        Collider2D[] enemyColliders = enemy.GetComponentsInChildren<Collider2D>();
+
+        foreach (Collider2D enemyCollider in enemyColliders)
+        {
+            if (enemyCollider == null || enemyCollider == col)
+            {
+                continue;
+            }
+
+            Physics2D.IgnoreCollision(col, enemyCollider, true);
+        }
     }
 }

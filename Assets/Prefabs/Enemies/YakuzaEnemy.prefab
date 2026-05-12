@@ -82,7 +82,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAI
   currentState: 0
   health: 1
-  patrolSpeed: 2
+  patrolSpeed: 3
   chaseSpeed: 5
   detectionRadius: 10
   viewAngle: 300
@@ -90,7 +90,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   attackRadius: 6
-  aiReactionTime: 0.5
+  aiReactionTime: 0.45
   patrolPoints: []
   patrolWaitTime: 1
   searchDuration: 4

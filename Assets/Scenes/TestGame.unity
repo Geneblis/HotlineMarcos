@@ -863,14 +863,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2035201636582391374, guid: d3cfa477071ea274f9642e7aaf34c089, type: 3}
-      propertyPath: deathSound
-      value: 
-      objectReference: {fileID: 8300000, guid: aecc60d811b433d4fbc6310c187e2e23, type: 3}
-    - target: {fileID: 2035201636582391374, guid: d3cfa477071ea274f9642e7aaf34c089, type: 3}
-      propertyPath: groundSound
-      value: 
-      objectReference: {fileID: 8300000, guid: 4f1311e24a2421e469b439039d93cb8b, type: 3}
-    - target: {fileID: 2035201636582391374, guid: d3cfa477071ea274f9642e7aaf34c089, type: 3}
       propertyPath: playerTransform
       value: 
       objectReference: {fileID: 1226542501}

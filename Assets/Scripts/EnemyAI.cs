@@ -612,6 +612,7 @@ public class EnemyAI : MonoBehaviour, IDamageable
     private void StunnedBehavior()
     {
         rb.linearVelocity = Vector2.Lerp(rb.linearVelocity, Vector2.zero, Time.deltaTime * 3f);
+        rb.angularVelocity = 0f;
 
         stunTimer -= Time.deltaTime;
         if (stunTimer <= 0f)
@@ -623,6 +624,7 @@ public class EnemyAI : MonoBehaviour, IDamageable
     private void RecoverFromStun()
     {
         transform.rotation = Quaternion.identity;
+        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         rb.linearVelocity = Vector2.zero;
         rb.angularVelocity = 0f;
 
@@ -789,6 +791,7 @@ public class EnemyAI : MonoBehaviour, IDamageable
         currentState = AIState.Stunned;
         stunTimer = stunDuration;
 
+        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         rb.linearVelocity = Vector2.zero;
         rb.angularVelocity = 0f;
         rb.AddForce(knockbackDir * stunKnockbackForce, ForceMode2D.Impulse);
@@ -820,7 +823,7 @@ public class EnemyAI : MonoBehaviour, IDamageable
         rb.linearVelocity = Vector2.zero;
         rb.angularVelocity = 0f;
 
-        Destroy(gameObject);
+        Destroy(gameObject, 0.1f);
     }
 
     private void DropWeapon()
