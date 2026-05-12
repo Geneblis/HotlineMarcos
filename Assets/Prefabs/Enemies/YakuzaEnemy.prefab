@@ -111,6 +111,12 @@ MonoBehaviour:
   twoHandWalkAnimation: YakuzaWalk2Hand
   onGroundAnimation: YakuzaOnGround
   movingVelocityThreshold: 0.1
+  groundSound: {fileID: 8300000, guid: 4f1311e24a2421e469b439039d93cb8b, type: 3}
+  deathSound: {fileID: 8300000, guid: aecc60d811b433d4fbc6310c187e2e23, type: 3}
+  audioVolume: 1
+  randomWanderRadius: 8
+  randomArriveDistance: 0.35
+  randomWaitTime: 0.75
   playerTransform: {fileID: 0}
 --- !u!95 &1907500601032950959
 Animator:

@@ -5,26 +5,29 @@ using System.Collections;
 [RequireComponent(typeof(Collider2D))]
 public class DoorController : MonoBehaviour
 {
-    [Header("Referências")]
+    [Header("References")]
     [SerializeField] private Transform doorPivot;
 
-    [Header("Configurações")]
-    [SerializeField] private float openSpeed     = 300f;
+    [Header("Settings")]
+    [SerializeField] private float openSpeed = 300f;
     [SerializeField] private float autoCloseTime = 15f;
-    [SerializeField] private float openAngle     = 90f;
+    [SerializeField] private float openAngle = 90f;
 
-    [Header("Detecção de Inimigos")]
-    [SerializeField] private float knockCheckRadius   = 0.8f;
+    [Header("Enemy Detection")]
+    [SerializeField] private float knockCheckRadius = 0.8f;
     [SerializeField] private float knockCheckDistance = 0.6f;
 
-    private Rigidbody2D rb;
-    private bool       isMoving;
-    private Quaternion closedRotation;
-    private Vector3    closedPosition;
-    private Coroutine  openCoroutine;
-    private Coroutine  autoCloseCoroutine;
+    [Header("Audio")]
+    [SerializeField] private AudioClip interactionSound;
+    [SerializeField] private float soundVolume = 1f;
 
-    void Awake()
+    private Rigidbody2D rb;
+    private Quaternion closedRotation;
+    private Vector3 closedPosition;
+    private Coroutine openCoroutine;
+    private Coroutine autoCloseCoroutine;
+
+    private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         rb.bodyType = RigidbodyType2D.Kinematic;
@@ -36,19 +39,19 @@ public class DoorController : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         bool isPlayer = collision.gameObject.CompareTag("Player");
-        bool isEnemy  = collision.gameObject.CompareTag("Enemy");
+        bool isEnemy = collision.gameObject.CompareTag("Enemy");
 
         if (!isPlayer && !isEnemy) return;
 
-        // Inimigo stunnado no chão é ignorado pela porta
+        // Stunned enemy on the ground is ignored by the door
         if (isEnemy && IsStunned(collision.gameObject)) return;
 
-        Vector2 pushDir = ((Vector2)transform.position - (Vector2)collision.transform.position).normalized;
+        Vector2 pushDirection = ((Vector2)transform.position - (Vector2)collision.transform.position).normalized;
 
         if (isPlayer)
-            KnockEnemiesOnOtherSide(pushDir);
+            KnockEnemiesOnOtherSide(pushDirection);
 
-        TriggerOpen(pushDir);
+        TriggerOpen(pushDirection);
     }
 
     public void OnHitByBullet(Vector2 bulletDirection)
@@ -57,42 +60,46 @@ public class DoorController : MonoBehaviour
         TriggerOpen(bulletDirection);
     }
 
-    private void TriggerOpen(Vector2 pushDir)
+    private void TriggerOpen(Vector2 pushDirection)
     {
-        float cross       = Vector3.Cross(transform.up, (Vector3)pushDir).z;
-        float rotationDir = cross >= 0f ? 1f : -1f;
+        float cross = Vector3.Cross(transform.up, (Vector3)pushDirection).z;
+        float rotationDirection = cross >= 0f ? 1f : -1f;
 
-        Quaternion targetRotation = closedRotation * Quaternion.Euler(0f, 0f, rotationDir * openAngle);
-        float diff = Mathf.DeltaAngle(transform.eulerAngles.z, targetRotation.eulerAngles.z);
+        Quaternion targetRotation = closedRotation * Quaternion.Euler(0f, 0f, rotationDirection * openAngle);
+        float difference = Mathf.DeltaAngle(transform.eulerAngles.z, targetRotation.eulerAngles.z);
 
-        if (Mathf.Abs(diff) < 1f)
+        if (Mathf.Abs(difference) < 1f)
         {
             RestartAutoClose();
             return;
         }
 
-        if (openCoroutine      != null) StopCoroutine(openCoroutine);
+        if (openCoroutine != null) StopCoroutine(openCoroutine);
         if (autoCloseCoroutine != null) StopCoroutine(autoCloseCoroutine);
 
-        openCoroutine = StartCoroutine(RotateDoor(diff, opening: true));
+        openCoroutine = StartCoroutine(RotateDoor(difference, opening: true));
     }
 
     private IEnumerator RotateDoor(float totalAngle, bool opening)
     {
-        isMoving = true;
+        float remainingAngle = Mathf.Abs(totalAngle);
+        float sign = Mathf.Sign(totalAngle);
+        bool hasRotated = false;
 
-        float remaining = Mathf.Abs(totalAngle);
-        float sign      = Mathf.Sign(totalAngle);
-
-        while (remaining > 0f)
+        while (remainingAngle > 0f)
         {
-            float step = Mathf.Min(openSpeed * Time.deltaTime, remaining);
+            float step = Mathf.Min(openSpeed * Time.deltaTime, remainingAngle);
             transform.RotateAround(doorPivot.position, Vector3.forward, sign * step);
-            remaining -= step;
+            remainingAngle -= step;
+
+            if (!hasRotated && step > 0f)
+            {
+                PlayInteractionSound();
+                hasRotated = true;
+            }
+
             yield return null;
         }
-
-        isMoving = false;
 
         if (opening)
             RestartAutoClose();
@@ -102,9 +109,12 @@ public class DoorController : MonoBehaviour
     {
         yield return new WaitForSeconds(autoCloseTime);
 
-        float diff = Mathf.DeltaAngle(transform.eulerAngles.z, closedRotation.eulerAngles.z);
-        yield return StartCoroutine(RotateDoor(diff, opening: false));
+        float difference = Mathf.DeltaAngle(transform.eulerAngles.z, closedRotation.eulerAngles.z);
 
+        if (Mathf.Abs(difference) < 1f)
+            yield break;
+
+        yield return StartCoroutine(RotateDoor(difference, opening: false));
         transform.SetPositionAndRotation(closedPosition, closedRotation);
     }
 
@@ -114,23 +124,29 @@ public class DoorController : MonoBehaviour
         autoCloseCoroutine = StartCoroutine(AutoClose());
     }
 
-    private void KnockEnemiesOnOtherSide(Vector2 pushDir)
+    private void KnockEnemiesOnOtherSide(Vector2 pushDirection)
     {
-        Vector2      checkCenter = (Vector2)transform.position + pushDir * knockCheckDistance;
-        Collider2D[] hits        = Physics2D.OverlapCircleAll(checkCenter, knockCheckRadius);
+        Vector2 checkCenter = (Vector2)transform.position + pushDirection * knockCheckDistance;
+        Collider2D[] hits = Physics2D.OverlapCircleAll(checkCenter, knockCheckRadius);
 
         foreach (Collider2D hit in hits)
         {
             if (!hit.CompareTag("Enemy")) continue;
             if (IsStunned(hit.gameObject)) continue;
-            hit.GetComponent<EnemyAI>()?.TakeKnockdown(pushDir);
+            hit.GetComponent<EnemyAI>()?.TakeKnockdown(pushDirection);
         }
     }
 
-    private bool IsStunned(GameObject go)
+    private bool IsStunned(GameObject gameObjectReference)
     {
-        EnemyAI enemy = go.GetComponent<EnemyAI>();
+        EnemyAI enemy = gameObjectReference.GetComponent<EnemyAI>();
         return enemy != null && enemy.currentState == EnemyAI.AIState.Stunned;
+    }
+
+    private void PlayInteractionSound()
+    {
+        if (interactionSound == null) return;
+        AudioSource.PlayClipAtPoint(interactionSound, transform.position, soundVolume);
     }
 
     private void OnDrawGizmosSelected()

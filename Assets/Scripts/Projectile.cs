@@ -1,5 +1,10 @@
 using UnityEngine;
 
+
+//NOTE:
+// O projetil precisa de funcionalidade para IGNORAR (passar direto por) um inimigo que esteja derrubado.
+// Isso é necessário para que o jogador possa atirar por baixo de um inimigo caído, sem que a bala seja bloqueada por ele.
+
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Collider2D))]
 public class Projectile : MonoBehaviour

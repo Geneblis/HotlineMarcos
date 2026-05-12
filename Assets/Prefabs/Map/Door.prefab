@@ -54,6 +54,8 @@ MonoBehaviour:
   openAngle: 90
   knockCheckRadius: 0.84
   knockCheckDistance: 0.49
+  interactionSound: {fileID: 8300000, guid: e0b235769e17e084bb241e2a6e59d3c5, type: 3}
+  soundVolume: 1
 --- !u!212 &5812123453441974560
 SpriteRenderer:
   serializedVersion: 2
