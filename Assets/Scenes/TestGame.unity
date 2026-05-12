@@ -172,53 +172,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1472106279496477889, guid: 4c97179ae8608c24d809942d4e4fd9c9, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1775475372023935783, guid: 4c97179ae8608c24d809942d4e4fd9c9, type: 3}
-      propertyPath: pickupSounds.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1775475372023935783, guid: 4c97179ae8608c24d809942d4e4fd9c9, type: 3}
-      propertyPath: 'pickupSounds.Array.data[0]'
-      value: 
-      objectReference: {fileID: 8300000, guid: 7384c996304d5944abc3b522d7ae63c5, type: 3}
-    - target: {fileID: 1775475372023935783, guid: 4c97179ae8608c24d809942d4e4fd9c9, type: 3}
-      propertyPath: 'pickupSounds.Array.data[1]'
-      value: 
-      objectReference: {fileID: 8300000, guid: d88fe0f35289a7a4f99aff8348c8e8ca, type: 3}
-    - target: {fileID: 1775475372023935783, guid: 4c97179ae8608c24d809942d4e4fd9c9, type: 3}
-      propertyPath: 'pickupSounds.Array.data[2]'
-      value: 
-      objectReference: {fileID: 8300000, guid: 17223c18500e0024da26989d64c0cccc, type: 3}
-    - target: {fileID: 3270160009804608918, guid: 4c97179ae8608c24d809942d4e4fd9c9, type: 3}
-      propertyPath: m_Size.x
-      value: 0.32
-      objectReference: {fileID: 0}
-    - target: {fileID: 3270160009804608918, guid: 4c97179ae8608c24d809942d4e4fd9c9, type: 3}
-      propertyPath: m_Size.y
-      value: 0.27
-      objectReference: {fileID: 0}
-    - target: {fileID: 3270160009804608918, guid: 4c97179ae8608c24d809942d4e4fd9c9, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: a339fd98bf3df29479cc2fc949e138b2, type: 3}
-    - target: {fileID: 3270160009804608918, guid: 4c97179ae8608c24d809942d4e4fd9c9, type: 3}
-      propertyPath: m_WasSpriteAssigned
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4682800129954968708, guid: 4c97179ae8608c24d809942d4e4fd9c9, type: 3}
-      propertyPath: m_Icon
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 4682800129954968708, guid: 4c97179ae8608c24d809942d4e4fd9c9, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 4682800129954968708, guid: 4c97179ae8608c24d809942d4e4fd9c9, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
