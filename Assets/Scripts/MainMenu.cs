@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     // Nome da cena que você quer carregar ao iniciar
-    [SerializeField] private string gameSceneName = "Map01";
+    [SerializeField] private string gameSceneName = "IntroScene";
 
     public void StartGame()
     {

@@ -1,0 +1,138 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3be7d24fc03af1a42a06d1fa2e5941a6, type: 3}
+  m_Name: IntroStory
+  m_EditorClassIdentifier: Assembly-CSharp::StoryData
+  steps:
+  - image: {fileID: -4936667138001301770, guid: c22d74656c88a1f4a9f83a223662ada8, type: 3}
+    text: "Em um futuro n\xE3o muito distante os programas de televis\xE3o se viram
+      em uma crise avassaladora pois com o decorrer dos \xFAltimos anos praticamente
+      mais ningu\xE9m assitia a TV"
+  - image: {fileID: -4936667138001301770, guid: c22d74656c88a1f4a9f83a223662ada8, type: 3}
+    text: "E para contornar isso, v\xE1rios canais decidiram se unir e virar um s\xF3
+      para ent\xE3o realizar a cria\xE7\xE3o do maior programa de TV da hist\xF3ria"
+  - image: {fileID: 1723912135881791474, guid: a7867c91a6b552c45adb3c2df4c95e41, type: 3}
+    text: O Death Drive
+  - image: {fileID: 1723912135881791474, guid: a7867c91a6b552c45adb3c2df4c95e41, type: 3}
+    text: "Esse programa consiste em um participante entrar em um jogo ficticio onde
+      ele deve subir andares eliminando inimigos de formas diferentes e derivadas
+      para ent\xE3o no topo encontrar o pr\xEAmio do epis\xF3dio do dia"
+  - image: {fileID: 1723912135881791474, guid: a7867c91a6b552c45adb3c2df4c95e41, type: 3}
+    text: "Por\xE9m ao eliminar adversarios esse timer sobre, tendo um limite de
+      10 segundos, resumidamente era uma batalha fren\xE9tica e sem pausa de uma
+      viol\xEAncia controlada e fict\xEDcia, justamente o'que o p\xFAblico buscava
+      assistir"
+  - image: {fileID: 1723912135881791474, guid: a7867c91a6b552c45adb3c2df4c95e41, type: 3}
+    text: "O programa foi um sucesso, virando a forma de entretenimento mais acessada
+      do planeta terra, \xE9 uma nova febre mundial"
+  - image: {fileID: 1723912135881791474, guid: a7867c91a6b552c45adb3c2df4c95e41, type: 3}
+    text: "E em um dia qualquer foi divulgado o pr\xF3ximo pr\xEAmio do programa,
+      Ninja H200R, a moto mais cobi\xE7ada do mundo por todo o f\xE3 de moto, uma
+      evolu\xE7\xE3o da H2R que vai al\xE9m dos limites da compreens\xE3o humana,
+      dizem que aquele que possui essa moto em sua garagem \xE9 igualado a um Deus"
+  - image: {fileID: 1723912135881791474, guid: a7867c91a6b552c45adb3c2df4c95e41, type: 3}
+    text: O novo Deus da velocidade
+  - image: {fileID: 5855934776516676285, guid: 945d1f55fe1f816459792529a7b55390, type: 3}
+    text: "E n\xE3o era diferente com Marcos, um grande amante de motos fazendo disso
+      seu estilo e intuito de vida, seu quarto inteiro com posters sobre motos conseguia
+      expressar bem sua paix\xE3o de duas rodas e como todos os outros, ele tamb\xE9m
+      tinha um sonho"
+  - image: {fileID: 5855934776516676285, guid: 945d1f55fe1f816459792529a7b55390, type: 3}
+    text: "E ele estava bem ali na frente dele, enquanto tomava lua deliciosa lata
+      de pitu ele viu, o arcanjo vindos dos c\xE9us que chegou na terra, a H200R"
+  - image: {fileID: 5855934776516676285, guid: 945d1f55fe1f816459792529a7b55390, type: 3}
+    text: "Ele n\xE3o podia simplesmente deixar isso escapar dele, ela nunca esteve
+      t\xE3o perto antes"
+  - image: {fileID: 5855934776516676285, guid: 945d1f55fe1f816459792529a7b55390, type: 3}
+    text: Sem pensar duas vezes ele foi
+  - image: {fileID: 6690884627407420627, guid: 9741b4860cfdca44badca85de4b64672, type: 3}
+    text: Estava um dia chuvoso mas nada iria impedir ele de batalhar pelo seu sonho,
+      pelo seu sentido de viver
+  - image: {fileID: 6690884627407420627, guid: 9741b4860cfdca44badca85de4b64672, type: 3}
+    text: Aquilo que ele dizia ser um presente divino do Deus das motos estava bem
+      ali na estrutura na frente dele
+  - image: {fileID: 6690884627407420627, guid: 9741b4860cfdca44badca85de4b64672, type: 3}
+    text: "Ent\xE3o sem baixar a cabe\xE7a por um segundo sequer ele foi e entrou
+      no local"
+  - image: {fileID: 6690884627407420627, guid: 9741b4860cfdca44badca85de4b64672, type: 3}
+    text: "Por\xE9m\u2026"
+  - image: {fileID: -4936667138001301770, guid: c22d74656c88a1f4a9f83a223662ada8, type: 3}
+    text: "Logo quando as portas se fecharam atr\xE1s dele, ele foi nocauteado de
+      surpresa"
+  - image: {fileID: 8203110511350270543, guid: 32cec8f4847680a4f91385ae785c5617, type: 3}
+    text: "Quando as portas se fecharam atr\xE1s dele, ele foi nocauteado de surpresa"
+  - image: {fileID: 8203110511350270543, guid: 32cec8f4847680a4f91385ae785c5617, type: 3}
+    text: "Enquanto estava desacordado, foi implantado em seu peito uma esp\xE9cie
+      de bomba rel\xF3gio, uma capaz de evaporar um corpo humano como se fosse um
+      papel"
+  - image: {fileID: 8203110511350270543, guid: 32cec8f4847680a4f91385ae785c5617, type: 3}
+    text: "Desacordado, Marcos n\xE3o pode fazer nada"
+  - image: {fileID: -4936667138001301770, guid: c22d74656c88a1f4a9f83a223662ada8, type: 3}
+    text: "Quando acordou n\xE3o sabia quanto tempo tinha se passado ou nem onde
+      esteva, o local n\xE3o parecia ser a entrada do programa"
+  - image: {fileID: -4936667138001301770, guid: c22d74656c88a1f4a9f83a223662ada8, type: 3}
+    text: "Foi dif\xEDcil para ele abrir os olhos pois seu corpo estava fraco devido
+      a implanta\xE7\xE3o da bomba em seu peito"
+  - image: {fileID: -6267047828634609007, guid: fd5a206dafd781f419ad9164236b52bc, type: 3}
+    text: "Ao conseguir enxergar com clareza, notou que estava em um cen\xE1rio de
+      massacre, corpos jogados como sacos de lixo por todo o lugar"
+  - image: {fileID: -6267047828634609007, guid: fd5a206dafd781f419ad9164236b52bc, type: 3}
+    text: "Tripas nas paredes, cheio de podrid\xE3o enorme, por\xE9m o'que mais chamou
+      sua aten\xE7\xE3o foi o \xF3culos que estava em seu rosto, parece que ele est\xE1
+      preso em seu rosto e na parte de dentro da lente ele via um Timer de 10 segundos
+      travado"
+  - image: {fileID: 3316770095247160215, guid: 336230735487eef439bfff145d838100, type: 3}
+    text: "Marcos encontrou um espelho e ali viu que o \xF3culos realmente estava
+      preso em seu rosto e tamb\xE9m analisou a bomba que viu est\xE1 em seu peito,
+      e ent\xE3o ele come\xE7ou a entender tudo"
+  - image: {fileID: 3316770095247160215, guid: 336230735487eef439bfff145d838100, type: 3}
+    text: "Levando em considera\xE7\xE3o o timer no \xF3culos e todo esse cen\xE1rio
+      ele entende que tudo aquilo era real, toda a matan\xE7a que familias assistiam
+      felizes nas suas salas, tudo aquilo era real"
+  - image: {fileID: 3316770095247160215, guid: 336230735487eef439bfff145d838100, type: 3}
+    text: "Ele entendeu que toda vez que ele estava assistindo e via um participante
+      ter seu timer zerado, ele n\xE3o era s\xF3 eliminado do programa mas sim eliminado
+      da face da terra"
+  - image: {fileID: 3316770095247160215, guid: 336230735487eef439bfff145d838100, type: 3}
+    text: "Normalmente ele iria come\xE7ar a pensar em uma forma de fugir daquilo,
+      achar um absurdo tudo que estavam fazendo ali e divulgar a todo o mundo"
+  - image: {fileID: 283867644848029792, guid: 624601dfae177734bb82da26e88454fb, type: 3}
+    text: "Mas ele n\xE3o pensou nisso"
+  - image: {fileID: 283867644848029792, guid: 624601dfae177734bb82da26e88454fb, type: 3}
+    text: Na verdade nem ligou para tudo isso
+  - image: {fileID: 283867644848029792, guid: 624601dfae177734bb82da26e88454fb, type: 3}
+    text: "O presente que Deus concebeu a esse mundo estava logo ali e poderia ser
+      dele, s\xF3 isso importava"
+  - image: {fileID: 283867644848029792, guid: 624601dfae177734bb82da26e88454fb, type: 3}
+    text: "Se ele morresse iria valer a pena pois lutou at\xE9 o fim por seu sonho
+      e se ele deixasse essa chance escapar dele, n\xE3o tinha mais motivo pelo qual
+      viver"
+  - image: {fileID: 283867644848029792, guid: 624601dfae177734bb82da26e88454fb, type: 3}
+    text: As pessoas que tiver que matar seriam apenas pedras no sapato dele, nada
+      mais, nada menos
+  - image: {fileID: 6610547276344642796, guid: fd8ee0dc4b989444e92de55d66da07cc, type: 3}
+    text: "N\xE3o importa o'que ele iria fazer ali, as atrocidades cometidas, nada
+      disso importava"
+  - image: {fileID: 6610547276344642796, guid: fd8ee0dc4b989444e92de55d66da07cc, type: 3}
+    text: O que realmente importava era o seu sonho
+  - image: {fileID: 6610547276344642796, guid: fd8ee0dc4b989444e92de55d66da07cc, type: 3}
+    text: "E nada vai impedir ele de alcan\xE7ar esse sonho"
+  - image: {fileID: 6610547276344642796, guid: fd8ee0dc4b989444e92de55d66da07cc, type: 3}
+    text: "Marcos est\xE1 preparado para fazer tudo que for necess\xE1rio para chegar
+      na Moto"
+  - image: {fileID: 6610547276344642796, guid: fd8ee0dc4b989444e92de55d66da07cc, type: 3}
+    text: "Ao caminhar para a porta onde tudo iria se iniciar ele absorve todos os
+      pensamentos in\xFAteis e foca s\xF3 em uma coisa"
+  - image: {fileID: 6610547276344642796, guid: fd8ee0dc4b989444e92de55d66da07cc, type: 3}
+    text: Sobreviver
+  - image: {fileID: 6610547276344642796, guid: fd8ee0dc4b989444e92de55d66da07cc, type: 3}
+    text: E matar tudo que se mexer em sua frente
