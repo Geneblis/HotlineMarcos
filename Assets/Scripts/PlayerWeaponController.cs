@@ -135,11 +135,16 @@ public class PlayerWeaponController : MonoBehaviour
 
     // Finalizaçao do inimigo
     // No PlayerWeaponController.cs, dentro da função ExecuteFinisher:
-void ExecuteFinisher(EnemyAI enemy)
-{
-    // Chamamos o Finisher em vez de Bullet para o inimigo saber como morreu
-    enemy.TakeDamage(999f, DamageType.Finisher); 
-}
+    void ExecuteFinisher(EnemyAI enemy)
+    {
+        // Chamamos o Finisher em vez de Bullet para o inimigo saber como morreu
+        enemy.TakeDamage(999f, DamageType.Finisher); 
+    }
+
+    public IWeapon GetEquippedWeapon()
+    {
+        return equippedWeapon;
+    }
 
     void TryPickup()
     {

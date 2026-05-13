@@ -156,6 +156,7 @@ GameObject:
   - component: {fileID: 713466767515817258}
   - component: {fileID: 6643943964640817519}
   - component: {fileID: 7842536105318099804}
+  - component: {fileID: 410177781982991838}
   - component: {fileID: 1775475372023935783}
   - component: {fileID: 692347245647687334}
   - component: {fileID: 1601062389330948805}
@@ -218,6 +219,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAnimationController
   lowerAnimator: {fileID: 5413876475346937626}
+--- !u!114 &410177781982991838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4682800129954968708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4a867a09a7bcfc4299494bacf4f4ba1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerBodyAnimationController
+  upperAnimator: {fileID: 7879531773477905604}
+  weaponController: {fileID: 1775475372023935783}
 --- !u!114 &1775475372023935783
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -329,7 +344,7 @@ AudioSource:
   MinDistance: 2
   MaxDistance: 500
   Pan2D: 0
-  rolloffMode: 1
+  rolloffMode: 0
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -412,6 +427,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2948186996977974827}
   - component: {fileID: 3270160009804608918}
+  - component: {fileID: 7879531773477905604}
   - component: {fileID: 2168815601420168907}
   m_Layer: 6
   m_Name: Upperbody
@@ -495,6 +511,28 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!95 &7879531773477905604
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7046526495826232748}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 416fb09cb5fcf3340a5d536f0a00e0ba, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!81 &2168815601420168907
 AudioListener:
   m_ObjectHideFlags: 0

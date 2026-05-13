@@ -49,7 +49,7 @@ MonoBehaviour:
   backgroundMusic: {fileID: 8300000, guid: 54ca3174d063e2d47b6ecce3a2b1e99e, type: 3}
   playOnStart: 1
   loopMusic: 1
-  musicVolume: 0.75
+  musicVolume: 0.6
 --- !u!82 &6158704529387468083
 AudioSource:
   m_ObjectHideFlags: 0
