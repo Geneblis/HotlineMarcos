@@ -80,6 +80,10 @@ public class EnemyAI : MonoBehaviour, IDamageable
     [SerializeField] private float randomArriveDistance = 0.35f;
     [SerializeField] private float randomWaitTime = 0.75f;
 
+    [Header("Corpse Prefab")]
+    [Tooltip("Insert the prefab contaning the CorpseController script, with appropriate visuals and a Rigidbody2D for physics interactions")]
+    [SerializeField] private GameObject corpsePrefab;
+
     [Header("References")]
     [SerializeField] private Transform playerTransform;
 
@@ -103,6 +107,7 @@ public class EnemyAI : MonoBehaviour, IDamageable
     private float randomWaitTimer;
     private string currentAnimation;
     private AIState preferredIdleState = AIState.Patrol;
+    private Vector2 lastHitDirection;
 
     void Start()
     {
@@ -117,6 +122,8 @@ public class EnemyAI : MonoBehaviour, IDamageable
             GameObject player = GameObject.FindGameObjectWithTag("Player");
             if (player != null) playerTransform = player.transform;
         }
+
+        lastHitDirection = Vector2.down;
 
         SpawnWeapon();
 
@@ -526,8 +533,21 @@ public class EnemyAI : MonoBehaviour, IDamageable
 
     public void TakeDamage(float damage, DamageType damageType)
     {
+        Vector2 sourcePosition = playerTransform != null
+            ? (Vector2)playerTransform.position
+            : (Vector2)transform.position + Vector2.down;
+
+        TakeDamage(damage, damageType, sourcePosition);
+    }
+
+    public void TakeDamage(float damage, DamageType damageType, Vector2 damageSourcePosition)
+    {
         if (isDead) return;
         isAggro = true;
+
+        lastHitDirection = ((Vector2)transform.position - damageSourcePosition).normalized;
+
+        if (lastHitDirection.sqrMagnitude < 0.001f) lastHitDirection = Vector2.up;
 
         switch (damageType)
         {
@@ -545,6 +565,7 @@ public class EnemyAI : MonoBehaviour, IDamageable
     {
         if (isDead || currentState == AIState.Stunned) return;
         isAggro = true;
+        lastHitDirection = knockbackDir;
         PlayGroundSound();
         EnterStunnedState(knockbackDir);
     }
@@ -556,6 +577,7 @@ public class EnemyAI : MonoBehaviour, IDamageable
         Vector2 knockbackDir = playerTransform != null
             ? ((Vector2)transform.position - (Vector2)playerTransform.position).normalized
             : Vector2.down;
+        lastHitDirection = knockbackDir;
         EnterStunnedState(knockbackDir);
     }
 
@@ -588,16 +610,29 @@ public class EnemyAI : MonoBehaviour, IDamageable
         }
     }
 
-    private void Die()
-    {
+    private void Die() {
         if (isDead) return;
         isDead = true;
         PlayDeathSound();
+        SpawnCorpse();
         DropWeapon();
         if (enemyCollider != null) enemyCollider.enabled = false;
         rb.linearVelocity = Vector2.zero;
         rb.angularVelocity = 0f;
-        Destroy(gameObject, 0.1f);
+        Destroy(gameObject); 
+    }
+    private void SpawnCorpse()
+    {
+        if (corpsePrefab == null) return;
+
+        Vector3 spawnPosition = new Vector3(transform.position.x, transform.position.y, 2f);
+        GameObject corpseGO = Instantiate(corpsePrefab, spawnPosition, transform.rotation);
+
+        CorpseController corpse = corpseGO.GetComponent<CorpseController>();
+        if (corpse != null)
+        {
+            corpse.Initialize(lastHitDirection);
+        }
     }
 
     private void DropWeapon()
@@ -634,7 +669,7 @@ public class EnemyAI : MonoBehaviour, IDamageable
     private WeaponHoldCategory GetHeldWeaponCategory()
     {
         if (heldWeapon == null) return WeaponHoldCategory.None;
-        return (heldWeapon.type == WeaponType.OneHandFirearm || heldWeapon.type == WeaponType.OneHandMelee) 
+        return (heldWeapon.type == WeaponType.OneHandFirearm || heldWeapon.type == WeaponType.OneHandMelee)
             ? WeaponHoldCategory.OneHand : WeaponHoldCategory.TwoHand;
     }
 

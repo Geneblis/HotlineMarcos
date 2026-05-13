@@ -117,6 +117,7 @@ MonoBehaviour:
   randomWanderRadius: 8
   randomArriveDistance: 0.35
   randomWaitTime: 0.75
+  corpsePrefab: {fileID: 3611360365058762911, guid: 44bf51b62d6184b41bc691d62715e166, type: 3}
   playerTransform: {fileID: 0}
 --- !u!95 &1907500601032950959
 Animator:
