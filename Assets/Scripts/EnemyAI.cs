@@ -625,7 +625,7 @@ public class EnemyAI : MonoBehaviour, IDamageable
     {
         if (corpsePrefab == null) return;
 
-        Vector3 spawnPosition = new Vector3(transform.position.x, transform.position.y, 2f);
+        Vector3 spawnPosition = new Vector3(transform.position.x, transform.position.y, 3f);
         GameObject corpseGO = Instantiate(corpsePrefab, spawnPosition, transform.rotation);
 
         CorpseController corpse = corpseGO.GetComponent<CorpseController>();

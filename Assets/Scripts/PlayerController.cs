@@ -18,6 +18,10 @@ public class PlayerController : MonoBehaviour, IDamageable
     public Transform body;
     public Transform legs;
 
+    [Header("Death")]
+    [SerializeField] private GameObject corpsePrefab;
+    [SerializeField] private float corpseLayerOffset = 3f;
+
     Rigidbody2D rb;
     Camera cam;
     Vector2 moveInput;
@@ -33,6 +37,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         if (cam == null) Debug.LogError("PlayerController: no camera found!", this);
         if (body == null) Debug.LogError("PlayerController: 'Body' not assigned!", this);
         if (legs == null) Debug.LogError("PlayerController: 'Legs' not assigned!", this);
+        if (corpsePrefab == null) Debug.LogError("PlayerController: 'Corpse Prefab' not assigned!", this);
     }
 
     void Update()
@@ -57,14 +62,30 @@ public class PlayerController : MonoBehaviour, IDamageable
     public void TakeDamage(float damage, DamageType damageType)
     {
         if (isDead) return;
+
         currentHealth -= damage;
-        if (currentHealth <= 0f) Die();
+        if (currentHealth <= 0f)
+            Die();
     }
 
     private void Die()
     {
+        if (isDead) return;
+
         isDead = true;
         rb.linearVelocity = Vector2.zero;
+
+        if (corpsePrefab != null)
+        {
+            Vector3 corpsePosition = transform.position;
+            corpsePosition.z += corpseLayerOffset;
+
+            float randomRotation = Random.Range(-3, 12);
+            Quaternion corpseRotation = transform.rotation * Quaternion.Euler(0f, 0f, randomRotation);
+
+            Instantiate(corpsePrefab, corpsePosition, corpseRotation);
+        }
+
         gameObject.SetActive(false);
         GameManager.Instance?.OnPlayerDied();
     }
@@ -72,16 +93,28 @@ public class PlayerController : MonoBehaviour, IDamageable
     void RotateTowardsMouse()
     {
         if (cam == null || body == null) return;
+
         Vector3 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
         Vector2 dir = mousePos - body.position;
         float angle = Vector2ToAngle(dir);
-        body.rotation = Quaternion.RotateTowards(body.rotation, Quaternion.Euler(0, 0, angle), bodyRotationSpeed * Time.deltaTime);
+
+        body.rotation = Quaternion.RotateTowards(
+            body.rotation,
+            Quaternion.Euler(0, 0, angle),
+            bodyRotationSpeed * Time.deltaTime
+        );
     }
 
     void RotateLegs()
     {
+        if (legs == null) return;
+
         Quaternion target = Quaternion.Euler(0, 0, lastMoveAngle);
-        legs.rotation = Quaternion.RotateTowards(legs.rotation, target, legsRotationSpeed * Time.deltaTime);
+        legs.rotation = Quaternion.RotateTowards(
+            legs.rotation,
+            target,
+            legsRotationSpeed * Time.deltaTime
+        );
     }
 
     float Vector2ToAngle(Vector2 dir)

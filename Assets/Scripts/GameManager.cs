@@ -8,43 +8,59 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    void Awake()
-    {
-        if (Instance != null && Instance != this) { Destroy(gameObject); return; }
-        Instance = this;
-    }
-
     [Header("HUD — Points")]
     [SerializeField] TMP_Text pointsText;
-    [SerializeField] string   pointsSuffix = "";
+    [SerializeField] string pointsSuffix = "";
 
     [Header("HUD — Ammo")]
     [SerializeField] TMP_Text ammoText;
-    [SerializeField] string   ammoSeparator = " / ";
-    [SerializeField] string   ammoEmpty     = "---";
+    [SerializeField] string ammoSeparator = " / ";
+    [SerializeField] string ammoEmpty = "---";
 
     [Header("HUD — Timer")]
     [SerializeField] TMP_Text timerText;
-    [SerializeField] bool     countDown     = false;
-    [SerializeField] float    timerDuration = 60f;
+    [SerializeField] bool countDown = false;
+    [SerializeField] float timerDuration = 60f;
 
     [Header("Screens")]
     [SerializeField] GameObject gameOverScreen;
+    [SerializeField] TMP_Text gameOverText;
+    [SerializeField] string gameOverMessage = "VOCE MORREU!\n\nAperte R para tentar novamente...";
     [SerializeField] GameObject pauseMenuRoot;
 
     [Header("Main Menu Scene")]
     [SerializeField] string mainMenuScene = "MainMenu";
 
-    GameState state         = GameState.Playing;
-    int       currentPoints = 0;
-    float     elapsedTime   = 0f;
+    [Header("Restart")]
+    [SerializeField] KeyCode restartKey = KeyCode.R;
+
+    GameState state = GameState.Playing;
+    int currentPoints = 0;
+    float elapsedTime = 0f;
+
+    void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+    }
 
     void Start()
     {
         Time.timeScale = 1f;
 
-        if (gameOverScreen != null) gameOverScreen.SetActive(false);
-        if (pauseMenuRoot  != null) pauseMenuRoot.SetActive(false);
+        if (gameOverScreen != null)
+            gameOverScreen.SetActive(false);
+
+        if (pauseMenuRoot != null)
+            pauseMenuRoot.SetActive(false);
+
+        if (gameOverText != null)
+            gameOverText.text = gameOverMessage;
 
         RefreshPointsUI();
         RefreshAmmoUI(ammoEmpty);
@@ -55,22 +71,30 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if      (state == GameState.Playing) Pause();
-            else if (state == GameState.Paused)  Resume();
+            if (state == GameState.Playing)
+                Pause();
+            else if (state == GameState.Paused)
+                Resume();
         }
 
-        if (state == GameState.Dead && Input.GetKeyDown(KeyCode.R))
-            RestartLevel();
+        if (state == GameState.Dead)
+        {
+            if (Input.GetKeyDown(restartKey))
+                RestartLevel();
 
-        if (state != GameState.Playing) return;
+            return;
+        }
+
+        if (state != GameState.Playing)
+            return;
 
         elapsedTime += Time.deltaTime;
+
         float display = countDown ? Mathf.Max(0f, timerDuration - elapsedTime) : elapsedTime;
         RefreshTimerUI(display);
 
         if (countDown && display <= 0f)
         {
-            state = GameState.Dead;
             OnTimerEnd();
         }
     }
@@ -79,22 +103,40 @@ public class GameManager : MonoBehaviour
 
     public void Pause()
     {
-        state          = GameState.Paused;
+        if (state != GameState.Playing)
+            return;
+
+        state = GameState.Paused;
         Time.timeScale = 0f;
-        if (pauseMenuRoot != null) pauseMenuRoot.SetActive(true);
+
+        if (pauseMenuRoot != null)
+            pauseMenuRoot.SetActive(true);
     }
 
     public void Resume()
     {
-        state          = GameState.Playing;
+        if (state != GameState.Paused)
+            return;
+
+        state = GameState.Playing;
         Time.timeScale = 1f;
-        if (pauseMenuRoot != null) pauseMenuRoot.SetActive(false);
+
+        if (pauseMenuRoot != null)
+            pauseMenuRoot.SetActive(false);
     }
 
     public void OnPlayerDied()
     {
+        if (state == GameState.Dead)
+            return;
+
         state = GameState.Dead;
-        if (gameOverScreen != null) gameOverScreen.SetActive(true);
+
+        if (gameOverText != null)
+            gameOverText.text = gameOverMessage;
+
+        if (gameOverScreen != null)
+            gameOverScreen.SetActive(true);
     }
 
     public void RestartLevel()
@@ -111,7 +153,9 @@ public class GameManager : MonoBehaviour
 
     public void AddPoints(int amount)
     {
-        if (state != GameState.Playing) return;
+        if (state != GameState.Playing)
+            return;
+
         currentPoints += amount;
         RefreshPointsUI();
     }
@@ -122,33 +166,50 @@ public class GameManager : MonoBehaviour
         RefreshPointsUI();
     }
 
-    public void UpdateAmmo(int current, int max) => RefreshAmmoUI($"{current}{ammoSeparator}{max}");
-    public void ClearAmmo()                       => RefreshAmmoUI(ammoEmpty);
+    public void UpdateAmmo(int current, int max)
+    {
+        RefreshAmmoUI($"{current}{ammoSeparator}{max}");
+    }
 
-    public void ResetTimer() { elapsedTime = 0f; }
+    public void ClearAmmo()
+    {
+        RefreshAmmoUI(ammoEmpty);
+    }
+
+    public void ResetTimer()
+    {
+        elapsedTime = 0f;
+    }
 
     void RefreshPointsUI()
     {
-        if (pointsText == null) return;
+        if (pointsText == null)
+            return;
+
         pointsText.text = $"{currentPoints}{pointsSuffix}";
     }
 
     void RefreshAmmoUI(string content)
     {
-        if (ammoText == null) return;
+        if (ammoText == null)
+            return;
+
         ammoText.text = content;
     }
 
     void RefreshTimerUI(float seconds)
     {
-        if (timerText == null) return;
-        int m = Mathf.FloorToInt(seconds / 60f);
-        int s = Mathf.FloorToInt(seconds % 60f);
-        timerText.text = $"{m:00}:{s:00}";
+        if (timerText == null)
+            return;
+
+        int minutes = Mathf.FloorToInt(seconds / 60f);
+        int remainingSeconds = Mathf.FloorToInt(seconds % 60f);
+        timerText.text = $"{minutes:00}:{remainingSeconds:00}";
     }
 
     void OnTimerEnd()
     {
         Debug.Log("GameManager: Timer ended.");
+        OnPlayerDied();
     }
 }

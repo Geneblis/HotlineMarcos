@@ -113,7 +113,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -590895859, guid: 2e52b57e83e352b4babdad0c91ebb827, type: 3}
+  m_Sprite: {fileID: -612035232, guid: 24c4e568afd140e45bf798b4c5a13be1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -199,10 +199,12 @@ MonoBehaviour:
   moveSpeed: 7
   bodyRotationSpeed: 720
   legsRotationSpeed: 540
-  maxHealth: 100
-  currentHealth: 0
+  maxHealth: 1
+  currentHealth: 1
   body: {fileID: 2948186996977974827}
   legs: {fileID: 3430366620852029864}
+  corpsePrefab: {fileID: 3611360365058762911, guid: 06ae5ee8916166a41a7084b9e1927fa3, type: 3}
+  corpseLayerOffset: 3
 --- !u!114 &7842536105318099804
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -324,10 +326,10 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 2
   MaxDistance: 500
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -410,7 +412,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2948186996977974827}
   - component: {fileID: 3270160009804608918}
-  - component: {fileID: 1472106279496477889}
+  - component: {fileID: 2168815601420168907}
   m_Layer: 6
   m_Name: Upperbody
   m_TagString: Untagged
@@ -493,7 +495,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!81 &1472106279496477889
+--- !u!81 &2168815601420168907
 AudioListener:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

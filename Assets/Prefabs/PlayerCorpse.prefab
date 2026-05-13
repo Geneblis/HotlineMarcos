@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 5080149149307724114}
   - component: {fileID: 3437707800491408305}
   - component: {fileID: -5855852396217605332}
+  - component: {fileID: -6184918338757059323}
   m_Layer: 0
-  m_Name: YakuzaCorpse
+  m_Name: PlayerCorpse
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -83,7 +84,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 613986104548276386, guid: acd2bfd062a65bc41979273b16dabf8e, type: 3}
+  m_Sprite: {fileID: 8454138893773171329, guid: 88cdd84f7b1ccf049994aff30cbf52f2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -144,3 +145,11 @@ MonoBehaviour:
   bloodFinalScale: 5
   bloodRotateDegrees: 25
   bloodAlpha: 1
+--- !u!81 &-6184918338757059323
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3611360365058762911}
+  m_Enabled: 1
