@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3be7d24fc03af1a42a06d1fa2e5941a6, type: 3}
+  m_Name: FinalStoryData
+  m_EditorClassIdentifier: Assembly-CSharp::StoryData
+  steps:
+  - image: {fileID: 7141547621344835472, guid: 60e4a1d09e103dc4283831a841ddf8a8, type: 3}
+    text: "Depois de tanta matan\xE7a, finalmente l\xE1 estava ela, o santo graal,
+      protegia por um vidro a prova de bala"
+  - image: {fileID: 7141547621344835472, guid: 60e4a1d09e103dc4283831a841ddf8a8, type: 3}
+    text: "Mas n\xE3o a prova de um homem sonhador"
+  - image: {fileID: 7141547621344835472, guid: 60e4a1d09e103dc4283831a841ddf8a8, type: 3}
+    text: "Com um cute ele quebra o vidro, pois nada iria separar ele da H200R, e
+      por l\xE1 ele fica quase um minuto em choque sem acreditar que estava logo
+      em sua frente"
+  - image: {fileID: 7141547621344835472, guid: 60e4a1d09e103dc4283831a841ddf8a8, type: 3}
+    text: "Depois de agradecer aos Deuses pela ben\xE7\xE3o, ele sobe e realiza o
+      seu sonho"
