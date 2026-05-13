@@ -1,0 +1,611 @@
+fileFormatVersion: 2
+guid: d2c733fa5c94b1145a592d1f24952094
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -3104959815136807019
+    second: Logo Death Drive_0
+  - first:
+      213: -6673028661690913357
+    second: Logo Death Drive_1
+  - first:
+      213: -4007162383984482911
+    second: Logo Death Drive_2
+  - first:
+      213: 5715350572501483084
+    second: Logo Death Drive_3
+  - first:
+      213: 8008805354580240125
+    second: Logo Death Drive_4
+  - first:
+      213: 2810316931129040126
+    second: Logo Death Drive_5
+  - first:
+      213: -7290512393662266210
+    second: Logo Death Drive_6
+  - first:
+      213: -8000111865610234987
+    second: Logo Death Drive_7
+  - first:
+      213: -4395667983785846557
+    second: Logo Death Drive_8
+  - first:
+      213: 1336955773115181924
+    second: Logo Death Drive_9
+  - first:
+      213: -5592310526724357487
+    second: Logo Death Drive_10
+  - first:
+      213: -5500918852092645117
+    second: Logo Death Drive_11
+  - first:
+      213: -7168966410733695828
+    second: Logo Death Drive_12
+  - first:
+      213: 6589221313652588910
+    second: Logo Death Drive_13
+  - first:
+      213: -5695917144193368631
+    second: Logo Death Drive_14
+  - first:
+      213: -925247892558412108
+    second: Logo Death Drive_15
+  - first:
+      213: 655475967313618483
+    second: Logo Death Drive_16
+  - first:
+      213: -1641441853296384906
+    second: Logo Death Drive_17
+  - first:
+      213: -4055790313248649526
+    second: Logo Death Drive_18
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Logo Death Drive_0
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 0
+        width: 1531
+        height: 1024
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 59778e8bf77f8e4d0800000000000000
+      internalID: -3104959815136807019
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Logo Death Drive_1
+      rect:
+        serializedVersion: 2
+        x: 1041
+        y: 966
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3bda9e399c3a463a0800000000000000
+      internalID: -6673028661690913357
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Logo Death Drive_2
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 725
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a52c49ea03b368c0800000000000000
+      internalID: -4007162383984482911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Logo Death Drive_3
+      rect:
+        serializedVersion: 2
+        x: 66
+        y: 733
+        width: 12
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c4eb6c08011015f40800000000000000
+      internalID: 5715350572501483084
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Logo Death Drive_4
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 711
+        width: 10
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: df6600b990ef42f60800000000000000
+      internalID: 8008805354580240125
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Logo Death Drive_5
+      rect:
+        serializedVersion: 2
+        x: 67
+        y: 706
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: efc5632fb50400720800000000000000
+      internalID: 2810316931129040126
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Logo Death Drive_6
+      rect:
+        serializedVersion: 2
+        x: 66
+        y: 669
+        width: 7
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e948d21da95e2da90800000000000000
+      internalID: -7290512393662266210
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Logo Death Drive_7
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 513
+        width: 9
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5931ae605a4e9f090800000000000000
+      internalID: -8000111865610234987
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Logo Death Drive_8
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 498
+        width: 10
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3e813eb02437ff2c0800000000000000
+      internalID: -4395667983785846557
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Logo Death Drive_9
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 421
+        width: 34
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 46b20f03132dd8210800000000000000
+      internalID: 1336955773115181924
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Logo Death Drive_10
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 405
+        width: 16
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 192caec843f1462b0800000000000000
+      internalID: -5592310526724357487
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Logo Death Drive_11
+      rect:
+        serializedVersion: 2
+        x: 1525
+        y: 413
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 301b4caf27fc8a3b0800000000000000
+      internalID: -5500918852092645117
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Logo Death Drive_12
+      rect:
+        serializedVersion: 2
+        x: 66
+        y: 390
+        width: 6
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cacc2814807b28c90800000000000000
+      internalID: -7168966410733695828
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Logo Death Drive_13
+      rect:
+        serializedVersion: 2
+        x: 62
+        y: 375
+        width: 12
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e6102b2afdd917b50800000000000000
+      internalID: 6589221313652588910
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Logo Death Drive_14
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 243
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9cdfb4e198904f0b0800000000000000
+      internalID: -5695917144193368631
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Logo Death Drive_15
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 249
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b680e2a1fbd823f0800000000000000
+      internalID: -925247892558412108
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Logo Death Drive_16
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 222
+        width: 67
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 336a88e5be7b81900800000000000000
+      internalID: 655475967313618483
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Logo Death Drive_17
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 183
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6746fc6c45d6839e0800000000000000
+      internalID: -1641441853296384906
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Logo Death Drive_18
+      rect:
+        serializedVersion: 2
+        x: 58
+        y: 177
+        width: 35
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ace0857d230f6b7c0800000000000000
+      internalID: -4055790313248649526
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Logo Death Drive_0: -3104959815136807019
+      Logo Death Drive_1: -6673028661690913357
+      Logo Death Drive_10: -5592310526724357487
+      Logo Death Drive_11: -5500918852092645117
+      Logo Death Drive_12: -7168966410733695828
+      Logo Death Drive_13: 6589221313652588910
+      Logo Death Drive_14: -5695917144193368631
+      Logo Death Drive_15: -925247892558412108
+      Logo Death Drive_16: 655475967313618483
+      Logo Death Drive_17: -1641441853296384906
+      Logo Death Drive_18: -4055790313248649526
+      Logo Death Drive_2: -4007162383984482911
+      Logo Death Drive_3: 5715350572501483084
+      Logo Death Drive_4: 8008805354580240125
+      Logo Death Drive_5: 2810316931129040126
+      Logo Death Drive_6: -7290512393662266210
+      Logo Death Drive_7: -8000111865610234987
+      Logo Death Drive_8: -4395667983785846557
+      Logo Death Drive_9: 1336955773115181924
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
