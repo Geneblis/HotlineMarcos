@@ -75,6 +75,9 @@ public class EnemyAI : MonoBehaviour, IDamageable
     [SerializeField] private AudioClip deathSound;
     [SerializeField] private float audioVolume = 1f;
 
+    [Header("Scoring")]
+    [SerializeField] private int scoreOnDeath = 100;
+
     [Header("Random State")]
     [SerializeField] private float randomWanderRadius = 8f;
     [SerializeField] private float randomArriveDistance = 0.35f;
@@ -613,6 +616,7 @@ public class EnemyAI : MonoBehaviour, IDamageable
     private void Die() {
         if (isDead) return;
         isDead = true;
+        ScoreManager.Instance?.AddKill(100);
         PlayDeathSound();
         SpawnCorpse();
         DropWeapon();
