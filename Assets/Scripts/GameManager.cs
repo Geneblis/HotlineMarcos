@@ -38,6 +38,9 @@ public class GameManager : MonoBehaviour
     int currentPoints = 0;
     float elapsedTime = 0f;
 
+    // NOVO: Controle interno da dificuldade para o Timer
+    private bool isTimerEnabled = true;
+
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -62,9 +65,39 @@ public class GameManager : MonoBehaviour
         if (gameOverText != null)
             gameOverText.text = gameOverMessage;
 
+        // VERIFICAÇÃO DE DIFICULDADE (0 = Fácil, 1 = Difícil)
+        int savedDifficulty = PlayerPrefs.GetInt("GameDifficulty", 0);
+
+        if (savedDifficulty == 0)
+        {
+            // MODO FÁCIL: Desativa o timer e esconde ele da interface
+            isTimerEnabled = false;
+            if (timerText != null)
+            {
+                timerText.gameObject.SetActive(false);
+            }
+            Debug.Log("GameManager: Modo Fácil ativo. Timer desativado.");
+        }
+        else
+        {
+            // MODO DIFÍCIL: Força o timer a ser regressivo e o deixa visível
+            isTimerEnabled = true;
+            countDown = true; // Garante que vai contar de forma regressiva para matar o player
+            if (timerText != null)
+            {
+                timerText.gameObject.SetActive(true);
+            }
+            Debug.Log("GameManager: Modo Difícil ativo. Timer regressivo ativado!");
+        }
+
         RefreshPointsUI();
         RefreshAmmoUI(ammoEmpty);
-        RefreshTimerUI(countDown ? timerDuration : 0f);
+        
+        // Inicializa o texto do timer baseado se ele está ativo ou não
+        if (isTimerEnabled)
+        {
+            RefreshTimerUI(countDown ? timerDuration : 0f);
+        }
     }
 
     void Update()
@@ -88,18 +121,23 @@ public class GameManager : MonoBehaviour
         if (state != GameState.Playing)
             return;
 
-        elapsedTime += Time.deltaTime;
-
-        float display = countDown ? Mathf.Max(0f, timerDuration - elapsedTime) : elapsedTime;
-        RefreshTimerUI(display);
-
-        if (countDown && display <= 0f)
+        // SÓ ENTRA NA LÓGICA DO TIMER SE ESTIVER NO MODO DIFÍCIL (isTimerEnabled == true)
+        if (isTimerEnabled)
         {
-            OnTimerEnd();
+            elapsedTime += Time.deltaTime;
+
+            float display = countDown ? Mathf.Max(0f, timerDuration - elapsedTime) : elapsedTime;
+            RefreshTimerUI(display);
+
+            // Se o tempo acabar no modo regressivo, mata o jogador
+            if (countDown && display <= 0f)
+            {
+                OnTimerEnd();
+            }
         }
     }
 
-    public GameState CurrentState => state;
+    public void GameState CurrentState => state;
 
     public void Pause()
     {
@@ -205,11 +243,21 @@ public class GameManager : MonoBehaviour
         int minutes = Mathf.FloorToInt(seconds / 60f);
         int remainingSeconds = Mathf.FloorToInt(seconds % 60f);
         timerText.text = $"{minutes:00}:{remainingSeconds:00}";
+
+        // Feedback visual estilo Hotline Miami: Se faltar menos de 10 segundos no difícil, o texto fica vermelho
+        if (countDown && seconds <= 10f)
+        {
+            timerText.color = Color.red;
+        }
+        else
+        {
+            timerText.color = Color.white; // Ou a cor padrão da sua HUD
+        }
     }
 
     void OnTimerEnd()
     {
         Debug.Log("GameManager: Timer ended.");
-        OnPlayerDied();
+        OnPlayerDied(); // Chama a sua tela de morte padrão automaticamente!
     }
 }

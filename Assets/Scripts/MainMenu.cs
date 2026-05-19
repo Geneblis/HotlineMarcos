@@ -8,24 +8,25 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private string gameSceneName = "IntroScene"; // Nome da cena da história
 
     [Header("Painéis do Menu")]
-    public GameObject mainPanel;    // Painel com Iniciar, Opções, Sair
-    public GameObject optionsPanel; // Painel com o Slider de Volume e botão Voltar
+    public GameObject mainPanel;         // Painel principal (Iniciar, Opções, Sair)
+    public GameObject optionsPanel;      // Painel de Opções (Volume, Voltar)
+    public GameObject difficultyPanel;   // NOVO: Painel de Dificuldade (Fácil, Difícil, Voltar)
 
     [Header("Configurações de Áudio")]
-    public Slider volumeSlider;     // Arraste o componente Slider aqui
-    public AudioClip clickSound;    // Arraste o arquivo de áudio (.wav/.mp3) aqui
+    public Slider volumeSlider;     
+    public AudioClip clickSound;    
     private AudioSource audioSource;
 
     void Start()
     {
-        // Obtém o AudioSource necessário para tocar o som de clique
         audioSource = GetComponent<AudioSource>();
 
-        // Inicializa o estado dos painéis
+        // Inicializa o estado de todos os painéis
         if (mainPanel != null) mainPanel.SetActive(true);
         if (optionsPanel != null) optionsPanel.SetActive(false);
+        if (difficultyPanel != null) difficultyPanel.SetActive(false); // Começa escondido
 
-        // Carrega o volume salvo (ou 1.0 como padrão) e aplica ao jogo
+        // Carrega o volume salvo e aplica ao jogo
         float savedVolume = PlayerPrefs.GetFloat("GameVolume", 1f);
         if (volumeSlider != null)
         {
@@ -36,9 +37,39 @@ public class MainMenu : MonoBehaviour
 
     // --- FUNÇÕES DE NAVEGAÇÃO ---
 
-    public void StartGame()
+    public void OpenDifficultySelection()
     {
-        // Carrega a cena inicial do projeto
+        // Quando clica em "Iniciar Jogo", esconde o principal e abre a dificuldade
+        mainPanel.SetActive(false);
+        difficultyPanel.SetActive(true);
+    }
+
+    public void CloseDifficultySelection()
+    {
+        // Botão voltar da tela de dificuldade
+        mainPanel.SetActive(true);
+        difficultyPanel.SetActive(false);
+    }
+
+    public void SelectEasy()
+    {
+        // Salva a dificuldade como 0 (Fácil) e inicia o jogo
+        PlayerPrefs.SetInt("GameDifficulty", 0); 
+        Debug.Log("Dificuldade selecionada: FÁCIL");
+        StartGame();
+    }
+
+    public void SelectHard()
+    {
+        // Salva a dificuldade como 1 (Difícil) e inicia o jogo
+        PlayerPrefs.SetInt("GameDifficulty", 1); 
+        Debug.Log("Dificuldade selecionada: DIFÍCIL");
+        StartGame();
+    }
+
+    private void StartGame()
+    {
+        // Carrega a cena inicial do projeto (a intro que configuramos)
         SceneManager.LoadScene(gameSceneName);
     }
 
@@ -56,7 +87,6 @@ public class MainMenu : MonoBehaviour
 
     public void OpenCredits()
     {
-        // Placeholder para funcionalidade de créditos
         Debug.Log("Abrindo Créditos...");
     }
 
@@ -70,14 +100,12 @@ public class MainMenu : MonoBehaviour
 
     public void SetVolume(float volume)
     {
-        // Ajusta o volume global e salva para a próxima sessão
         AudioListener.volume = volume;
         PlayerPrefs.SetFloat("GameVolume", volume);
     }
 
     public void PlayClickSound()
     {
-        // Toca o som de forma independente (não é cortado ao fechar painéis)
         if (audioSource != null && clickSound != null)
         {
             audioSource.PlayOneShot(clickSound);
