@@ -17,12 +17,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/mapav1.unity
     guid: 04ad0a8f320b2b04b9bc0f3a7fa50af4
-  - enabled: 0
-    path: Assets/Scenes/TestGame.unity
-    guid: 66d43bda73bdea74c924c3b230eb5510
   - enabled: 1
     path: Assets/Scenes/EndingScene.unity
     guid: 23833e8fa7c2f1048bcc202d0e670934
+  - enabled: 0
+    path: Assets/Scenes/TestGame.unity
+    guid: 66d43bda73bdea74c924c3b230eb5510
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
