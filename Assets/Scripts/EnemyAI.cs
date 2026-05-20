@@ -84,7 +84,6 @@ public class EnemyAI : MonoBehaviour, IDamageable
     [SerializeField] private float randomWaitTime = 0.75f;
 
     [Header("Corpse Prefab")]
-    [Tooltip("Insert the prefab contaning the CorpseController script, with appropriate visuals and a Rigidbody2D for physics interactions")]
     [SerializeField] private GameObject corpsePrefab;
 
     [Header("References")]
@@ -97,6 +96,7 @@ public class EnemyAI : MonoBehaviour, IDamageable
     private bool readyToPickupWeapon;
     private bool isDead;
     private bool isAggro;
+    private bool wasFinishered;
     private int currentPatrolIndex;
     private float waitTimer;
     private float searchTimer;
@@ -286,13 +286,13 @@ public class EnemyAI : MonoBehaviour, IDamageable
     {
         switch (currentState)
         {
-            case AIState.Patrol: PatrolBehavior(); break;
-            case AIState.Hold: HoldBehavior(); break;
-            case AIState.Chase: ChaseBehavior(); break;
-            case AIState.Search: SearchBehavior(); break;
-            case AIState.Combat: CombatBehavior(); break;
+            case AIState.Patrol:       PatrolBehavior();       break;
+            case AIState.Hold:         HoldBehavior();         break;
+            case AIState.Chase:        ChaseBehavior();        break;
+            case AIState.Search:       SearchBehavior();       break;
+            case AIState.Combat:       CombatBehavior();       break;
             case AIState.PickupWeapon: PickupWeaponBehavior(); break;
-            case AIState.Random: RandomBehavior(); break;
+            case AIState.Random:       RandomBehavior();       break;
         }
     }
 
@@ -335,7 +335,7 @@ public class EnemyAI : MonoBehaviour, IDamageable
         if (newState == AIState.Search) searchTimer = searchDuration;
         if (newState == AIState.Random) { preferredIdleState = AIState.Random; BeginRandomWander(); }
         if (newState == AIState.Patrol) preferredIdleState = AIState.Patrol;
-        if (newState == AIState.Hold) preferredIdleState = AIState.Hold;
+        if (newState == AIState.Hold)   preferredIdleState = AIState.Hold;
     }
 
     private AIState GetIdleState()
@@ -374,9 +374,8 @@ public class EnemyAI : MonoBehaviour, IDamageable
     private void ChaseBehavior()
     {
         if (playerTransform == null) { ChangeState(GetIdleState()); return; }
-        Vector2 targetPosition = playerTransform.position;
-        MoveTowards(targetPosition, chaseSpeed);
-        LookAtTarget(targetPosition);
+        MoveTowards(playerTransform.position, chaseSpeed);
+        LookAtTarget(playerTransform.position);
     }
 
     private void SearchBehavior()
@@ -531,7 +530,7 @@ public class EnemyAI : MonoBehaviour, IDamageable
         return heldWeapon.fireRate > 0f ? Mathf.Max(0.01f, 1f / heldWeapon.fireRate) : Mathf.Max(0.01f, aiReactionTime);
     }
 
-    private bool IsFirearm(WeaponType weaponType) => weaponType == WeaponType.OneHandFirearm || weaponType == WeaponType.TwoHandFirearm;
+    private bool IsFirearm(WeaponType weaponType)   => weaponType == WeaponType.OneHandFirearm || weaponType == WeaponType.TwoHandFirearm;
     private bool IsMeleeWeapon(WeaponType weaponType) => weaponType == WeaponType.OneHandMelee || weaponType == WeaponType.TwoHandMelee;
 
     public void TakeDamage(float damage, DamageType damageType)
@@ -549,7 +548,6 @@ public class EnemyAI : MonoBehaviour, IDamageable
         isAggro = true;
 
         lastHitDirection = ((Vector2)transform.position - damageSourcePosition).normalized;
-
         if (lastHitDirection.sqrMagnitude < 0.001f) lastHitDirection = Vector2.up;
 
         switch (damageType)
@@ -559,8 +557,13 @@ public class EnemyAI : MonoBehaviour, IDamageable
                 health -= damage;
                 if (health <= 0f) Die();
                 break;
-            case DamageType.Thrown: OnHitByThrownWeapon(); break;
-            case DamageType.Finisher: Die(); break;
+            case DamageType.Thrown:
+                OnHitByThrownWeapon();
+                break;
+            case DamageType.Finisher:
+                wasFinishered = true;
+                Die();
+                break;
         }
     }
 
@@ -613,7 +616,8 @@ public class EnemyAI : MonoBehaviour, IDamageable
         }
     }
 
-    private void Die() {
+    private void Die()
+    {
         if (isDead) return;
         isDead = true;
         ScoreManager.Instance?.AddKill(100);
@@ -623,20 +627,23 @@ public class EnemyAI : MonoBehaviour, IDamageable
         if (enemyCollider != null) enemyCollider.enabled = false;
         rb.linearVelocity = Vector2.zero;
         rb.angularVelocity = 0f;
-        Destroy(gameObject); 
+        Destroy(gameObject);
     }
+
     private void SpawnCorpse()
     {
         if (corpsePrefab == null) return;
 
-        Vector3 spawnPosition = new Vector3(transform.position.x, transform.position.y, 3f);
-        GameObject corpseGO = Instantiate(corpsePrefab, spawnPosition, transform.rotation);
-
-        CorpseController corpse = corpseGO.GetComponent<CorpseController>();
-        if (corpse != null)
+        if (wasFinishered && playerTransform != null)
         {
-            corpse.Initialize(lastHitDirection);
+            Vector3 spawnPosition = new Vector3(playerTransform.position.x, playerTransform.position.y, 3f);
+            Instantiate(corpsePrefab, spawnPosition, Quaternion.identity);
+            return;
         }
+
+        Vector3 enemyPosition = new Vector3(transform.position.x, transform.position.y, 3f);
+        GameObject corpseGO = Instantiate(corpsePrefab, enemyPosition, transform.rotation);
+        corpseGO.GetComponent<CorpseController>()?.Initialize(lastHitDirection);
     }
 
     private void DropWeapon()
@@ -649,7 +656,7 @@ public class EnemyAI : MonoBehaviour, IDamageable
     }
 
     private void PlayGroundSound() { if (groundSound != null) AudioSource.PlayClipAtPoint(groundSound, transform.position, audioVolume); }
-    private void PlayDeathSound() { if (deathSound != null) AudioSource.PlayClipAtPoint(deathSound, transform.position, audioVolume); }
+    private void PlayDeathSound()  { if (deathSound  != null) AudioSource.PlayClipAtPoint(deathSound,  transform.position, audioVolume); }
 
     private void UpdateAnimations()
     {
@@ -661,10 +668,10 @@ public class EnemyAI : MonoBehaviour, IDamageable
 
         string targetAnimation = weaponCategory switch
         {
-            WeaponHoldCategory.None => isMoving ? walkAnimation : idleAnimation,
+            WeaponHoldCategory.None    => isMoving ? walkAnimation        : idleAnimation,
             WeaponHoldCategory.OneHand => isMoving ? oneHandWalkAnimation : oneHandIdleAnimation,
             WeaponHoldCategory.TwoHand => isMoving ? twoHandWalkAnimation : twoHandIdleAnimation,
-            _ => idleAnimation
+            _                          => idleAnimation
         };
 
         PlayAnimation(targetAnimation);

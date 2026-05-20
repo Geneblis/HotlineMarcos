@@ -124,12 +124,12 @@ TextureImporter:
       name: MarcosSocando_0
       rect:
         serializedVersion: 2
-        x: 239
-        y: 127
-        width: 242
-        height: 266
+        x: 238
+        y: 125
+        width: 246
+        height: 270
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -146,12 +146,12 @@ TextureImporter:
       name: MarcosSocando_1
       rect:
         serializedVersion: 2
-        x: 623
-        y: 127
-        width: 202
-        height: 266
+        x: 621
+        y: 125
+        width: 207
+        height: 270
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -168,12 +168,12 @@ TextureImporter:
       name: MarcosSocando_2
       rect:
         serializedVersion: 2
-        x: 1007
-        y: 127
-        width: 242
-        height: 266
+        x: 1004
+        y: 125
+        width: 246
+        height: 270
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -191,11 +191,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1391
-        y: 127
-        width: 202
-        height: 266
+        y: 125
+        width: 203
+        height: 270
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -212,12 +212,12 @@ TextureImporter:
       name: MarcosSocando_4
       rect:
         serializedVersion: 2
-        x: 1775
-        y: 127
-        width: 242
-        height: 266
+        x: 1773
+        y: 125
+        width: 247
+        height: 270
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -234,12 +234,12 @@ TextureImporter:
       name: MarcosSocando_5
       rect:
         serializedVersion: 2
-        x: 2159
-        y: 127
-        width: 202
-        height: 266
+        x: 2156
+        y: 125
+        width: 207
+        height: 270
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -256,12 +256,12 @@ TextureImporter:
       name: MarcosSocando_6
       rect:
         serializedVersion: 2
-        x: 2711
-        y: 95
-        width: 242
-        height: 330
+        x: 2707
+        y: 94
+        width: 250
+        height: 332
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -278,12 +278,12 @@ TextureImporter:
       name: MarcosSocando_7
       rect:
         serializedVersion: 2
-        x: 3231
-        y: 95
-        width: 218
-        height: 338
+        x: 3230
+        y: 94
+        width: 223
+        height: 340
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -300,7 +300,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: f63332b931a8099489ab5b94fa59634b
     internalID: 0
     vertices: []
     indices: 
@@ -308,7 +308,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
       MarcosSocando_0: 3395687472858265718
       MarcosSocando_1: 7883300527638122893

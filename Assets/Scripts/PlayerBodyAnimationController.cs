@@ -31,6 +31,11 @@ public class PlayerBodyAnimationController : MonoBehaviour
             Debug.LogError("PlayerBodyAnimationController: PlayerWeaponController não encontrado!", this);
     }
 
+    void OnDestroy()
+    {
+        IsExecuting = false;
+    }
+
     void Update()
     {
         if (upperAnimator == null || weaponController == null) return;
