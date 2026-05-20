@@ -652,8 +652,9 @@ MonoBehaviour:
     Infantino\nStephen King\nGeorge Lucas\nWalt Disney\nStephen Hawking\nShinji Mikami\nNaruto
     Uzumaki\nEchiiro Oda\nRel\xE2mpago McQueen\nLeon S Kennedy\nDick Vigarista\nRaquel
     Lira\nGra\xE7a Xavier\nMordecai e Rigby\nEdinaldo Pereira\nEdinaldo (Pai de Guga)\nP\xE9ricles
-    Aparecido Fonseca de Faria\nP\xE9ricles (Pai de Ian)\nSnoop Dog\r\nJesus Cristo
-    \n\nOBRIGADO POR JOGAR\n\n              \n\n\n                    \n\n\n \n\n\n\n\n\n"
+    Aparecido Fonseca de Faria\nP\xE9ricles (Pai de Ian)\nSnoop Dog\nMichael Jackson\r\nJesus
+    Cristo \n\nOBRIGADO POR JOGAR\n\n              \n\n\n                    \n\n\n
+    \n\n\n\n\n\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -746,7 +747,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Credits
   scrollSpeed: 45
-  exitPositionY: 3560
+  exitPositionY: 3580
   mainMenuSceneName: MainMenu
 --- !u!1 &1811515459
 GameObject:
