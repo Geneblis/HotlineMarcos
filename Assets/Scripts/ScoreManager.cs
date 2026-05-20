@@ -7,7 +7,7 @@ public class ScoreManager : MonoBehaviour
 
     [Header("Configurações")]
     [SerializeField] float streakTimeout = 3.5f;
-    [SerializeField] float bonusTimePerKill = 5f; // segundos adicionados ao timer
+    [SerializeField] float bonusTimePerKill = 5f; // Segundos adicionados ao timer a cada abate
 
     [Header("Referências da HUD")]
     [SerializeField] private TextMeshProUGUI scoreDisplayText;
@@ -40,8 +40,8 @@ public class ScoreManager : MonoBehaviour
         totalScore += pointsToGive;
 
         // ── Integração com GameManager ──────────────────────────────
-        GameManager.Instance?.AddPoints(pointsToGive); // atualiza HUD de pontos
-        GameManager.Instance?.AddTime(bonusTimePerKill); // +5s no timer
+        GameManager.Instance?.AddPoints(pointsToGive); // Atualiza os pontos na HUD
+        GameManager.Instance?.AddTime(bonusTimePerKill); // Dá +5s no timer (Só funciona no Difícil)
         // ────────────────────────────────────────────────────────────
 
         UpdateUI();

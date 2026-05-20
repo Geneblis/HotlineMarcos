@@ -6,6 +6,7 @@ public class MainMenu : MonoBehaviour
 {
     [Header("Configurações de Cena")]
     [SerializeField] private string gameSceneName = "IntroScene"; // Nome da cena da história
+    [SerializeField] private string creditsSceneName = "CreditsScene"; // Nome da cena dos créditos
 
     [Header("Painéis do Menu")]
     public GameObject mainPanel;         // Painel principal (Iniciar, Opções, Sair)
@@ -87,7 +88,9 @@ public class MainMenu : MonoBehaviour
 
     public void OpenCredits()
     {
-        Debug.Log("Abrindo Créditos...");
+        // AGORA FUNCIONA: Carrega a cena de créditos que criamos!
+        Debug.Log("Abrindo Créditos... Carregando a cena: " + creditsSceneName);
+        SceneManager.LoadScene(creditsSceneName);
     }
 
     public void QuitGame()
