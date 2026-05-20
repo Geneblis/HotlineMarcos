@@ -22,6 +22,12 @@ public class PlayerAnimationController : MonoBehaviour
 
     void Update()
     {
+        if (PlayerBodyAnimationController.IsExecuting)
+        {
+            ChangeState(IDLE);
+            return;
+        }
+
         bool isMoving = rb.linearVelocity.sqrMagnitude > 0.01f;
         ChangeState(isMoving ? WALK : IDLE);
     }
@@ -29,7 +35,6 @@ public class PlayerAnimationController : MonoBehaviour
     void ChangeState(string newState)
     {
         if (currentState == newState) return;
-
         lowerAnimator.Play(newState);
         currentState = newState;
     }

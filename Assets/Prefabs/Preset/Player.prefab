@@ -233,6 +233,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerBodyAnimationController
   upperAnimator: {fileID: 7879531773477905604}
   weaponController: {fileID: 1775475372023935783}
+  punchSound: {fileID: 8300000, guid: 630cc3c70fe1836439bb9fb4f03c46d3, type: 3}
+  punchVolume: 1
 --- !u!114 &1775475372023935783
 MonoBehaviour:
   m_ObjectHideFlags: 0

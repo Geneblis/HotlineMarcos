@@ -137,7 +137,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void GameState CurrentState => state;
 
     public void Pause()
     {
@@ -252,6 +251,21 @@ public class GameManager : MonoBehaviour
         else
         {
             timerText.color = Color.white; // Ou a cor padrão da sua HUD
+        }
+    }
+
+    public void AddTime(float seconds)
+    {
+        if (state != GameState.Playing) return;
+        if (countDown)
+        {
+            // Countdown: ampliar a duração total equivale a dar mais tempo
+            timerDuration += seconds;
+        }
+        else
+        {
+            // Count-up: "voltar" o elapsed time dá a ilusão de ganhar tempo
+            elapsedTime = Mathf.Max(0f, elapsedTime - seconds);
         }
     }
 

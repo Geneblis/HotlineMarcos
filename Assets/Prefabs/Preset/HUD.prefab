@@ -1604,6 +1604,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2813884898274966998}
   - component: {fileID: 6288684537963061811}
+  - component: {fileID: 2821977664400529703}
   - component: {fileID: 1773347740495364044}
   - component: {fileID: 6098811206788012328}
   m_Layer: 0
@@ -1657,6 +1658,22 @@ MonoBehaviour:
   pauseMenuRoot: {fileID: 1791488287020704593}
   mainMenuScene: MainMenu
   restartKey: 114
+--- !u!114 &2821977664400529703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5429957764065348084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abd355c536e585842aa7584e646f6c30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ScoreManager
+  streakTimeout: 3.5
+  bonusTimePerKill: 5
+  scoreDisplayText: {fileID: 8177567619129809720}
+  comboDisplayText: {fileID: 2446667807137045899}
 --- !u!114 &1773347740495364044
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2121,7 +2138,6 @@ GameObject:
   - component: {fileID: 8911954140177193919}
   - component: {fileID: 4377210213251026221}
   - component: {fileID: 2446667807137045899}
-  - component: {fileID: 1635318923774869478}
   m_Layer: 5
   m_Name: COMBO
   m_TagString: Untagged
@@ -2248,18 +2264,3 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &1635318923774869478
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8392072141327775095}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: abd355c536e585842aa7584e646f6c30, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ScoreManager
-  streakTimeout: 3.5
-  scoreDisplayText: {fileID: 0}
-  comboDisplayText: {fileID: 0}

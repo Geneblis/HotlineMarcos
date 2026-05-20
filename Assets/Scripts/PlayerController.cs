@@ -23,26 +23,32 @@ public class PlayerController : MonoBehaviour, IDamageable
     [SerializeField] private float corpseLayerOffset = 3f;
 
     Rigidbody2D rb;
-    Camera cam;
-    Vector2 moveInput;
-    float lastMoveAngle;
-    bool isDead;
+    Camera      cam;
+    Vector2     moveInput;
+    float       lastMoveAngle;
+    bool        isDead;
 
     void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
+        rb            = GetComponent<Rigidbody2D>();
         currentHealth = maxHealth;
-        cam = FindFirstObjectByType<Camera>();
+        cam           = FindFirstObjectByType<Camera>();
 
-        if (cam == null) Debug.LogError("PlayerController: no camera found!", this);
-        if (body == null) Debug.LogError("PlayerController: 'Body' not assigned!", this);
-        if (legs == null) Debug.LogError("PlayerController: 'Legs' not assigned!", this);
+        if (cam == null)         Debug.LogError("PlayerController: no camera found!", this);
+        if (body == null)        Debug.LogError("PlayerController: 'Body' not assigned!", this);
+        if (legs == null)        Debug.LogError("PlayerController: 'Legs' not assigned!", this);
         if (corpsePrefab == null) Debug.LogError("PlayerController: 'Corpse Prefab' not assigned!", this);
     }
 
     void Update()
     {
         if (isDead) return;
+
+        if (PlayerBodyAnimationController.IsExecuting)
+        {
+            moveInput = Vector2.zero;
+            return;
+        }
 
         moveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
 
@@ -56,16 +62,21 @@ public class PlayerController : MonoBehaviour, IDamageable
     void FixedUpdate()
     {
         if (isDead) return;
+
+        if (PlayerBodyAnimationController.IsExecuting)
+        {
+            rb.linearVelocity = Vector2.zero;
+            return;
+        }
+
         rb.linearVelocity = moveInput * moveSpeed;
     }
 
     public void TakeDamage(float damage, DamageType damageType)
     {
         if (isDead) return;
-
         currentHealth -= damage;
-        if (currentHealth <= 0f)
-            Die();
+        if (currentHealth <= 0f) Die();
     }
 
     private void Die()
@@ -77,12 +88,10 @@ public class PlayerController : MonoBehaviour, IDamageable
 
         if (corpsePrefab != null)
         {
-            Vector3 corpsePosition = transform.position;
-            corpsePosition.z += corpseLayerOffset;
-
-            float randomRotation = Random.Range(-3, 12);
+            Vector3    corpsePosition = transform.position;
+            corpsePosition.z         += corpseLayerOffset;
+            float      randomRotation = Random.Range(-3, 12);
             Quaternion corpseRotation = transform.rotation * Quaternion.Euler(0f, 0f, randomRotation);
-
             Instantiate(corpsePrefab, corpsePosition, corpseRotation);
         }
 
@@ -95,8 +104,8 @@ public class PlayerController : MonoBehaviour, IDamageable
         if (cam == null || body == null) return;
 
         Vector3 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 dir = mousePos - body.position;
-        float angle = Vector2ToAngle(dir);
+        Vector2 dir      = mousePos - body.position;
+        float   angle    = Vector2ToAngle(dir);
 
         body.rotation = Quaternion.RotateTowards(
             body.rotation,

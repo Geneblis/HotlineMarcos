@@ -1,5 +1,5 @@
 using UnityEngine;
-using TMPro; // Se estiver usando TextMeshPro
+using TMPro;
 
 public class ScoreManager : MonoBehaviour
 {
@@ -7,6 +7,7 @@ public class ScoreManager : MonoBehaviour
 
     [Header("Configurações")]
     [SerializeField] float streakTimeout = 3.5f;
+    [SerializeField] float bonusTimePerKill = 5f; // segundos adicionados ao timer
 
     [Header("Referências da HUD")]
     [SerializeField] private TextMeshProUGUI scoreDisplayText;
@@ -16,19 +17,17 @@ public class ScoreManager : MonoBehaviour
     private int streakCount = 0;
     private float lastKillTime;
 
-    void Awake() 
+    void Awake()
     {
+        if (Instance != null && Instance != this) { Destroy(gameObject); return; }
         Instance = this;
         UpdateUI();
     }
 
     void Update()
     {
-        // Reseta o multiplicador se passar muito tempo
         if (streakCount > 0 && Time.time - lastKillTime > streakTimeout)
-        {
             ResetStreak();
-        }
     }
 
     public void AddKill(int basePoints)
@@ -36,11 +35,15 @@ public class ScoreManager : MonoBehaviour
         lastKillTime = Time.time;
         streakCount++;
 
-        // Lógica de Multiplicador: 1x, 1.5x, 2x, etc.
         float multiplier = 1f + (streakCount - 1) * 0.5f;
         int pointsToGive = Mathf.RoundToInt(basePoints * multiplier);
-
         totalScore += pointsToGive;
+
+        // ── Integração com GameManager ──────────────────────────────
+        GameManager.Instance?.AddPoints(pointsToGive); // atualiza HUD de pontos
+        GameManager.Instance?.AddTime(bonusTimePerKill); // +5s no timer
+        // ────────────────────────────────────────────────────────────
+
         UpdateUI();
     }
 
@@ -58,21 +61,20 @@ public class ScoreManager : MonoBehaviour
     private void UpdateUI()
     {
         if (scoreDisplayText != null)
-        {
             scoreDisplayText.text = $"PONTOS: {totalScore}";
-        }
 
-        if (streakCount > 1)
+        if (comboDisplayText != null)
         {
-            if (comboDisplayText != null)
+            if (streakCount > 1)
             {
-                comboDisplayText.text = $"{streakCount}x COMBO!";
+                float multiplier = 1f + (streakCount - 1) * 0.5f;
+                comboDisplayText.text = $"{streakCount}x COMBO!  {multiplier:0.#}x";
                 comboDisplayText.gameObject.SetActive(true);
             }
-        }
-        else if (comboDisplayText != null)
-        {
-            comboDisplayText.gameObject.SetActive(false);
+            else
+            {
+                comboDisplayText.gameObject.SetActive(false);
+            }
         }
     }
 }
