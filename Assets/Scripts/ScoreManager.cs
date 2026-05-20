@@ -41,7 +41,7 @@ public class ScoreManager : MonoBehaviour
 
         // ── Integração com GameManager ──────────────────────────────
         GameManager.Instance?.AddPoints(pointsToGive); // atualiza HUD de pontos
-        GameManager.Instance?.AddTime(bonusTimePerKill); // +5s no timer
+        GameManager.Instance?.AddTime(bonusTimePerKill); // AGORA FUNCIONA! Dá +5s no timer de morte
         // ────────────────────────────────────────────────────────────
 
         UpdateUI();

@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
     int currentPoints = 0;
     float elapsedTime = 0f;
 
-    // NOVO: Controle interno da dificuldade para o Timer
+    // Controle interno da dificuldade e ativação do Timer
     private bool isTimerEnabled = true;
 
     void Awake()
@@ -70,7 +70,6 @@ public class GameManager : MonoBehaviour
 
         if (savedDifficulty == 0)
         {
-            // MODO FÁCIL: Desativa o timer e esconde ele da interface
             isTimerEnabled = false;
             if (timerText != null)
             {
@@ -80,9 +79,8 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            // MODO DIFÍCIL: Força o timer a ser regressivo e o deixa visível
             isTimerEnabled = true;
-            countDown = true; // Garante que vai contar de forma regressiva para matar o player
+            countDown = true; 
             if (timerText != null)
             {
                 timerText.gameObject.SetActive(true);
@@ -93,7 +91,6 @@ public class GameManager : MonoBehaviour
         RefreshPointsUI();
         RefreshAmmoUI(ammoEmpty);
         
-        // Inicializa o texto do timer baseado se ele está ativo ou não
         if (isTimerEnabled)
         {
             RefreshTimerUI(countDown ? timerDuration : 0f);
@@ -121,7 +118,6 @@ public class GameManager : MonoBehaviour
         if (state != GameState.Playing)
             return;
 
-        // SÓ ENTRA NA LÓGICA DO TIMER SE ESTIVER NO MODO DIFÍCIL (isTimerEnabled == true)
         if (isTimerEnabled)
         {
             elapsedTime += Time.deltaTime;
@@ -129,7 +125,6 @@ public class GameManager : MonoBehaviour
             float display = countDown ? Mathf.Max(0f, timerDuration - elapsedTime) : elapsedTime;
             RefreshTimerUI(display);
 
-            // Se o tempo acabar no modo regressivo, mata o jogador
             if (countDown && display <= 0f)
             {
                 OnTimerEnd();
@@ -137,6 +132,37 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public GameState CurrentState => state;
+
+    // MECÂNICA DE BÔNUS: Adiciona tempo ao timer quando o player mata um inimigo
+    public void AddTime(float amount)
+    {
+        // Só adiciona tempo se o timer estiver ativo (Modo Difícil) e o jogo rolando
+        if (!isTimerEnabled || state != GameState.Playing) return;
+
+        if (countDown)
+        {
+            // No modo regressivo, diminuir o elapsedTime faz o tempo restante AUMENTAR
+            elapsedTime = Mathf.Max(0f, elapsedTime - amount);
+        }
+        else
+        {
+            // Caso seu timer fosse progressivo, isso daria mais tempo diminuindo o tempo decorrido também
+            elapsedTime = Mathf.Max(0f, elapsedTime - amount);
+        }
+
+        // Atualiza a HUD imediatamente para o jogador ver o tempo subindo
+        float display = countDown ? Mathf.Max(0f, timerDuration - elapsedTime) : elapsedTime;
+        RefreshTimerUI(display);
+        
+        Debug.Log($"GameManager: +{amount}s adicionados ao timer!");
+    }
+
+    public void PauseMatchTimer()
+    {
+        isTimerEnabled = false;
+        Debug.Log("GameManager: O timer da partida foi congelado!");
+    }
 
     public void Pause()
     {
@@ -243,35 +269,19 @@ public class GameManager : MonoBehaviour
         int remainingSeconds = Mathf.FloorToInt(seconds % 60f);
         timerText.text = $"{minutes:00}:{remainingSeconds:00}";
 
-        // Feedback visual estilo Hotline Miami: Se faltar menos de 10 segundos no difícil, o texto fica vermelho
         if (countDown && seconds <= 10f)
         {
             timerText.color = Color.red;
         }
         else
         {
-            timerText.color = Color.white; // Ou a cor padrão da sua HUD
-        }
-    }
-
-    public void AddTime(float seconds)
-    {
-        if (state != GameState.Playing) return;
-        if (countDown)
-        {
-            // Countdown: ampliar a duração total equivale a dar mais tempo
-            timerDuration += seconds;
-        }
-        else
-        {
-            // Count-up: "voltar" o elapsed time dá a ilusão de ganhar tempo
-            elapsedTime = Mathf.Max(0f, elapsedTime - seconds);
+            timerText.color = Color.white;
         }
     }
 
     void OnTimerEnd()
     {
         Debug.Log("GameManager: Timer ended.");
-        OnPlayerDied(); // Chama a sua tela de morte padrão automaticamente!
+        OnPlayerDied();
     }
 }
