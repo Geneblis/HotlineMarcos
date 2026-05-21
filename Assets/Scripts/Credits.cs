@@ -14,8 +14,21 @@ public class Credits : MonoBehaviour
 
     void Start()
     {
-        // Pega o componente de UI que controla a posição do texto
+        // Tenta pegar o RectTransform do próprio GameObject
         textRectTransform = GetComponent<RectTransform>();
+
+        // Se não encontrou, tenta encontrar em um componente filho
+        if (textRectTransform == null)
+        {
+            textRectTransform = GetComponentInChildren<RectTransform>();
+        }
+
+        // Se ainda não encontrou, loga um erro
+        if (textRectTransform == null)
+        {
+            enabled = false; // Desabilita o script para evitar erros
+            return;
+        }
 
         // Se você quiser garantir que ele SEMPRE comece embaixo, 
         // descomente a linha abaixo e mude o valor (ex: -800f)
@@ -24,6 +37,9 @@ public class Credits : MonoBehaviour
 
     void Update()
     {
+        // Se por algum motivo o textRectTransform for null, retorna
+        if (textRectTransform == null) return;
+
         // Move o texto para cima baseado no tempo (DeltaTime garante que rode igual em qualquer PC)
         textRectTransform.anchoredPosition += new Vector2(0, scrollSpeed * Time.deltaTime);
 

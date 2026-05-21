@@ -50,6 +50,7 @@ MonoBehaviour:
   playOnStart: 1
   loopMusic: 1
   musicVolume: 0.6
+  requiredSceneName: mapav1
 --- !u!82 &6158704529387468083
 AudioSource:
   m_ObjectHideFlags: 0

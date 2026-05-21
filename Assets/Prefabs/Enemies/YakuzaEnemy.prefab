@@ -89,8 +89,8 @@ MonoBehaviour:
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 128
-  attackRadius: 6
-  aiReactionTime: 0.45
+  attackRadius: 4
+  aiReactionTime: 0.6
   patrolPoints: []
   patrolWaitTime: 1
   searchDuration: 4
@@ -114,6 +114,7 @@ MonoBehaviour:
   groundSound: {fileID: 8300000, guid: 4f1311e24a2421e469b439039d93cb8b, type: 3}
   deathSound: {fileID: 8300000, guid: aecc60d811b433d4fbc6310c187e2e23, type: 3}
   audioVolume: 1
+  scoreOnDeath: 100
   randomWanderRadius: 8
   randomArriveDistance: 0.35
   randomWaitTime: 0.75

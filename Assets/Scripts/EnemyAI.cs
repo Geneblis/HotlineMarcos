@@ -333,6 +333,7 @@ public class EnemyAI : MonoBehaviour, IDamageable
 
         currentState = newState;
         if (newState == AIState.Search) searchTimer = searchDuration;
+        if (newState == AIState.Combat) nextAiAttackTime = Time.time + aiReactionTime; // Tempo de reação inicial ao entrar em combate
         if (newState == AIState.Random) { preferredIdleState = AIState.Random; BeginRandomWander(); }
         if (newState == AIState.Patrol) preferredIdleState = AIState.Patrol;
         if (newState == AIState.Hold)   preferredIdleState = AIState.Hold;
